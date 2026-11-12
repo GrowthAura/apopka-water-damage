@@ -13,15 +13,25 @@
           observer.unobserve(entry.target);
         }
       });
-    // Threshold 0.02 (was 0.12): a tall section container — e.g. the
-    // 7,686px services section on a 390px phone — can never show 12% of
-    // itself inside an 844px viewport, so it stayed invisible forever.
-    // Any visible sliver now triggers the reveal.
-    }, { threshold: 0.02 });
+    // Threshold 0 (was 0.12, then 0.02): a tall section container can
+    // never show a fixed fraction of itself inside a phone viewport, so
+    // it stayed invisible. Any visible sliver now triggers the reveal.
+    // Safety timer below reveals anything still hidden after 900ms, so
+    // content is never stuck invisible. Content-bearing wrappers no
+    // longer carry .reveal at all (index.php) — first paint shows text
+    // with zero JS dependency; this observer only covers decorative use.
+    }, { threshold: 0 });
     revealEls.forEach(function (el) { observer.observe(el); });
   } else {
     revealEls.forEach(function (el) { el.classList.add('in'); });
   }
+  // Safety net: reveal anything still hidden after 900ms, whatever the
+  // observer did or did not fire on.
+  setTimeout(function () {
+    document.querySelectorAll('.reveal:not(.in)').forEach(function (el) {
+      el.classList.add('in');
+    });
+  }, 900);
 
   // Header gains a shadow once the page scrolls.
   var header = document.querySelector('.site-header');
