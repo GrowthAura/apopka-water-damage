@@ -62,6 +62,6 @@ $map_src = 'https://www.google.com/maps?q=' . rawurlencode($SITE['map_query']) .
   <span aria-hidden="true">&#9742;</span><span><?= esc($SITE['phone']) ?></span>
 </a>
 <div class="mobile-call-spacer" aria-hidden="true"></div>
-<script src="/assets/js/main.js?v=2" defer></script>
+<script src="/assets/js/main.js?v=3" defer></script>
 </body>
 </html>

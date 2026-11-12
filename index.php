@@ -23,14 +23,20 @@ if ($path !== '/' && strlen($path) > 1 && str_ends_with($path, '/')) {
     exit;
 }
 
-// 2. Sitemap (dynamic, loc + date-only lastmod).
+// 2. Sitemap (dynamic, loc + date-only lastmod + image:loc for every
+// meaningful photo on the page). Each <url> stays on ONE line so a
+// line-based <loc> count still reads 25.
 if ($path === '/sitemap.xml') {
     header('Content-Type: application/xml; charset=utf-8');
     echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-    echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+    echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
     $all = array_merge(['/'], array_keys($PAGES));
     foreach ($all as $slug) {
-        echo '  <url><loc>' . esc(site_url($slug)) . '</loc><lastmod>' . $TODAY . '</lastmod></url>' . "\n";
+        $line = '  <url><loc>' . esc(site_url($slug)) . '</loc><lastmod>' . $TODAY . '</lastmod>';
+        foreach (page_images($slug) as $imgUrl) {
+            $line .= '<image:image><image:loc>' . esc($imgUrl) . '</image:loc></image:image>';
+        }
+        echo $line . '</url>' . "\n";
     }
     echo '</urlset>';
     exit;
@@ -127,7 +133,7 @@ function call_strip() {
 
 function final_cta_compact() {
     global $FINAL_CTA_H2, $FINAL_CTA_PARAS;
-    $out = '<section class="final-cta"><div class="container"><div class="final-cta-card reveal">';
+    $out = '<section class="final-cta"><div class="container"><div class="final-cta-card">';
     $out .= '<h2>' . esc($FINAL_CTA_H2) . '</h2>';
     foreach ($FINAL_CTA_PARAS as $p) $out .= '<p>' . esc($p) . '</p>';
     $out .= hero_buttons('#request-service');
@@ -147,6 +153,7 @@ function render_home($form = null) {
         $WHY_US_INTRO, $WHY_US_BULLETS, $FAQ_H2, $FAQS, $FINAL_CTA_H2,
         $FINAL_CTA_PARAS;
     $homeHero = page_img('/', 'hero');
+    $homeHeroUrl = $homeHero ? site_url($homeHero['src']) : null;
     $homeCanon = site_url('/');
     $HEAD = [
         'title' => $HOME_META['title'],
@@ -154,10 +161,10 @@ function render_home($form = null) {
         'canonical' => $homeCanon,
         'og_type' => 'website',
         'og_image' => $homeHero ? site_url($homeHero['src']) : null,
-        'ld' => ld_json([ld_local_business(), ld_website(),
-            ld_webpage($homeCanon, $HOME_META['title'], site_url('/') . '#business'),
+        'ld' => ld_json([ld_local_business($homeHeroUrl), ld_website(),
+            ld_webpage($homeCanon, $HOME_META['title'], site_url('/') . '#business', $homeHeroUrl),
             ld_breadcrumb([['label' => 'Home', 'href' => '/']], $homeCanon),
-            ld_faq($FAQS, $homeCanon), ld_howto($PROCESS_STEPS, $homeCanon), ld_speakable($homeCanon)]),
+            ld_faq($FAQS, $homeCanon), ld_howto($PROCESS_STEPS, $homeCanon)]),
     ];
     $currentSlug = '/';
     $show_map = true;
@@ -177,10 +184,10 @@ function render_home($form = null) {
   <li><span class="check" aria-hidden="true">&#10003;</span><?= esc($t) ?></li>
   <?php endforeach; ?>
 </ul></div></section>
-<section class="section"><div class="container"><div class="split"><div class="content-block reveal">
+<section class="section"><div class="container"><div class="split"><div class="content-block">
   <h2><?= esc($WHO_H2) ?></h2>
   <?php foreach ($WHO_PARAS as $p): ?><p><?= esc($p) ?></p><?php endforeach; ?>
-</div><aside class="sticky-aside reveal"><div class="brand-panel">
+</div><aside class="sticky-aside"><div class="brand-panel">
   <p class="panel-title">Emergency Water Damage?</p>
   <p>A crew is dispatched immediately.</p>
   <a class="btn btn-ocean" href="<?= esc($SITE['phone_href']) ?>"><?= esc($SITE['phone']) ?></a>
@@ -188,7 +195,7 @@ function render_home($form = null) {
   <p>Water damage restoration in Apopka, FL starts the moment you pick up the phone.</p>
   <a class="btn btn-navy" href="#request-service">Request Emergency Help</a>
 </div></aside></div></div></section>
-<section class="section section-cream"><div class="container content-block reveal">
+<section class="section section-cream"><div class="container content-block">
   <h2><?= esc($SERVICES_H2) ?></h2>
   <p class="lead"><?= esc($SERVICES_INTRO) ?></p>
   <div class="cards">
@@ -200,7 +207,7 @@ function render_home($form = null) {
     <?php endforeach; ?>
   </div>
 </div></section>
-<section class="section"><div class="container content-block reveal">
+<section class="section"><div class="container content-block">
   <h2><?= esc($WHY_H2) ?></h2>
   <p class="lead"><?= esc($WHY_INTRO) ?></p>
   <p><?= esc($WHY_LEAD) ?></p>
@@ -210,7 +217,7 @@ function render_home($form = null) {
   <?php endforeach; ?>
   </div>
 </div></section>
-<section class="section section-navy"><div class="container content-block reveal">
+<section class="section section-navy"><div class="container content-block">
   <h2><?= esc($PROCESS_H2) ?></h2>
   <p class="lead"><?= esc($PROCESS_INTRO) ?></p>
   <div class="phase-grid">
@@ -222,7 +229,7 @@ function render_home($form = null) {
     <?php endforeach; ?>
   </div>
 </div></section>
-<section class="section section-tint"><div class="container content-block reveal">
+<section class="section section-tint"><div class="container content-block">
   <h2><?= esc($CATEGORIES_H2) ?></h2>
   <p><?= esc($CATEGORIES_INTRO) ?></p>
   <div class="cat-grid">
@@ -235,7 +242,7 @@ function render_home($form = null) {
   </div>
   <p><?= esc($CATEGORIES_CLOSE) ?></p>
 </div></section>
-<section class="section"><div class="container content-block reveal">
+<section class="section"><div class="container content-block">
   <h2><?= esc($COST_H2) ?></h2>
   <p><?= esc($COST_INTRO) ?></p>
   <?= bullets_html($COST_BULLETS) ?>
@@ -260,7 +267,7 @@ function render_home($form = null) {
   <p><?= esc($WHY_US_INTRO) ?></p>
   <?= bullets_html($WHY_US_BULLETS) ?>
 </div></section>
-<section class="section section-cream" id="faq"><div class="container content-block reveal">
+<section class="section section-cream" id="faq"><div class="container content-block">
   <h2><?= esc($FAQ_H2) ?></h2>
   <div class="faq-list">
     <?php foreach ($FAQS as $f): ?>
@@ -272,7 +279,7 @@ function render_home($form = null) {
   </div>
 </div></section>
 <?= call_strip() ?>
-<section class="final-cta"><div class="container"><div class="final-cta-card reveal">
+<section class="final-cta"><div class="container"><div class="final-cta-card">
   <h2><?= esc($FINAL_CTA_H2) ?></h2>
   <?php foreach ($FINAL_CTA_PARAS as $p): ?><p><?= esc($p) ?></p><?php endforeach; ?>
   <?= hero_buttons() ?>
@@ -291,10 +298,15 @@ function render_page($slug, $page, $form = null) {
     $crumbs = [['label' => 'Home', 'href' => '/'], ['label' => $page['h1']]];
     $pageCanon = site_url($slug);
     $aboutId = $full['type'] === 'service' ? $pageCanon . '#service' : site_url('/') . '#business';
-    $graph = [ld_local_business(), ld_webpage($pageCanon, $meta['title'], $aboutId),
+    $pageHero = page_img($slug, 'hero');
+    $pageHeroUrl = $pageHero ? site_url($pageHero['src']) : null;
+    $graph = [ld_local_business($pageHeroUrl), ld_webpage($pageCanon, $meta['title'], $aboutId, $pageHeroUrl),
         ld_breadcrumb($crumbs, $pageCanon)];
     if ($full['type'] === 'service') {
-        $graph[] = ld_service($page['h1'], 'Apopka', $pageCanon);
+        $graph[] = ld_service($page['h1'], $full['nav'], $pageCanon, $pageHeroUrl);
+    }
+    if ($full['type'] === 'blog') {
+        $graph[] = ld_article($pageCanon, $page['h1'], $pageHeroUrl);
     }
     if (!empty($full['faqs'])) {
         $graph[] = ld_faq(array_map(fn($f) => ['q' => $f['q'], 'a' => $f['a']], $full['faqs']), $pageCanon);
@@ -303,7 +315,6 @@ function render_page($slug, $page, $form = null) {
         $steps = array_map(fn($s) => ['h3' => $s['name'], 'text' => $s['text']], $full['howto']['steps']);
         $graph[] = ld_howto($steps, $pageCanon, $full['howto']['name']);
     }
-    $pageHero = page_img($slug, 'hero');
     $HEAD = [
         'title' => $meta['title'],
         'description' => $meta['description'],
@@ -320,22 +331,50 @@ function render_page($slug, $page, $form = null) {
     $faqAt = $full['faq_at'] ?? $nBlocks;
     $preBlocks = array_slice($full['blocks'], 0, $faqAt);
     $postBlocks = array_slice($full['blocks'], $faqAt);
+    // 20x polish: service pages get the two-column hero (copy left,
+    // compact lead form right at >=1021px, stacked on mobile). About /
+    // Contact / blogs keep the single-column hero. Breadcrumb moves into
+    // the hero on all inner pages. No visible word changes anywhere:
+    // the intro simply renders as .hero-intro inside the hero on service
+    // pages, and the bottom form is omitted there (the hero form IS the
+    // page's single form, id="request-service" once).
+    $isService = ($full['type'] === 'service');
     ?>
+<?php if ($isService): ?>
+<section class="hero hero-split">
+  <?php if ($pageHero): ?><div class="hero-media"><img src="<?= esc($pageHero['src']) ?>" alt="<?= esc($pageHero['alt']) ?>" width="1600" height="900" fetchpriority="high"></div><?php endif; ?>
+  <div class="container hero-content">
+    <?= crumbs_html($crumbs) ?>
+    <div class="hero-copy">
+      <p class="eyebrow on-navy"><?= esc($full['eyebrow']) ?></p>
+      <h1><?= esc($page['h1']) ?></h1>
+      <p class="hero-intro"><?= render_linked($full['intro'], $full['intro_links'] ?? [], $slug, $used) ?></p>
+      <?= hero_buttons() ?>
+    </div>
+    <div class="hero-form">
+      <?php require $ROOT . '/includes/lead-form.php'; ?>
+    </div>
+  </div>
+</section>
+<?php else: ?>
 <section class="hero hero-short">
   <?php if ($pageHero): ?><div class="hero-media"><img src="<?= esc($pageHero['src']) ?>" alt="<?= esc($pageHero['alt']) ?>" width="1600" height="900" fetchpriority="high"></div><?php endif; ?>
   <div class="container hero-content">
+    <?= crumbs_html($crumbs) ?>
     <p class="eyebrow on-navy"><?= esc($full['eyebrow']) ?></p>
     <h1><?= esc($page['h1']) ?></h1>
     <?= hero_buttons() ?>
   </div>
 </section>
-<section class="section"><div class="container content-block reveal">
-  <?= crumbs_html($crumbs) ?>
+<?php endif; ?>
+<section class="section"><div class="container content-block">
+  <?php if (!$isService): ?>
   <p class="lead"><?= render_linked($full['intro'], $full['intro_links'] ?? [], $slug, $used) ?></p>
+  <?php endif; ?>
   <?= render_block_list($preBlocks, $slug, $used) ?>
 </div></section>
 <?php if (!empty($full['faqs'])): ?>
-<section class="section section-cream" id="faq"><div class="container content-block reveal">
+<section class="section section-cream" id="faq"><div class="container content-block">
   <h2><?= esc($full['faq_h2']) ?></h2>
   <div class="faq-list">
     <?php foreach ($full['faqs'] as $f): ?>
@@ -347,11 +386,13 @@ function render_page($slug, $page, $form = null) {
   </div>
 </div></section>
 <?php endif; ?>
-<section class="section"><div class="container content-block reveal">
+<section class="section"><div class="container content-block">
   <?= render_block_list($postBlocks, $slug, $used) ?>
+  <?php if (!$isService): ?>
   <div class="form-wrap">
     <?php require $ROOT . '/includes/lead-form.php'; ?>
   </div>
+  <?php endif; ?>
   <p class="back-home"><a href="/">Back to home</a></p>
 </div></section>
 <?= call_strip() ?>

@@ -190,30 +190,87 @@ function render_block_list($blocks, $slug, &$used) {
 }
 
 // ---- JSON-LD -------------------------------------------------------------
-function ld_local_business() {
-    global $SITE;
-    return [
-        '@type' => 'LocalBusiness',
+// Business node (2026-11-12 10x upgrade): HomeAndConstructionBusiness,
+// the 2026-11-08 research verdict's best subtype — NEVER EmergencyService
+// (schema.org defines that as a fire station / ER). One @id (#business)
+// shared by every page. Description is the homepage meta description,
+// verbatim from the doc. NO street address (none in the doc), NO geo,
+// NO Review/AggregateRating, NO sameAs, NO price/founding date.
+// areaServed lists only places the doc itself names: Apopka + Orange
+// County + Central Florida, plus Zellwood and Plymouth (named as reached
+// areas in the Serving section). No neighbouring city is claimed.
+// $imageUrl is that page's real hero photo; when omitted it defaults to
+// the homepage hero.
+function ld_local_business($imageUrl = null) {
+    global $SITE, $SERVICES, $HOME_META;
+    if ($imageUrl === null) {
+        $homeHero = page_img('/', 'hero');
+        $imageUrl = $homeHero ? site_url($homeHero['src']) : null;
+    }
+    $offers = [];
+    foreach ($SERVICES as $s) {
+        $offers[] = ld_offer($s);
+        foreach ($s['also'] ?? [] as $x) {
+            $offers[] = ld_offer($x);
+        }
+    }
+    $out = [
+        '@type' => 'HomeAndConstructionBusiness',
+        'additionalType' => 'https://schema.org/ProfessionalService',
         '@id' => site_url('/') . '#business',
         'name' => $SITE['brand'],
-        'description' => '24/7 emergency water damage restoration in Apopka, FL 32703 and 32712. Crew dispatched immediately.',
-        'telephone' => $SITE['phone'],
+        'description' => $HOME_META['description'],
         'url' => site_url('/'),
+        'telephone' => $SITE['phone'],
         'address' => [
             '@type' => 'PostalAddress',
             'addressLocality' => 'Apopka',
             'addressRegion' => 'FL',
-            'postalCode' => '32703',
+            'postalCode' => ['32703', '32712'],
             'addressCountry' => 'US',
         ],
         'areaServed' => [
             ['@type' => 'City', 'name' => 'Apopka'],
             ['@type' => 'AdministrativeArea', 'name' => 'Orange County'],
+            ['@type' => 'AdministrativeArea', 'name' => 'Central Florida'],
+            ['@type' => 'Place', 'name' => 'Zellwood'],
+            ['@type' => 'Place', 'name' => 'Plymouth'],
         ],
         'openingHoursSpecification' => [
             '@type' => 'OpeningHoursSpecification',
             'dayOfWeek' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
             'opens' => '00:00', 'closes' => '23:59',
+        ],
+        'hasOfferCatalog' => [
+            '@type' => 'OfferCatalog',
+            'name' => 'Water Damage Restoration Services',
+            'itemListElement' => $offers,
+        ],
+        'contactPoint' => [
+            '@type' => 'ContactPoint',
+            'telephone' => '+1-407-787-9139',
+            'contactType' => 'customer service',
+            'areaServed' => ['@type' => 'AdministrativeArea', 'name' => 'Orange County'],
+            'availableLanguage' => 'English',
+        ],
+        // The real footer map URL already embedded on every page.
+        'hasMap' => 'https://www.google.com/maps?q=' . rawurlencode($SITE['map_query']) . '&output=embed',
+    ];
+    if ($imageUrl !== null) {
+        $out['image'] = $imageUrl;
+    }
+    return $out;
+}
+
+// One catalog entry: verbatim service label + live URL. No invented
+// offers, prices or availability — the label and URL are the offer.
+function ld_offer($s) {
+    return [
+        '@type' => 'Offer',
+        'itemOffered' => [
+            '@type' => 'Service',
+            'name' => $s['nav'],
+            'url' => site_url($s['slug']),
         ],
     ];
 }
@@ -225,6 +282,8 @@ function ld_website() {
         '@id' => site_url('/') . '#website',
         'url' => site_url('/'),
         'name' => $SITE['brand'],
+        'publisher' => ['@id' => site_url('/') . '#business'],
+        'inLanguage' => 'en-US',
     ];
 }
 
@@ -262,16 +321,42 @@ function ld_faq($faqs, $canonical = null) {
     return $out;
 }
 
-function ld_service($name, $areaName, $canonical = null) {
+function ld_service($name, $serviceType, $canonical, $imageUrl = null) {
     global $SITE;
     $out = [
         '@type' => 'Service',
         'name' => $name,
-        'serviceType' => 'Water Damage Restoration',
+        'serviceType' => $serviceType,
         'provider' => ['@id' => site_url('/') . '#business'],
-        'areaServed' => ['@type' => 'City', 'name' => $areaName],
+        'areaServed' => [
+            ['@type' => 'City', 'name' => 'Apopka'],
+            ['@type' => 'AdministrativeArea', 'name' => 'Orange County'],
+        ],
+        'url' => $canonical,
     ];
+    if ($imageUrl !== null) {
+        $out['image'] = $imageUrl;
+    }
     if ($canonical !== null) $out['@id'] = $canonical . '#service';
+    return $out;
+}
+
+// Article for the /resources/ guides. NO dates: the doc gives no publish
+// or update date for any guide, so datePublished/dateModified are omitted
+// rather than invented.
+function ld_article($canonical, $headline, $imageUrl = null) {
+    $out = [
+        '@type' => 'Article',
+        '@id' => $canonical . '#article',
+        'headline' => $headline,
+        'author' => ['@id' => site_url('/') . '#business'],
+        'publisher' => ['@id' => site_url('/') . '#business'],
+        'mainEntityOfPage' => $canonical,
+        'inLanguage' => 'en-US',
+    ];
+    if ($imageUrl !== null) {
+        $out['image'] = $imageUrl;
+    }
     return $out;
 }
 
@@ -298,20 +383,9 @@ function ld_howto($steps, $canonical = null, $name = 'Our Water Damage Restorati
     return $out;
 }
 
-// Speakable: only content that exists verbatim on the page (hero intro +
-// FAQ section).
-function ld_speakable($canonical = null) {
-    $out = [
-        '@type' => 'SpeakableSpecification',
-        'cssSelector' => ['.hero-intro', '#faq'],
-    ];
-    if ($canonical !== null) $out['@id'] = $canonical . '#speakable';
-    return $out;
-}
-
 // WebPage node: ties the page into the @id graph (isPartOf WebSite,
 // about the business on the homepage / the service on service pages).
-function ld_webpage($canonical, $title, $aboutId = null) {
+function ld_webpage($canonical, $title, $aboutId = null, $imageUrl = null) {
     $out = [
         '@type' => 'WebPage',
         '@id' => $canonical,
@@ -320,7 +394,35 @@ function ld_webpage($canonical, $title, $aboutId = null) {
         'isPartOf' => ['@id' => site_url('/') . '#website'],
     ];
     if ($aboutId !== null) $out['about'] = ['@id' => $aboutId];
+    if ($imageUrl !== null) $out['image'] = $imageUrl;
     return $out;
+}
+
+// All meaningful photos on a page, as absolute URLs, for the image
+// sitemap: homepage hero + every service card + the 8 process photos;
+// inner pages carry their hero only. Missing slots (no file) are skipped,
+// never emitted as a broken URL.
+function page_images($slug) {
+    global $SERVICES;
+    $out = [];
+    $add = function ($img) use (&$out) {
+        if ($img) $out[] = site_url($img['src']);
+    };
+    if ($slug === '/') {
+        $add(page_img('/', 'hero'));
+        // Only the cards the homepage actually renders (the 15 $SERVICES
+        // cards; 'also' routes share their hero file as their card, so
+        // adding them here would duplicate their own page's hero entry).
+        foreach ($SERVICES as $c) {
+            $add(page_img($c['slug'], 'card'));
+        }
+        for ($i = 1; $i <= 8; $i++) {
+            $add(page_img('process-' . $i, 'img'));
+        }
+    } else {
+        $add(page_img($slug, 'hero'));
+    }
+    return array_values(array_unique($out));
 }
 
 function ld_json($graph) {
