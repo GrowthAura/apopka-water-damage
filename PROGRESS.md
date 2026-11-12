@@ -1,0 +1,35 @@
+# Apopka FL Water Damage Restoration — PROGRESS
+
+Build dir: ~/workspace/apopka-water-damage/
+Source: Google Doc 1LfF_CNNyium0TldmxA3no6Wv_nFZFyPm8bok5MAlKGY (homepage only, 2,753 words). Local only — no push/deploy/domain/DNS.
+
+## 2026-11-11 ~17:55 PKT — Build started
+- Read extracted.txt fully (H1 x1, H2 x13, H3 x31, FAQ 8). Phone (407) 787-9139, ZIPs 32703 + 32712, Orange County / Central Florida.
+- Routes locked: 19 total (homepage + 18 unique linked paths; insurance-claim-help appears twice in doc = ONE route).
+- DO-DONT-LIST.md, CHECKLIST.md, POINTS-SHEET.md written. Scaffold build next.
+- PROBLEMS: none yet. OPEN: domain (none in doc), no street address, no About/Contact/Privacy, images not yet sourced.
+
+## 2026-11-11 ~18:10 PKT — Code + content build verified (round 1)
+- Scaffold complete: index.php front controller, includes/ (header, footer, functions, lead-form, lead-handler), data/pages.php + data/media.php (empty map, null-guards), assets/css/styles.css + assets/js/main.js (both fresh), .htaccess (308 no-slash), robots.txt (Allow:/, NO Host:), llms.txt (19 pages), site.webmanifest, drawn favicon set (navy tile + ocean drop).
+- Verification round 1: qa/verify-round1.py — 181/181 PASS (routes 200 19/19, H1 1/page, canonical 1/page = sitemap 19/19, slash 308 18/18, 404, FAQ schema 8/8 = visible, HowTo 8 steps, Speakable, JSON-LD valid 19/19, 0 broken links, 0 orphans, 0 self-links in main, 0 other-site traces, 0 dashes, lead POST honest notice, title 60ch + desc 108ch verbatim, H2 x13, H3 x31, cards x15, trust x4, process x8).
+- Fixes during round 1: why-reasons rendered as <p class="cause-title"> not H3 (doc has no H3s there; H3 count now 31/31); service-page heroes gained Button 1 + Button 2 (rule: Button 2 visible at scroll-0 on every page); hero intro set to 18px sitewide (18px rule); mobile hero tightened (topbar hidden ≤640px, H1 clamp, ≤400px pass) so Button 2 is in-viewport at scroll-0 on 1280x900, 390x844 and 320x844, buttons equal 56-57px everywhere, overflow 0 at 320/390/1280, body 18px.
+- KNOWN LIMIT: at 320x700 (short viewport) homepage Button 2 sits 125px below the fold — verbatim hero copy is physically taller than that viewport; a tiny scroll reveals it. Documented, not hidden.
+- Images: worker spawned (child agent, Pexels fresh, 27 slots); 0 files landed yet. Review PDF + full re-shoot after images land.
+- PROBLEMS: 0 open on code/content. OPEN: domain, street address, About/Contact/Privacy, images pending.
+
+## 2026-11-11 ~13:50 PKT — BUILD COMPLETE, local only (images + visual round done)
+- Images: worker delivered 27/27 fresh Pexels photos (1600x900, EXIF/XMP stripped, 0 banned-source matches; hash check caught + replaced 3 Acworth collisions). qa/IMAGE-LOG.md has per-slot notes. Honest quality notes: structural-drying + process-6 are B&W drum-fan photos (no colour air-mover photos on Pexels); leak-detection + process-3 thermal shots are studio-staged; hero has no crew; sewage shows sanitizing step; mobile home generic lakeside. 0 slots unfilled.
+- Verification round 2: qa/verify-round1.py re-run 181/181 PASS. Visual probe (40 probes): PROBLEMS none — overflow 0 at 1280/390/320, body 18px, H1 visible 40/40, Button 2 in-viewport at scroll-0 40/40, buttons equal. All 24 homepage imgs + 18 service heroes verified loading (scroll-into-view test; SHOTS.json "broken" flags are lazy-load timing only).
+- Viewed screenshots: desktop hero, service cards, process navy, FAQ, burst-pipe service page, mobile home hero — design approved as seen. Fixed screenshot-process bug (smooth-scroll lag left .reveal at opacity 0 in full-page shots; site itself unaffected).
+- Review PDF: ~/workspace/your_files/apopka-review-pack.pdf (39 pp, 15.3 MB — cover + 19 site pages, desktop top + mobile top each). Screenshots: qa/screenshots/ (57 files).
+- KNOWN LIMIT (unchanged): 320x700 homepage Button 2 sits 125px below the fold.
+- Environment notes: PHP CLI vanished mid-task (VM image change; apt reinstalled it) and the dev server died twice when parent exec sessions were cleaned up; restarted each time, currently running on 127.0.0.1:8911.
+- PROBLEMS: 0 open. OPEN: domain (canonicals/sitemap/robots on localhost placeholder), street address, About/Contact/Privacy (not in doc, not built), real job photos as future swaps for the B&W drying shots. NOTHING pushed/deployed; no token used.
+
+## 2026-11-11 ~18:42 PKT — Images landed + verification round 2 (45-min report run)
+- Images: 27/27 fresh Pexels photos landed 18:16-18:24 PKT, wired in data/media.php (hero + 18 service card/heroes + 8 process). qa/IMAGE-LOG.md documents per-slot viewed-pixel checks, Pexels IDs, 1600x900 re-encode, 0 EXIF/XMP markers, 0 "AI" in names/alts/metadata.
+- Reuse check caught + fixed 3 Acworth collisions (slab-leak, water-heater, insurance-claim) before they shipped — replaced with different Pexels photos, hash re-checked. 1 hamming-7 near-match (leak-detection vs Acworth process-1) viewed and confirmed different photos. Zero banned IDs used.
+- Round 2 verification (re-ran qa/verify-round1.py with images live): 181/181 PASS, 0 fail — routes 200 19/19, H1 1/page, sitemap 19/19, slash 308, FAQ 8/8 = visible, JSON-LD valid, 0 broken links, 0 traces, 0 dashes. Spot-checked 4 image files serving 200 with correct byte sizes; homepage renders 24 <img> tags.
+- Honest quality notes (from IMAGE-LOG, not blockers): structural-drying + process-6 are black-and-white drum-fan photos (Pexels has no colour air-mover photos); leak-detection + process-3 thermal shots are studio-staged; hero has no crew in frame; sewage shows sanitizing step not a backup scene; mobile-home is generic lakeside, not identifiably Florida. Swap first if real job photos arrive.
+- PROBLEMS: 0 open. NEXT: desktop + mobile screenshots per page (viewed) + review PDF for his review; then build is fully delivered pending his word on domain/push.
+- OPEN (unchanged): domain (localhost placeholder), no street address, no About/Contact/Privacy.

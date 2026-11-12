@@ -1,0 +1,15 @@
+# Apopka Water Damage Restoration — Apache rules.
+# Clean URLs: homepage / only, every other route with NO trailing slash.
+# A slash form of a no-slash route answers 308 to the no-slash form.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Slash form -> no-slash form (308), except the homepage itself.
+  RewriteCond %{REQUEST_URI} !^/$
+  RewriteRule ^(.*)/$ /$1 [R=308,L]
+
+  # Route everything that is not a real file or directory to the front controller.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.php [L]
+</IfModule>
