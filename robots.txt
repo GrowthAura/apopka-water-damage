@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://growthaura.github.io/apopka-water-damage/sitemap.xml
