@@ -1,0 +1,45 @@
+[NORMAL_TEXT] URL: /contact/
+[NORMAL_TEXT] Meta Title: Contact | 24/7 Water Damage Help in Apopka, FL
+[NORMAL_TEXT] Meta Description: Call (407) 787-9139 for 24/7 water damage help in Apopka, FL 32703 & 32712.
+[NORMAL_TEXT] Eyebrow: CONTACT • APOPKA, FLORIDA
+[HEADING_1] Contact Us for 24/7 Water Damage Help in Apopka
+[NORMAL_TEXT] Water in your home or business right now? Call (407) 787-9139. Our line is answered 24 hours a day, 7 days a week, including holidays, and a crew is dispatched immediately to homes and businesses across Apopka, FL 32703 and 32712.
+[NORMAL_TEXT] CTA Button 1: Call (407) 787-9139 Now
+[NORMAL_TEXT] CTA Button 2: Send Us a Message
+[HEADING_2] What info should you have ready when you call?
+[NORMAL_TEXT] Tell us where the water is coming from, which rooms are wet, whether it is clean or sewage, and whether the water is shut off. That helps the crew bring the right equipment.
+[NORMAL_TEXT] Helpful details include:
+[NORMAL_TEXT] Your address and the best phone number to reach you.
+[NORMAL_TEXT] The source of the water, if you know it: pipe, AC, water heater, appliance, toilet, roof, storm or sewage.
+[NORMAL_TEXT] How many rooms are affected and what flooring is in them.
+[NORMAL_TEXT] Whether the water is still flowing or has been shut off.
+[NORMAL_TEXT] Roughly when the leak started or when you found it.
+[NORMAL_TEXT] Whether anyone in the home is elderly, very young or has health concerns.
+[NORMAL_TEXT] Whether you plan to file an insurance claim.
+[HEADING_2] Phone
+[NORMAL_TEXT] Call: (407) 787-9139
+[NORMAL_TEXT] Available 24/7/365 for emergencies.
+[HEADING_2] Service Area
+[NORMAL_TEXT] Apopka, Florida: ZIP codes 32703 and 32712, including downtown Apopka, Errol Estate, Wekiwa Springs, Rock Springs, Kelly Park, Zellwood, Plymouth and the Ocoee-Apopka Road corridor.
+[HEADING_2] Hours
+[NORMAL_TEXT] Emergency water damage response: 24 hours a day, 7 days a week, 365 days a year.
+[NORMAL_TEXT] Non-emergency questions and inspections: scheduled at a time that works for you.
+[HEADING_2] Send Us a Message
+[NORMAL_TEXT] For non-emergency questions, such as a musty smell, an old stain or a mold inspection, fill out the form and we will get back to you. For active leaks, flooding or sewage, please call instead so a crew can be dispatched immediately.
+[NORMAL_TEXT] Form fields: Name, Phone, Email, Address or ZIP code, What is going on? (message), Is water still flowing? (Yes / No)
+[HEADING_2] While You Wait for the Crew
+[NORMAL_TEXT] Shut off the main water valve or the fixture valve.
+[NORMAL_TEXT] Turn off power to wet rooms at the breaker panel.
+[NORMAL_TEXT] Move valuables, electronics and rugs to a dry area.
+[NORMAL_TEXT] Take photos and video for your insurance claim.
+[NORMAL_TEXT] Stay out of any water that might be sewage or flood water.
+[NORMAL_TEXT] For more first steps, read Emergency Water Extraction in Apopka (/emergency-water-extraction/).
+[HEADING_2] Frequently Asked Questions
+[HEADING_3] How fast will a crew arrive?
+[NORMAL_TEXT] A crew is dispatched immediately after your call. Arrival time depends on your location in Apopka and traffic.
+[HEADING_3] What is the fastest way to reach you?
+[NORMAL_TEXT] Calling is fastest for emergencies. For non-urgent questions, the contact form works well.
+[HEADING_3] Do you serve areas outside Apopka?
+[NORMAL_TEXT] Our focus is Apopka, FL 32703 and 32712. Call to ask about nearby addresses.
+[NORMAL_TEXT] CTA Button: Call (407) 787-9139 Now
+[NORMAL_TEXT] 

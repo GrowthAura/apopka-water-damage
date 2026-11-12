@@ -92,6 +92,29 @@ $PAGE_IMG = [
         'card' => ['file' => 'water-damage-insurance-claim-help-apopka.jpg', 'alt' => 'Water Damage Insurance Claim Help in Apopka'],
         'hero' => ['file' => 'water-damage-insurance-claim-help-apopka.jpg', 'alt' => 'Inspector in a hard hat holding a clipboard while documenting a home inspection in Apopka, FL'],
     ],
+    // New routes (tabs 20..25, full-content rebuild 2026-11-12). Hero only;
+    // no homepage card. page_img() returns null until the file lands in
+    // assets/img/, so a missing photo is a navy hero, never a broken image.
+    '/about' => [
+        'hero' => ['file' => 'about-apopka.jpg', 'alt' => 'Water damage restoration crew with cleaning equipment in a home in Apopka, FL'],
+    ],
+    '/contact' => [
+        'hero' => ['file' => 'contact-apopka.jpg', 'alt' => 'Homeowner calling for emergency help on the phone at home in Apopka, FL'],
+    ],
+    '/resources/apopka-ac-drain-line-tips' => [
+        'hero' => ['file' => 'blog-ac-drain-line-apopka.jpg', 'alt' => 'HVAC technician inspecting an outdoor air conditioning unit at a home in Apopka, FL'],
+    ],
+    '/resources/who-pays-for-water-damage-florida' => [
+        'hero' => ['file' => 'blog-who-pays-apopka.jpg', 'alt' => 'Homeowner reviewing insurance paperwork at a wooden desk in Apopka, FL'],
+    ],
+    // Hurricane alt carries NO place claim: the photo was shot in Tenerife
+    // (Canary Islands), not Florida — palms + storm seascape only.
+    '/resources/apopka-hurricane-water-damage-checklist' => [
+        'hero' => ['file' => 'blog-hurricane-checklist-apopka.jpg', 'alt' => 'Palm trees bending in strong hurricane winds over a stormy ocean'],
+    ],
+    '/resources/how-fast-mold-grows-florida' => [
+        'hero' => ['file' => 'blog-mold-timeline-apopka.jpg', 'alt' => 'Black mold and mildew stains on a damp wall in a home in Apopka, FL'],
+    ],
     // Process steps (homepage phase grid).
     'process-1' => [
         'img' => ['file' => 'process-1-emergency-call-apopka.jpg', 'alt' => 'Woman making an emergency phone call from home in Apopka, FL'],

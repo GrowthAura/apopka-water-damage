@@ -333,3 +333,8 @@ $FINAL_CTA_H2 = 'Get 24/7 Emergency Water Damage Help in Apopka Now';
 $FINAL_CTA_PARAS = [
     'Every hour water sits in your home, more drywall soaks it up, more flooring lifts and the risk of mold grows. Our water damage restoration Apopka FL crew is ready right now for flood cleanup, water removal service and full structural drying. Call (407) 787-9139 and a crew is dispatched immediately to your door.',
 ];
+
+// Full tab content (tabs 02..25) — generated, see data/full_pages.php.
+// The homepage arrays above are unchanged; inner pages now carry their OWN
+// tab's full content verbatim instead of the old homepage summary.
+require __DIR__ . '/full_pages.php';

@@ -2,14 +2,23 @@
 
 Top authority for this build. Every line below is a standing order from the user or a direct consequence of the source doc.
 
+## THE STANDARD — Noorullah's order, 2026-11-12 (applies to EVERY future work on this site)
+- Content 1001% wohi ho jo usne docs mein diya hai, aur bilkul waise ho jaisi usne instructions di hain — na ek lafz kam, na ek lafz zyada, na kuch invent karna hai.
+- Har site ek se badh kar ek ho — is site ko pichli sites se BEHTAR banao.
+- CORRECTION (2026-11-12, verified by fresh fetch): the "HOMEPAGE ONLY" claim below was WRONG. Plain documents.get returns Tab 1 ONLY. With includeTabsContent=true the doc has 25 tabs, 42,901 words. The full content WAS in his doc all along. NEVER trust a Tab-1-only read again: fetch docs ONLY with includeTabsContent=true, verify the tabs array + per-tab word counts BEFORE claiming anything about coverage.
+
 ## Source of truth
-- Google Doc 1LfF_CNNyium0TldmxA3no6Wv_nFZFyPm8bok5MAlKGY, "Apopka FL Water Damage Restoration — Page Copy".
-- HOMEPAGE ONLY in the doc: 2,753 words, H1 x1, H2 x13, H3 x31, FAQ 8.
+- Google Doc 1LfF_CNNyium0TldmxA3no6Wv_nFZFyPm8bok5MAlKGY, "Apopka FL Water Damage Restoration — Page Copy" — 25 tabs, 42,901 words (verified 2026-11-12, doc-tabs.json + extracted-tab01..25.txt in build dir).
+- Tab 01 Homepage: 2,753 words, H1 x1, H2 x13, H3 x31, FAQ 8.
+- Tabs 02–19: full pages for all 18 service routes, 1,688–2,084 words each (own URL + Meta Title + Meta Description + Eyebrow + H1 per tab). These go VERBATIM onto their pages — the old summary-only inner pages are superseded.
+- Tab 20 About (/about/, 904 words) + Tab 21 Contact (/contact/, 496 words) — content EXISTS in the doc: build both pages verbatim. NO Privacy tab exists — do NOT build Privacy, do NOT invent it.
+- Tabs 22–25: 4 blog guides (~1,100 words each) under /resources/ — build all 4 verbatim.
+- Total routes: 25 (homepage + 18 services + About + Contact + 4 blogs).
 - Phone ONLY (407) 787-9139. ZIPs 32703 + 32712, Orange County / Central Florida, Lake Apopka / Wekiva River basin.
-- Meta title verbatim 60ch: "Water Damage Restoration Apopka FL | 24/7 Emergency Response".
-- Meta description verbatim 108ch: "24/7 water damage restoration in Apopka, FL 32703 & 32712. Crew dispatched immediately. Call (407) 787-9139."
-- NO domain in the doc, NO street address, NO About / Contact / Privacy content. Do NOT invent any of these. Do NOT build About / Contact / Privacy pages.
-- 0 hyperlink objects in the doc. Links are paths in parentheses ONLY — they are the sole authority for links. Never infer a link from pasted text.
+- Homepage meta title verbatim 60ch: "Water Damage Restoration Apopka FL | 24/7 Emergency Response".
+- Homepage meta description verbatim 108ch: "24/7 water damage restoration in Apopka, FL 32703 & 32712. Crew dispatched immediately. Call (407) 787-9139."
+- NO domain in the doc, NO street address. Do NOT invent either.
+- 0 hyperlink objects in the doc. Links are paths in parentheses ONLY — they are the sole authority for links. Never infer a link from pasted text. Headings are real named styles in Tab 01; check each tab's own styles/labels, never assume.
 
 ## DO
 - Keep every visible word 100% verbatim from the doc. Do not cut, shorten, paraphrase or invent a single line.
@@ -18,8 +27,10 @@ Top authority for this build. Every line below is a standing order from the user
 - Button 1 = ONLY the call number "(407) 787-9139", nothing else written in it. Button 2 ("Request Emergency Help") = EQUAL to Button 1: same size, same prominence, same visibility.
 - Mobile: sticky call bar hidden while hero is on screen, hamburger 46x46, Escape closes, no overflow at 320/390, Button 2 visible at scroll-0.
 - URL form: homepage / only, every other route NO trailing slash. Slash form answers 308 to no-slash. Self-canonical 1/page. Sitemap date-only lastmod. robots Allow:/ with NO Host: line.
-- Linked pages (18) get ONLY their verbatim homepage summary until their own docs arrive. No invented words.
-- /water-damage-insurance-claim-help appears twice in the doc (service list + insurance section) but is ONE route. Total routes: 19.
+- Every inner page carries its OWN tab's FULL content verbatim (URL + meta + eyebrow + H1 + all headings + all body + FAQ where the tab has one). No summary-only pages. No invented words.
+- /water-damage-insurance-claim-help appears twice in the homepage tab (service list + insurance section) but is ONE route (Tab 19).
+- CONTENT-FULLNESS GATE (mandatory in every QA round): count visible words per page — total + main-body excl. header/footer/sticky bar + UNIQUE prose (excl. repeated template). EMPTY = main <100 words, THIN = 100–300. A page returning 200 with H1=1 can still be effectively empty. Rendered-state checks (real clicks / mirror render) are mandatory, never curl alone.
+- llms.txt lists all 25 pages. Sitemap 25/25. JSON-LD per tab content (FAQPage where the tab has FAQ, Service on service pages, HowTo only where the tab has steps).
 - 0 broken links, 0 orphans, 0 self-links in body copy (header/footer exempt), anchors max 3-5 words, 1 link per target per page in body copy.
 - Lead form: honest no-mail-yet notice. No backend mail until he gives an address. The form must not pretend to send.
 - SEO + AEO + GEO on verbatim doc facts only: LocalBusiness + BreadcrumbList every page, FAQPage + WebSite on homepage, Service schema on service pages, HowTo schema for the 8-step process (steps verbatim, no invented tools/supplies), SpeakableSpecification for FAQ + hero intro, llms.txt with full 19-page list. Keep citable facts (IICRC S500, 24-48h mold window, cost range $1,000-$3,000 / $3,000-$10,000+) exactly as written, no invented source.

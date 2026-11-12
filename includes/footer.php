@@ -34,6 +34,17 @@ $map_src = 'https://www.google.com/maps?q=' . rawurlencode($SITE['map_query']) .
       </ul>
     </div>
     <div class="footer-col">
+      <p class="footer-h">Guides &amp; Company</p>
+      <ul>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+        <li><a href="/resources/apopka-ac-drain-line-tips">AC Drain Line Tips</a></li>
+        <li><a href="/resources/who-pays-for-water-damage-florida">Who Pays for Water Damage?</a></li>
+        <li><a href="/resources/apopka-hurricane-water-damage-checklist">Hurricane Checklist</a></li>
+        <li><a href="/resources/how-fast-mold-grows-florida">How Fast Mold Grows</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
       <p class="footer-h">Get Help Now</p>
       <p>Water on your floors, dripping through a ceiling or soaking a closet wall needs action now, not tomorrow.</p>
       <p><a href="<?= esc($SITE['phone_href']) ?>"><?= esc($SITE['phone']) ?></a><br>

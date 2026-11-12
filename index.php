@@ -286,12 +286,23 @@ function render_home($form = null) {
 
 function render_page($slug, $page, $form = null) {
     global $ROOT, $SITE, $HOME_META, $PAGES;
+    $full = $page['full'];
     $meta = page_meta($slug, $PAGES);
     $crumbs = [['label' => 'Home', 'href' => '/'], ['label' => $page['h1']]];
     $pageCanon = site_url($slug);
-    $graph = [ld_local_business(), ld_webpage($pageCanon, $meta['title'], $pageCanon . '#service'),
-        ld_breadcrumb($crumbs, $pageCanon),
-        ld_service($page['h1'], 'Apopka', $pageCanon)];
+    $aboutId = $full['type'] === 'service' ? $pageCanon . '#service' : site_url('/') . '#business';
+    $graph = [ld_local_business(), ld_webpage($pageCanon, $meta['title'], $aboutId),
+        ld_breadcrumb($crumbs, $pageCanon)];
+    if ($full['type'] === 'service') {
+        $graph[] = ld_service($page['h1'], 'Apopka', $pageCanon);
+    }
+    if (!empty($full['faqs'])) {
+        $graph[] = ld_faq(array_map(fn($f) => ['q' => $f['q'], 'a' => $f['a']], $full['faqs']), $pageCanon);
+    }
+    if (!empty($full['howto'])) {
+        $steps = array_map(fn($s) => ['h3' => $s['name'], 'text' => $s['text']], $full['howto']['steps']);
+        $graph[] = ld_howto($steps, $pageCanon, $full['howto']['name']);
+    }
     $pageHero = page_img($slug, 'hero');
     $HEAD = [
         'title' => $meta['title'],
@@ -304,18 +315,40 @@ function render_page($slug, $page, $form = null) {
     $currentSlug = $slug;
     $show_map = true;
     require $ROOT . '/includes/header.php';
+    $used = [];
+    $nBlocks = count($full['blocks']);
+    $faqAt = $full['faq_at'] ?? $nBlocks;
+    $preBlocks = array_slice($full['blocks'], 0, $faqAt);
+    $postBlocks = array_slice($full['blocks'], $faqAt);
     ?>
 <section class="hero hero-short">
   <?php if ($pageHero): ?><div class="hero-media"><img src="<?= esc($pageHero['src']) ?>" alt="<?= esc($pageHero['alt']) ?>" width="1600" height="900" fetchpriority="high"></div><?php endif; ?>
   <div class="container hero-content">
-    <p class="eyebrow on-navy"><?= esc($HOME_META['eyebrow']) ?></p>
+    <p class="eyebrow on-navy"><?= esc($full['eyebrow']) ?></p>
     <h1><?= esc($page['h1']) ?></h1>
     <?= hero_buttons() ?>
   </div>
 </section>
 <section class="section"><div class="container content-block reveal">
   <?= crumbs_html($crumbs) ?>
-  <?= card_para($page['summary'], $slug) ?>
+  <p class="lead"><?= render_linked($full['intro'], $full['intro_links'] ?? [], $slug, $used) ?></p>
+  <?= render_block_list($preBlocks, $slug, $used) ?>
+</div></section>
+<?php if (!empty($full['faqs'])): ?>
+<section class="section section-cream" id="faq"><div class="container content-block reveal">
+  <h2><?= esc($full['faq_h2']) ?></h2>
+  <div class="faq-list">
+    <?php foreach ($full['faqs'] as $f): ?>
+    <details>
+      <summary><h3><?= esc($f['q']) ?></h3><span class="faq-toggle" aria-hidden="true">+</span></summary>
+      <div class="faq-answer"><p><?= render_linked($f['a'], $f['l'] ?? [], $slug, $used) ?></p></div>
+    </details>
+    <?php endforeach; ?>
+  </div>
+</div></section>
+<?php endif; ?>
+<section class="section"><div class="container content-block reveal">
+  <?= render_block_list($postBlocks, $slug, $used) ?>
   <div class="form-wrap">
     <?php require $ROOT . '/includes/lead-form.php'; ?>
   </div>

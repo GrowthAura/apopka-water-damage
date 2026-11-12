@@ -257,7 +257,7 @@ li{margin-bottom:.5em}
 .footer-map-wrap{line-height:0}
 .footer-map{width:100%;height:340px;border:0}
 .site-footer{background:var(--ink);color:#C7D3DF;padding:64px 0 0}
-.footer-cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;padding-bottom:48px}
+.footer-cols{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px}
 .footer-h{font-family:var(--font-display);font-size:1.2rem;font-weight:650;color:#fff;margin-bottom:16px}
 .footer-col p{color:#C7D3DF}
 .footer-col ul{list-style:none;margin:0}

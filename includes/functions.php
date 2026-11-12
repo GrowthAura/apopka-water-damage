@@ -90,11 +90,11 @@ function bullets_html($items) {
 }
 
 // ---- Page map: every route the site serves -------------------------------
-// Skeleton pages reuse ONLY their doc-verbatim homepage summary as content.
-// No words are invented for them; their full guides await their own docs.
-// Cards with two links (mold, structural, leak detection) map to two routes.
+// Every inner page carries its OWN tab's full content verbatim
+// ($FULL_PAGES, generated from doc tabs 02..25). The $SERVICES loop below
+// only keeps the homepage card data in shape; the full pages override it.
 function build_pages() {
-    global $SERVICES;
+    global $SERVICES, $FULL_PAGES;
     $pages = [];
     foreach ($SERVICES as $c) {
         $pages[$c['slug']] = [
@@ -108,27 +108,85 @@ function build_pages() {
             ];
         }
     }
+    foreach ($FULL_PAGES as $slug => $fp) {
+        $pages[$slug] = [
+            'type' => $fp['type'], 'h1' => $fp['h1'], 'kind' => $fp['type'],
+            'full' => $fp, 'parent' => null,
+        ];
+    }
     return $pages;
 }
 
+// Trim at a word boundary to <= $max chars. Meta only; visible page text
+// is untouched.
+function trim_words_meta($s, $max) {
+    if (strlen($s) <= $max) return $s;
+    $t = rtrim(substr($s, 0, $max));
+    $sp = strrpos($t, ' ');
+    return $sp !== false ? substr($t, 0, $sp) : $t;
+}
+
 function page_meta($slug, $pages) {
-    global $HOME_META, $SITE;
+    global $HOME_META, $SITE, $FULL_PAGES;
     if ($slug === '/') {
         return ['title' => $HOME_META['title'], 'description' => $HOME_META['description']];
     }
-    $p = $pages[$slug];
-    // Titles: H1 alone — the " | Brand" suffix pushed 15/18 inner titles
-    // over 60 chars. Homepage keeps its verbatim 60ch doc title.
-    // Descriptions: meta only, trimmed at a word boundary to <=160 chars;
-    // visible page text is untouched.
-    $desc = $p['summary']['body'];
-    if (strlen($desc) > 160) {
-        $desc = rtrim(substr($desc, 0, 160));
-        $sp = strrpos($desc, ' ');
-        if ($sp !== false) $desc = substr($desc, 0, $sp);
+    if (isset($FULL_PAGES[$slug])) {
+        // Titles: the tab's H1 alone, trimmed at a word boundary to <=60
+        // (two blog H1s are 62-63ch; the doc's own Meta Titles run 54-64ch
+        // and are NOT used as <title> — same class as the Round 1 P3 fix).
+        // Descriptions: the tab's Meta Description verbatim (all <=108ch).
+        $fp = $FULL_PAGES[$slug];
+        return ['title' => trim_words_meta($fp['meta_title'], 60),
+                'description' => trim_words_meta($fp['meta_description'], 160)];
     }
+    $p = $pages[$slug];
+    $desc = $p['summary']['body'];
     return ['title' => $p['h1'],
-            'description' => $desc];
+            'description' => trim_words_meta($desc, 160)];
+}
+
+// Render text with its doc links. Each link is applied once, left to
+// right, on the doc's FULL phrase (the anchor is never a partial phrase).
+// A self-link or a second link to the same target on this page stays
+// plain text (paren annotation already stripped from $text).
+function render_linked($text, $links, $currentSlug, &$used) {
+    $out = '';
+    $rest = $text;
+    foreach ($links as $lnk) {
+        $anchor = $lnk[0];
+        $href = $lnk[1];
+        if ($href === $currentSlug || in_array($href, $used, true)) continue;
+        $pos = mb_strpos($rest, $anchor);
+        if ($pos === false) continue;
+        $out .= esc(mb_substr($rest, 0, $pos));
+        $out .= '<a href="' . esc($href) . '">' . esc($anchor) . '</a>';
+        $rest = mb_substr($rest, $pos + mb_strlen($anchor));
+        $used[] = $href;
+    }
+    $out .= esc($rest);
+    return $out;
+}
+
+// Render a full page's body blocks (h2 / h3 / p / ul) in doc order.
+function render_block_list($blocks, $slug, &$used) {
+    $out = '';
+    foreach ($blocks as $b) {
+        if ($b['t'] === 'h2') {
+            $out .= '<h2>' . esc($b['x']) . '</h2>';
+        } elseif ($b['t'] === 'h3') {
+            $out .= '<h3>' . esc($b['x']) . '</h3>';
+        } elseif ($b['t'] === 'p') {
+            $out .= '<p>' . render_linked($b['x'], $b['l'] ?? [], $slug, $used) . '</p>';
+        } elseif ($b['t'] === 'ul') {
+            $out .= '<ul>';
+            foreach ($b['items'] as $it) {
+                $out .= '<li>' . render_linked($it['x'], $it['l'] ?? [], $slug, $used) . '</li>';
+            }
+            $out .= '</ul>';
+        }
+    }
+    return $out;
 }
 
 // ---- JSON-LD -------------------------------------------------------------
@@ -217,21 +275,23 @@ function ld_service($name, $areaName, $canonical = null) {
     return $out;
 }
 
-// HowTo for the 8-step process. Steps are verbatim from the doc; no tools
-// or supplies are listed because the doc names none.
-function ld_howto($steps, $canonical = null) {
+// HowTo for a tab's numbered step sequence. Steps are verbatim from the
+// doc; no tools or supplies are listed because the doc names none.
+// $name is the section heading that holds the steps (homepage: the 8-step
+// process; inner pages: their own step section, e.g. flood cleanup).
+function ld_howto($steps, $canonical = null, $name = 'Our Water Damage Restoration Process, Step by Step') {
     $items = [];
     foreach ($steps as $i => $s) {
         $items[] = [
             '@type' => 'HowToStep',
             'position' => $i + 1,
-            'name' => $s['h3'],
+            'name' => $s['h3'] ?? $s['name'],
             'text' => $s['text'],
         ];
     }
     $out = [
         '@type' => 'HowTo',
-        'name' => 'Our Water Damage Restoration Process, Step by Step',
+        'name' => $name,
         'step' => $items,
     ];
     if ($canonical !== null) $out['@id'] = $canonical . '#howto';

@@ -1,0 +1,75 @@
+[NORMAL_TEXT] URL: /resources/apopka-ac-drain-line-tips/
+[NORMAL_TEXT] Meta Title: How to Keep Your AC Drain Line From Flooding (Florida Guide)
+[NORMAL_TEXT] Meta Description: Stop AC drain line clogs before they flood your Apopka home. Leak already? Call (407) 787-9139.
+[NORMAL_TEXT] Eyebrow: HOMEOWNER GUIDE • APOPKA, FLORIDA
+[HEADING_1] How to Keep Your AC Drain Line From Flooding Your Florida Home
+[NORMAL_TEXT] In Central Florida, your air conditioner removes gallons of water from the air every day. All of it has to leave through one small PVC pipe. When that condensate line clogs, the water ends up in your closet, hallway or ceiling instead. Here is how to unclog an AC drain line in Florida, keep it clear, and spot trouble before it turns into water damage.
+[HEADING_2] How often should an Apopka AC drain line be flushed?
+[NORMAL_TEXT] Flush it every one to three months during cooling season, and monthly in the humid summer, because Central Florida heat and moisture grow algae in the line quickly.
+[NORMAL_TEXT] In Apopka, cooling season lasts most of the year. Warm, wet conditions inside the drain line are perfect for algae, mold and bacteria, which form a slimy clog. A quick flush with white vinegar on a regular schedule keeps that buildup from blocking the line.
+[HEADING_2] How Your AC Drain System Works
+[NORMAL_TEXT] When warm, humid air passes over the cold evaporator coil inside your air handler, moisture condenses on the coil, the same way water forms on a cold glass. That water drips into a primary drain pan and flows out through a condensate drain line, usually 3/4-inch PVC, to the outside of the home or into a plumbing drain.
+[NORMAL_TEXT] Most systems also have:
+[NORMAL_TEXT] A cleanout access tee, a short vertical pipe with a cap near the air handler for flushing the line.
+[NORMAL_TEXT] A float switch that shuts off the AC if water rises in the pan.
+[NORMAL_TEXT] A secondary or emergency drain pan under attic units.
+[NORMAL_TEXT] An emergency drain line that often drips over a window or soffit to warn you the main line is clogged.
+[HEADING_2] Signs Your AC Drain Line Is Clogged
+[NORMAL_TEXT] Water in the primary or secondary drain pan.
+[NORMAL_TEXT] The AC shutting off by itself, a sign the float switch tripped.
+[NORMAL_TEXT] Water dripping from a pipe above a window or soffit outside.
+[NORMAL_TEXT] A musty smell near the air handler or vents.
+[NORMAL_TEXT] Damp carpet or baseboards near the AC closet.
+[NORMAL_TEXT] A ceiling stain under an attic air handler.
+[NORMAL_TEXT] Gurgling or no water coming from the outside drain line end while the AC runs.
+[HEADING_2] How to Unclog an AC Drain Line in Florida: Step by Step
+[HEADING_3] Step 1: Turn Off the AC
+[NORMAL_TEXT] Switch the system off at the thermostat. For safety, also turn off the breaker for the air handler.
+[HEADING_3] Step 2: Find the Cleanout
+[NORMAL_TEXT] Look for a short PVC pipe with a cap or T-fitting coming off the drain line near the air handler.
+[HEADING_3] Step 3: Clear the Outside End
+[NORMAL_TEXT] Find where the line exits outside. Use a wet/dry vacuum on the end of the pipe, sealing around it with your hand or a rag, and run it for one to two minutes to pull out the clog.
+[HEADING_3] Step 4: Flush With Vinegar
+[NORMAL_TEXT] Pour about one cup of distilled white vinegar into the cleanout. Let it sit for 30 minutes to break down algae.
+[HEADING_3] Step 5: Rinse
+[NORMAL_TEXT] Pour a cup or two of water into the cleanout and confirm it flows freely out the other end.
+[HEADING_3] Step 6: Check the Pan
+[NORMAL_TEXT] Wipe out the drain pan and make sure it is dry. If the pan is rusted or cracked, call an HVAC technician to replace it.
+[HEADING_3] Step 7: Turn the System Back On
+[NORMAL_TEXT] Restore power and check that water drips out the drain line within 15 to 30 minutes of the AC running.
+[HEADING_2] Vinegar AC Drain Line Cleaning: Do's and Don'ts
+[NORMAL_TEXT] Do use plain distilled white vinegar; it is gentle on PVC.
+[NORMAL_TEXT] Do flush on a schedule, not only when there is a problem.
+[NORMAL_TEXT] Don't use undiluted bleach often; it can damage some components and is harsh in enclosed closets.
+[NORMAL_TEXT] Don't use chemical drain openers made for sinks.
+[NORMAL_TEXT] Don't pour hot boiling water into PVC lines.
+[NORMAL_TEXT] Don't ignore a tripped float switch; it is telling you something is wrong.
+[HEADING_2] Float Switch AC Safety: Why It Matters
+[NORMAL_TEXT] A float switch sits in the drain pan or on the drain line. When water rises, the float lifts and cuts power to the AC so the pan does not overflow. It is one of the cheapest protections against condensate pan overflow and water damage. If your system does not have one, or it is old or corroded, ask an HVAC technician about adding or replacing it. Test it by gently lifting the float while the AC is running; the system should shut off.
+[HEADING_2] When to Call an HVAC Technician
+[NORMAL_TEXT] The line stays clogged after vacuuming and flushing.
+[NORMAL_TEXT] The drain pan is rusted, cracked or leaking.
+[NORMAL_TEXT] The evaporator coil is frozen or covered in ice.
+[NORMAL_TEXT] The float switch is missing or does not shut the system off.
+[NORMAL_TEXT] Water keeps appearing even when the line flows.
+[NORMAL_TEXT] You have a condensate pump that is not running.
+[HEADING_2] Already Have Water Damage?
+[NORMAL_TEXT] If water has already soaked carpet, baseboards, drywall or the ceiling, clearing the line is only the first step. Water trapped under flooring and inside walls in Apopka's humidity can lead to mold within 24 to 48 hours. A professional crew can extract the water, dry the closet and surrounding rooms with daily moisture readings, and treat the area to prevent mold. Read more: AC Leak Water Damage in Apopka (/ac-leak-water-damage/) or call (407) 787-9139 and a crew is dispatched immediately.
+[HEADING_2] Simple Habits That Prevent AC Water Damage
+[NORMAL_TEXT] Flush the drain line monthly in summer and every two to three months otherwise.
+[NORMAL_TEXT] Change your air filter every one to three months.
+[NORMAL_TEXT] Schedule HVAC maintenance once or twice a year.
+[NORMAL_TEXT] Keep the outdoor end of the drain line clear of mulch, plants and debris.
+[NORMAL_TEXT] Put a water sensor alarm in the AC closet or attic pan.
+[NORMAL_TEXT] Look in the drain pan whenever you change the filter.
+[HEADING_2] Frequently Asked Questions
+[HEADING_3] How much vinegar should I put in my AC drain line?
+[NORMAL_TEXT] About one cup of distilled white vinegar is enough for a routine flush.
+[HEADING_3] Can a clogged AC drain line cause a ceiling leak?
+[NORMAL_TEXT] Yes. Attic air handlers with a clogged line and failed secondary pan are a leading cause of ceiling stains in Florida homes.
+[HEADING_3] Why is water dripping over my window?
+[NORMAL_TEXT] That is likely the emergency drain line. It means the primary drain line is clogged and should be cleared soon.
+[HEADING_3] Is AC drain line water dirty?
+[NORMAL_TEXT] It starts fairly clean but picks up algae and bacteria in the pan and line, so treat any overflow as contaminated.
+[NORMAL_TEXT] If an AC leak has already caused damage in your Apopka home, call (407) 787-9139 for 24/7 help.
+[NORMAL_TEXT] 

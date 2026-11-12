@@ -37,7 +37,7 @@ global $SITE, $SERVICES;
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/styles.css?v=4">
+<link rel="stylesheet" href="/assets/css/styles.css?v=5">
 <?= $HEAD['ld'] ?? '' ?>
 <noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
 </head>
@@ -68,6 +68,8 @@ global $SITE, $SERVICES;
           <?php endforeach; ?>
         </div>
       </details>
+      <a href="/about"<?= nav_active('/about', $currentSlug ?? null) ?>>About</a>
+      <a href="/contact"<?= nav_active('/contact', $currentSlug ?? null) ?>>Contact</a>
     </nav>
     <a class="btn btn-ocean header-cta" href="<?= esc($SITE['phone_href']) ?>"><?= esc($SITE['phone']) ?></a>
     <div class="mobile-head">
@@ -83,6 +85,8 @@ global $SITE, $SERVICES;
           <a href="<?= esc($x['slug']) ?>"<?= nav_active($x['slug'], $currentSlug ?? null) ?>><?= esc($x['nav']) ?></a>
           <?php endforeach; ?>
           <?php endforeach; ?>
+          <a href="/about"<?= nav_active('/about', $currentSlug ?? null) ?>>About</a>
+          <a href="/contact"<?= nav_active('/contact', $currentSlug ?? null) ?>>Contact</a>
           <a class="btn btn-ocean" href="<?= esc($SITE['phone_href']) ?>"><?= esc($SITE['phone']) ?></a>
         </div>
       </details>
