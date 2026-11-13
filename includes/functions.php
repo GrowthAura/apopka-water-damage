@@ -235,7 +235,13 @@ function ld_local_business($imageUrl = null) {
             ['@type' => 'AdministrativeArea', 'name' => 'Central Florida'],
             ['@type' => 'Place', 'name' => 'Zellwood'],
             ['@type' => 'Place', 'name' => 'Plymouth'],
+            ['@type' => 'PostalCode', 'postalCode' => '32703'],
+            ['@type' => 'PostalCode', 'postalCode' => '32712'],
         ],
+        // U-3 (Cycle 1): only terms verified verbatim in page copy —
+        // "IICRC S500 Drying Methods" is a homepage category heading.
+        'knowsAbout' => ['Water damage restoration', 'Emergency water extraction',
+            'Structural drying', 'Mold remediation', 'IICRC S500 Drying Methods'],
         'openingHoursSpecification' => [
             '@type' => 'OpeningHoursSpecification',
             'dayOfWeek' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -252,6 +258,13 @@ function ld_local_business($imageUrl = null) {
             'contactType' => 'customer service',
             'areaServed' => ['@type' => 'AdministrativeArea', 'name' => 'Orange County'],
             'availableLanguage' => 'English',
+            // U-5 (Cycle 1): mirrors openingHoursSpecification — 24/7
+            // is stated everywhere on the site; no new fact.
+            'hoursAvailable' => [
+                '@type' => 'OpeningHoursSpecification',
+                'dayOfWeek' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                'opens' => '00:00', 'closes' => '23:59',
+            ],
         ],
         // The real footer map URL already embedded on every page.
         'hasMap' => 'https://www.google.com/maps?q=' . rawurlencode($SITE['map_query']) . '&output=embed',
@@ -294,10 +307,11 @@ function ld_breadcrumb($crumbs, $canonical = null) {
     foreach ($crumbs as $c) {
         $item = ['@type' => 'ListItem', 'position' => $i, 'name' => $c['label']];
         if (!empty($c['href'])) {
-            $item['item'] = site_url($c['href']);
+            // Cycle 1 P3-4: item as an object, not a bare URL string.
+            $item['item'] = ['@id' => site_url($c['href'])];
         } elseif ($canonical !== null && $i === $n) {
             // Current page: the item is the page itself.
-            $item['item'] = $canonical;
+            $item['item'] = ['@id' => $canonical];
         }
         $items[] = $item;
         $i++;
@@ -332,6 +346,8 @@ function ld_service($name, $serviceType, $canonical, $imageUrl = null, $descript
             ['@type' => 'City', 'name' => 'Apopka'],
             ['@type' => 'AdministrativeArea', 'name' => 'Orange County'],
             ['@type' => 'AdministrativeArea', 'name' => 'Central Florida'],
+            ['@type' => 'Place', 'name' => 'Zellwood'],
+            ['@type' => 'Place', 'name' => 'Plymouth'],
         ],
         'url' => $canonical,
     ];
@@ -349,7 +365,9 @@ function ld_service($name, $serviceType, $canonical, $imageUrl = null, $descript
 // Article for the /resources/ guides. NO dates: the doc gives no publish
 // or update date for any guide, so datePublished/dateModified are omitted
 // rather than invented.
-function ld_article($canonical, $headline, $imageUrl = null, $description = null) {
+// $body is the blog tab's full visible article text verbatim (its blocks
+// joined with blank lines) — Cycle 1 P2-1 articleBody.
+function ld_article($canonical, $headline, $imageUrl = null, $description = null, $body = null) {
     $out = [
         '@type' => 'Article',
         '@id' => $canonical . '#article',
@@ -358,6 +376,10 @@ function ld_article($canonical, $headline, $imageUrl = null, $description = null
         'publisher' => ['@id' => site_url('/') . '#business'],
         'mainEntityOfPage' => $canonical,
         'inLanguage' => 'en-US',
+        // U-2 (Cycle 1): about the business; articleSection is the URL
+        // directory the blogs live under — honest, not invented.
+        'about' => ['@id' => site_url('/') . '#business'],
+        'articleSection' => 'Resources',
     ];
     // $description is the page's verbatim meta description (doc text).
     if ($description !== null) {
@@ -366,15 +388,36 @@ function ld_article($canonical, $headline, $imageUrl = null, $description = null
     if ($imageUrl !== null) {
         $out['image'] = $imageUrl;
     }
+    if ($body !== null && $body !== '') {
+        $out['articleBody'] = $body;
+    }
     return $out;
 }
 
+// Full visible article text, verbatim: every block's text in doc order
+// (headings, paragraphs, list items), joined with blank lines. No
+// trimming, no new words. FAQ Q&A are not blocks, so they stay out.
+function article_body_text($blocks) {
+    $parts = [];
+    foreach ($blocks as $b) {
+        if (($b['t'] ?? '') === 'ul') {
+            foreach ($b['items'] as $it) {
+                $parts[] = $it['x'];
+            }
+        } elseif (isset($b['x']) && $b['x'] !== '') {
+            $parts[] = $b['x'];
+        }
+    }
+    return implode("\n\n", $parts);
+}
+
 // HowTo for a tab's numbered step sequence. Steps are verbatim from the
-// doc; no tools or supplies are listed because the doc names none.
-// $name is the section heading that holds the steps (homepage: the 8-step
-// process; inner pages: their own step section, e.g. flood cleanup).
+// doc; tools are derived ONLY from that page's own step text (Cycle 1
+// U-1): a tool is listed only when the equipment phrase appears in the
+// page's steps. If a page names no equipment, 'tool' is omitted.
 function ld_howto($steps, $canonical = null, $name = 'Our Water Damage Restoration Process, Step by Step') {
     $items = [];
+    $stepText = '';
     foreach ($steps as $i => $s) {
         $items[] = [
             '@type' => 'HowToStep',
@@ -382,12 +425,45 @@ function ld_howto($steps, $canonical = null, $name = 'Our Water Damage Restorati
             'name' => $s['h3'] ?? $s['name'],
             'text' => $s['text'],
         ];
+        $stepText .= ' ' . ($s['h3'] ?? $s['name']) . ' ' . $s['text'];
     }
+    // [phrase in step text (case-insensitive), tool label]. Order is the
+    // order tools first appear in the steps, not this list's order.
+    $vocab = [
+        ['truck-mounted extraction units', 'Truck-mounted extraction units'],
+        ['truck-mounted extractors', 'Truck-mounted extractors'],
+        ['portable extractors', 'Portable extractors'],
+        ['submersible pumps', 'Submersible pumps'],
+        ['moisture meters', 'Moisture meters'],
+        ['thermal imaging camera', 'Thermal imaging camera'],
+        ['weighted extraction tools', 'Weighted extraction tools'],
+        ['commercial dehumidifiers', 'Commercial dehumidifiers'],
+        ['dehumidifiers', 'Dehumidifiers'],
+        ['air movers', 'Air movers'],
+        ['hepa air scrubbers', 'HEPA air scrubbers'],
+        ['air scrubbers', 'Air scrubbers'],
+        ['respirators', 'Respirators'],
+    ];
+    $tools = [];
+    $seen = [];
+    foreach ($vocab as [$phrase, $label]) {
+        $pos = mb_stripos($stepText, $phrase);
+        if ($pos === false) continue;
+        // Skip the generic form when the specific form already matched.
+        if ($phrase === 'dehumidifiers' && isset($seen['commercial dehumidifiers'])) continue;
+        if ($phrase === 'air scrubbers' && isset($seen['hepa air scrubbers'])) continue;
+        $tools[] = ['pos' => $pos, 'tool' => ['@type' => 'HowToTool', 'name' => $label]];
+        $seen[$phrase] = true;
+    }
+    usort($tools, fn($a, $b) => $a['pos'] <=> $b['pos']);
     $out = [
         '@type' => 'HowTo',
         'name' => $name,
         'step' => $items,
     ];
+    if (!empty($tools)) {
+        $out['tool'] = array_map(fn($t) => $t['tool'], $tools);
+    }
     if ($canonical !== null) $out['@id'] = $canonical . '#howto';
     return $out;
 }
@@ -401,6 +477,10 @@ function ld_webpage($canonical, $title, $aboutId = null, $imageUrl = null, $desc
         'url' => $canonical,
         'name' => $title,
         'isPartOf' => ['@id' => site_url('/') . '#website'],
+        // Cycle 1 P3-3: inLanguage on every WebPage.
+        'inLanguage' => 'en-US',
+        // Cycle 1 P3-4: link to this page's BreadcrumbList node.
+        'breadcrumb' => ['@id' => $canonical . '#breadcrumb'],
     ];
     if ($aboutId !== null) $out['about'] = ['@id' => $aboutId];
     if ($imageUrl !== null) {

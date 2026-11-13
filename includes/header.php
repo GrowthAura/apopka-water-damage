@@ -12,8 +12,10 @@ global $SITE, $SERVICES;
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?= esc($HEAD['title']) ?></title>
 <meta name="description" content="<?= esc($HEAD['description']) ?>">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="<?= esc($HEAD['robots'] ?? 'index, follow') ?>">
+<?php if (empty($HEAD['no_canonical'])): ?>
 <link rel="canonical" href="<?= esc($HEAD['canonical']) ?>">
+<?php endif; ?>
 <meta property="og:type" content="<?= esc($HEAD['og_type'] ?? 'website') ?>">
 <meta property="og:title" content="<?= esc($HEAD['title']) ?>">
 <meta property="og:description" content="<?= esc($HEAD['description']) ?>">
@@ -24,7 +26,7 @@ global $SITE, $SERVICES;
 <meta property="og:image" content="<?= esc($ogImage) ?>">
 <meta name="twitter:image" content="<?= esc($ogImage) ?>">
 <?php endif; ?>
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="<?= $ogImage ? 'summary_large_image' : 'summary' ?>">
 <meta name="twitter:title" content="<?= esc($HEAD['title']) ?>">
 <meta name="twitter:description" content="<?= esc($HEAD['description']) ?>">
 <meta name="theme-color" content="#0F1D2E">
@@ -34,10 +36,7 @@ global $SITE, $SERVICES;
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/styles.css?v=8">
+<link rel="stylesheet" href="/assets/css/styles.css?v=9">
 <?= $HEAD['ld'] ?? '' ?>
 <noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
 </head>

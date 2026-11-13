@@ -91,8 +91,10 @@ $HEAD = [
     'title' => 'Page Not Found | ' . $SITE['brand'],
     'description' => 'The page you asked for is not here. Call ' . $SITE['phone'] . ' for 24/7 emergency water damage help in Apopka, FL 32703.',
     'canonical' => site_url('/'),
+    'robots' => 'noindex, follow',
+    'no_canonical' => true,
     'og_type' => 'website',
-    'ld' => ld_json([ld_local_business()]),
+    'ld' => ld_json([ld_local_business(), ld_website()]),
 ];
 $currentSlug = $path;
 $show_map = false;
@@ -171,7 +173,7 @@ function render_home($form = null) {
     require $ROOT . '/includes/header.php';
     ?>
 <section class="hero">
-  <?php if ($homeHero): ?><div class="hero-media"><img src="<?= esc($homeHero['src']) ?>" alt="<?= esc($homeHero['alt']) ?>" width="1600" height="900" fetchpriority="high"></div><?php endif; ?>
+  <?php if ($homeHero): ?><div class="hero-media"><img src="<?= esc($homeHero['src']) ?>" alt="<?= esc($homeHero['alt']) ?>" width="1600" height="900"<?= srcset_attr($homeHero, 'hero') ?> fetchpriority="high"></div><?php endif; ?>
   <div class="container hero-content">
     <p class="eyebrow on-navy"><?= esc($HOME_META['eyebrow']) ?></p>
     <h1><?= esc($HOME_META['h1']) ?></h1>
@@ -201,7 +203,7 @@ function render_home($form = null) {
   <div class="cards">
     <?php foreach ($SERVICES as $c): $cimg = page_img($c['slug'], 'card'); ?>
     <article class="card">
-      <?php if ($cimg): ?><div class="card-media"><?= img_tag($cimg, 1200, 675) ?></div><?php else: ?><div class="card-media card-media-empty" aria-hidden="true"></div><?php endif; ?>
+      <?php if ($cimg): ?><div class="card-media"><?= img_tag($cimg, 600, 338, 'lazy', 'card') ?></div><?php else: ?><div class="card-media card-media-empty" aria-hidden="true"></div><?php endif; ?>
       <div class="card-body"><h3><?= esc($c['h3']) ?></h3><?= card_para($c, '/') ?></div>
     </article>
     <?php endforeach; ?>
@@ -223,7 +225,7 @@ function render_home($form = null) {
   <div class="phase-grid">
     <?php foreach ($PROCESS_STEPS as $i => $s): $pimg = page_img('process-' . ($i + 1), 'img'); ?>
     <div class="phase-card">
-      <?php if ($pimg): ?><div class="phase-media"><img src="<?= esc($pimg['src']) ?>" alt="<?= esc($pimg['alt']) ?>" width="1200" height="675" loading="lazy"></div><?php else: ?><div class="phase-media phase-media-empty" aria-hidden="true"></div><?php endif; ?>
+      <?php if ($pimg): ?><div class="phase-media"><img src="<?= esc($pimg['src']) ?>" alt="<?= esc($pimg['alt']) ?>" width="900" height="506"<?= srcset_attr($pimg, 'process') ?> loading="lazy"></div><?php else: ?><div class="phase-media phase-media-empty" aria-hidden="true"></div><?php endif; ?>
       <h3><?= esc($s['h3']) ?></h3><p><?= esc($s['text']) ?></p>
     </div>
     <?php endforeach; ?>
@@ -300,13 +302,13 @@ function render_page($slug, $page, $form = null) {
     $aboutId = $full['type'] === 'service' ? $pageCanon . '#service' : site_url('/') . '#business';
     $pageHero = page_img($slug, 'hero');
     $pageHeroUrl = $pageHero ? site_url($pageHero['src']) : null;
-    $graph = [ld_local_business($pageHeroUrl), ld_webpage($pageCanon, $meta['title'], $aboutId, $pageHeroUrl, $meta['description']),
+    $graph = [ld_local_business($pageHeroUrl), ld_website(), ld_webpage($pageCanon, $meta['title'], $aboutId, $pageHeroUrl, $meta['description']),
         ld_breadcrumb($crumbs, $pageCanon)];
     if ($full['type'] === 'service') {
         $graph[] = ld_service($page['h1'], $full['nav'], $pageCanon, $pageHeroUrl, $meta['description']);
     }
     if ($full['type'] === 'blog') {
-        $graph[] = ld_article($pageCanon, $page['h1'], $pageHeroUrl, $meta['description']);
+        $graph[] = ld_article($pageCanon, $page['h1'], $pageHeroUrl, $meta['description'], article_body_text($full['blocks']));
     }
     if (!empty($full['faqs'])) {
         $graph[] = ld_faq(array_map(fn($f) => ['q' => $f['q'], 'a' => $f['a']], $full['faqs']), $pageCanon);
@@ -342,7 +344,7 @@ function render_page($slug, $page, $form = null) {
     ?>
 <?php if ($isService): ?>
 <section class="hero hero-split">
-  <?php if ($pageHero): ?><div class="hero-media"><img src="<?= esc($pageHero['src']) ?>" alt="<?= esc($pageHero['alt']) ?>" width="1600" height="900" fetchpriority="high"></div><?php endif; ?>
+  <?php if ($pageHero): ?><div class="hero-media"><img src="<?= esc($pageHero['src']) ?>" alt="<?= esc($pageHero['alt']) ?>"<?= img_dims_attr($pageHero) ?><?= srcset_attr($pageHero, 'hero') ?> fetchpriority="high"></div><?php endif; ?>
   <div class="container hero-content">
     <?= crumbs_html($crumbs) ?>
     <div class="hero-copy">
@@ -358,7 +360,7 @@ function render_page($slug, $page, $form = null) {
 </section>
 <?php else: ?>
 <section class="hero hero-short">
-  <?php if ($pageHero): ?><div class="hero-media"><img src="<?= esc($pageHero['src']) ?>" alt="<?= esc($pageHero['alt']) ?>" width="1600" height="900" fetchpriority="high"></div><?php endif; ?>
+  <?php if ($pageHero): ?><div class="hero-media"><img src="<?= esc($pageHero['src']) ?>" alt="<?= esc($pageHero['alt']) ?>"<?= img_dims_attr($pageHero) ?><?= srcset_attr($pageHero, 'hero') ?> fetchpriority="high"></div><?php endif; ?>
   <div class="container hero-content">
     <?= crumbs_html($crumbs) ?>
     <p class="eyebrow on-navy"><?= esc($full['eyebrow']) ?></p>
