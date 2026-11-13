@@ -321,7 +321,7 @@ function ld_faq($faqs, $canonical = null) {
     return $out;
 }
 
-function ld_service($name, $serviceType, $canonical, $imageUrl = null) {
+function ld_service($name, $serviceType, $canonical, $imageUrl = null, $description = null) {
     global $SITE;
     $out = [
         '@type' => 'Service',
@@ -331,9 +331,14 @@ function ld_service($name, $serviceType, $canonical, $imageUrl = null) {
         'areaServed' => [
             ['@type' => 'City', 'name' => 'Apopka'],
             ['@type' => 'AdministrativeArea', 'name' => 'Orange County'],
+            ['@type' => 'AdministrativeArea', 'name' => 'Central Florida'],
         ],
         'url' => $canonical,
     ];
+    // $description is the page's verbatim meta description (doc text).
+    if ($description !== null) {
+        $out['description'] = $description;
+    }
     if ($imageUrl !== null) {
         $out['image'] = $imageUrl;
     }
@@ -344,7 +349,7 @@ function ld_service($name, $serviceType, $canonical, $imageUrl = null) {
 // Article for the /resources/ guides. NO dates: the doc gives no publish
 // or update date for any guide, so datePublished/dateModified are omitted
 // rather than invented.
-function ld_article($canonical, $headline, $imageUrl = null) {
+function ld_article($canonical, $headline, $imageUrl = null, $description = null) {
     $out = [
         '@type' => 'Article',
         '@id' => $canonical . '#article',
@@ -354,6 +359,10 @@ function ld_article($canonical, $headline, $imageUrl = null) {
         'mainEntityOfPage' => $canonical,
         'inLanguage' => 'en-US',
     ];
+    // $description is the page's verbatim meta description (doc text).
+    if ($description !== null) {
+        $out['description'] = $description;
+    }
     if ($imageUrl !== null) {
         $out['image'] = $imageUrl;
     }
@@ -385,7 +394,7 @@ function ld_howto($steps, $canonical = null, $name = 'Our Water Damage Restorati
 
 // WebPage node: ties the page into the @id graph (isPartOf WebSite,
 // about the business on the homepage / the service on service pages).
-function ld_webpage($canonical, $title, $aboutId = null, $imageUrl = null) {
+function ld_webpage($canonical, $title, $aboutId = null, $imageUrl = null, $description = null) {
     $out = [
         '@type' => 'WebPage',
         '@id' => $canonical,
@@ -394,7 +403,14 @@ function ld_webpage($canonical, $title, $aboutId = null, $imageUrl = null) {
         'isPartOf' => ['@id' => site_url('/') . '#website'],
     ];
     if ($aboutId !== null) $out['about'] = ['@id' => $aboutId];
-    if ($imageUrl !== null) $out['image'] = $imageUrl;
+    if ($imageUrl !== null) {
+        $out['image'] = $imageUrl;
+        $out['primaryImageOfPage'] = $imageUrl;
+    }
+    // $description is the page's verbatim meta description (doc text).
+    if ($description !== null) {
+        $out['description'] = $description;
+    }
     return $out;
 }
 
