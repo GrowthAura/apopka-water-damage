@@ -124,6 +124,10 @@ li{margin-bottom:.5em}
 }
 .topbar-inner{max-width:1400px;margin:0 auto;padding:9px 28px;
   display:flex;justify-content:space-between;align-items:center;gap:16px}
+/* Phase 5: topbar phone link was 127x23px — 1px under WCAG 2.2's 24px
+   minimum target size. Inline-block + 24px line-height + 1px padding
+   makes the tap box 26px tall; the bar itself grows ~3px. */
+.topbar a{display:inline-block;padding:1px 0;line-height:24px}
 .site-header{background:var(--paper);position:sticky;top:0;z-index:60;border-bottom:1px solid var(--line-soft)}
 .site-header.scrolled{box-shadow:var(--shadow-sm)}
 .header-row{display:flex;align-items:center;gap:28px;padding-top:14px;padding-bottom:14px}
