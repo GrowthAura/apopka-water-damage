@@ -24,6 +24,16 @@ $PAGE_IMG = [
     // on fresh disk reads (qa/hashnet-c1-install.json) + viewed full-size
     // before install. The 2 reuse heroes (structural-drying 8101101,
     // about 6195125) were replaced the same way.
+    // CYCLE 2 (2026-11-13, Stage 2): 9 weak real photos swapped for created
+    // images (burst hero + burst/appliance/slab/storm/mobile-home/mold cards
+    // + sewage hero + process-3) — real-photo sourcing exhausted first
+    // (Pexels burst-pipe picks all live elsewhere; no fitting real photo
+    // found for any of the 9 slots; see qa/FINDINGS-OPT-C2-STAGE2-
+    // 2026-11-13.md). Install nets on fresh disk reads: md5 0 hits over
+    // 29,526 files; aHash 2 d16<=40 flags, both adjudicated DIFFERENT by
+    // viewed pixels + MAD 60.83 / 58.60 (false positives — street scenes
+    // vs a concrete-floor detail shot). All 9 viewed full-size before
+    // install; EXIF 0, JFIF-only. Alts below describe the new photos.
     // Homepage hero.
     '/' => [
         'hero' => ['file' => 'hero-apopka.jpg', 'alt' => 'Floodwater on a palm-lined street in Apopka, FL after heavy rain'],
@@ -40,7 +50,7 @@ $PAGE_IMG = [
     ],
     '/burst-pipe-water-damage' => [
         'card' => ['file' => 'card-burst-pipe-water-damage-apopka.jpg', 'alt' => 'Burst Pipe Water Damage Cleanup in Apopka'],
-        'hero' => ['file' => 'burst-pipe-water-damage-apopka.jpg', 'alt' => 'Large red shutoff valve wheel for stopping water after a burst pipe in Apopka, FL'],
+        'hero' => ['file' => 'burst-pipe-water-damage-apopka.jpg', 'alt' => 'Burst copper pipe spraying water onto a flooded tile floor in a laundry room in Apopka, FL'],
     ],
     '/ac-leak-water-damage' => [
         'card' => ['file' => 'card-ac-leak-water-damage-apopka.jpg', 'alt' => 'AC Leak Water Damage in Apopka'],
@@ -72,7 +82,7 @@ $PAGE_IMG = [
     ],
     '/sewage-backup-cleanup' => [
         'card' => ['file' => 'card-sewage-backup-cleanup-apopka.jpg', 'alt' => 'Septic and Sewage Backup Cleanup in Apopka'],
-        'hero' => ['file' => 'sewage-backup-cleanup-apopka.jpg', 'alt' => 'Gloved hands sanitizing a toilet bowl with a brush and detergent in a home in Apopka, FL'],
+        'hero' => ['file' => 'sewage-backup-cleanup-apopka.jpg', 'alt' => 'Worker in blue gloves cleaning a toilet after a sewage backup in a bathroom in Apopka, FL'],
     ],
     '/mold-remediation' => [
         'card' => ['file' => 'card-mold-remediation-apopka.jpg', 'alt' => 'Mold Remediation in Apopka'],
@@ -135,7 +145,7 @@ $PAGE_IMG = [
         'img' => ['file' => 'process-1-emergency-call-apopka.jpg', 'alt' => 'Woman making an emergency phone call from home in Apopka, FL'],
     ],
     'process-2' => [
-        'img' => ['file' => 'process-2-stop-source-apopka.jpg', 'alt' => 'Blue water shutoff valve with a red wheel handle in Apopka, FL'],
+        'img' => ['file' => 'process-2-stop-source-apopka.jpg', 'alt' => 'Blue water shutoff valve with an orange, rusty wheel handle in Apopka, FL'],
     ],
     'process-3' => [
         'img' => ['file' => 'process-3-inspection-apopka.jpg', 'alt' => 'Technician holding a tablet showing a thermal image during a moisture inspection in Apopka, FL'],

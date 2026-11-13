@@ -104,7 +104,7 @@ require $ROOT . '/includes/header.php';
 <section class="hero hero-short">
   <div class="container hero-content">
     <p class="eyebrow on-navy"><?= esc($HOME_META['eyebrow']) ?></p>
-    <h1>Page Not Found</h1>
+    <h1>Page Not Found (404)</h1>
     <p class="hero-intro">The page you asked for is not here.</p>
     <div class="hero-ctas">
       <a class="btn btn-ocean" href="<?= esc($SITE['phone_href']) ?>"><?= esc($SITE['phone']) ?></a>
@@ -173,7 +173,7 @@ function render_home($form = null) {
     require $ROOT . '/includes/header.php';
     ?>
 <section class="hero">
-  <?php if ($homeHero): ?><div class="hero-media"><img src="<?= esc($homeHero['src']) ?>" alt="<?= esc($homeHero['alt']) ?>" width="1600" height="900"<?= srcset_attr($homeHero, 'hero') ?> fetchpriority="high"></div><?php endif; ?>
+  <?php if ($homeHero): ?><div class="hero-media"><img src="<?= esc($homeHero['src']) ?>" alt="<?= esc($homeHero['alt']) ?>" width="1280" height="720"<?= srcset_attr($homeHero, 'hero') ?> fetchpriority="high"></div><?php endif; ?>
   <div class="container hero-content">
     <p class="eyebrow on-navy"><?= esc($HOME_META['eyebrow']) ?></p>
     <h1><?= esc($HOME_META['h1']) ?></h1>
@@ -302,13 +302,14 @@ function render_page($slug, $page, $form = null) {
     $aboutId = $full['type'] === 'service' ? $pageCanon . '#service' : site_url('/') . '#business';
     $pageHero = page_img($slug, 'hero');
     $pageHeroUrl = $pageHero ? site_url($pageHero['src']) : null;
-    $graph = [ld_local_business($pageHeroUrl), ld_website(), ld_webpage($pageCanon, $meta['title'], $aboutId, $pageHeroUrl, $meta['description']),
+    $graph = [ld_local_business($pageHeroUrl), ld_website(), ld_webpage($pageCanon, $meta['title'], $aboutId, $pageHeroUrl, $meta['description'],
+        $full['type'] === 'service' ? $pageCanon . '#service' : ($full['type'] === 'blog' ? $pageCanon . '#article' : null)),
         ld_breadcrumb($crumbs, $pageCanon)];
     if ($full['type'] === 'service') {
         $graph[] = ld_service($page['h1'], $full['nav'], $pageCanon, $pageHeroUrl, $meta['description']);
     }
     if ($full['type'] === 'blog') {
-        $graph[] = ld_article($pageCanon, $page['h1'], $pageHeroUrl, $meta['description'], article_body_text($full['blocks']));
+        $graph[] = ld_article($pageCanon, $page['h1'], $pageHeroUrl, $meta['description'], article_body_text($full['blocks'], $full['intro'] ?? null));
     }
     if (!empty($full['faqs'])) {
         $graph[] = ld_faq(array_map(fn($f) => ['q' => $f['q'], 'a' => $f['a']], $full['faqs']), $pageCanon);

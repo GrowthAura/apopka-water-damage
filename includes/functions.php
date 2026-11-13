@@ -308,10 +308,11 @@ function ld_breadcrumb($crumbs, $canonical = null) {
         $item = ['@type' => 'ListItem', 'position' => $i, 'name' => $c['label']];
         if (!empty($c['href'])) {
             // Cycle 1 P3-4: item as an object, not a bare URL string.
-            $item['item'] = ['@id' => site_url($c['href'])];
+            // Cycle 2 U-3: name also inside the item object.
+            $item['item'] = ['@id' => site_url($c['href']), 'name' => $c['label']];
         } elseif ($canonical !== null && $i === $n) {
             // Current page: the item is the page itself.
-            $item['item'] = ['@id' => $canonical];
+            $item['item'] = ['@id' => $canonical, 'name' => $c['label']];
         }
         $items[] = $item;
         $i++;
@@ -375,6 +376,8 @@ function ld_article($canonical, $headline, $imageUrl = null, $description = null
         'author' => ['@id' => site_url('/') . '#business'],
         'publisher' => ['@id' => site_url('/') . '#business'],
         'mainEntityOfPage' => $canonical,
+        // Cycle 2 U-4: the article is part of the site.
+        'isPartOf' => ['@id' => site_url('/') . '#website'],
         'inLanguage' => 'en-US',
         // U-2 (Cycle 1): about the business; articleSection is the URL
         // directory the blogs live under — honest, not invented.
@@ -394,11 +397,15 @@ function ld_article($canonical, $headline, $imageUrl = null, $description = null
     return $out;
 }
 
-// Full visible article text, verbatim: every block's text in doc order
-// (headings, paragraphs, list items), joined with blank lines. No
-// trimming, no new words. FAQ Q&A are not blocks, so they stay out.
-function article_body_text($blocks) {
+// Full visible article text, verbatim: the intro (lead) paragraph first,
+// then every block's text in doc order (headings, paragraphs, list items),
+// joined with blank lines. No trimming, no new words. FAQ Q&A are not
+// blocks, so they stay out. Cycle 2 P3-1: the intro was previously omitted.
+function article_body_text($blocks, $intro = null) {
     $parts = [];
+    if ($intro !== null && $intro !== '') {
+        $parts[] = $intro;
+    }
     foreach ($blocks as $b) {
         if (($b['t'] ?? '') === 'ul') {
             foreach ($b['items'] as $it) {
@@ -470,7 +477,10 @@ function ld_howto($steps, $canonical = null, $name = 'Our Water Damage Restorati
 
 // WebPage node: ties the page into the @id graph (isPartOf WebSite,
 // about the business on the homepage / the service on service pages).
-function ld_webpage($canonical, $title, $aboutId = null, $imageUrl = null, $description = null) {
+// $mainEntityId (Cycle 2 U-2): the page's Service/Article @id when one
+// exists; null on pages with no Service/Article node (home, about,
+// contact) — no mainEntity is emitted there rather than an invented one.
+function ld_webpage($canonical, $title, $aboutId = null, $imageUrl = null, $description = null, $mainEntityId = null) {
     $out = [
         '@type' => 'WebPage',
         '@id' => $canonical,
@@ -482,6 +492,7 @@ function ld_webpage($canonical, $title, $aboutId = null, $imageUrl = null, $desc
         // Cycle 1 P3-4: link to this page's BreadcrumbList node.
         'breadcrumb' => ['@id' => $canonical . '#breadcrumb'],
     ];
+    if ($mainEntityId !== null) $out['mainEntity'] = ['@id' => $mainEntityId];
     if ($aboutId !== null) $out['about'] = ['@id' => $aboutId];
     if ($imageUrl !== null) {
         $out['image'] = $imageUrl;

@@ -31,12 +31,16 @@ global $SITE, $SERVICES;
 <meta name="twitter:description" content="<?= esc($HEAD['description']) ?>">
 <meta name="theme-color" content="#0F1D2E">
 <link rel="manifest" href="/site.webmanifest">
+<!-- C2 Stage 2 (CLS P3-1): preload the two woff2 files actually fetched
+     on every page. Italic was never fetched in 75 probes — not preloaded. -->
+<link rel="preload" href="/assets/fonts/fraunces-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="/favicon.ico">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/css/styles.css?v=9">
+<link rel="stylesheet" href="/assets/css/styles.css?v=10">
 <?= $HEAD['ld'] ?? '' ?>
 <noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
 </head>

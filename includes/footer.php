@@ -55,7 +55,7 @@ $map_src = 'https://www.google.com/maps?q=' . rawurlencode($SITE['map_query']) .
   </div>
   <div class="container footer-bottom">
     <span>&copy; 2026 <?= esc($SITE['brand']) ?> &middot; Apopka, FL 32703</span>
-    <span>24/7 Emergency Service &middot; <?= esc($SITE['phone']) ?></span>
+    <span>24/7 Emergency Service &middot; <span class="nowrap"><?= esc($SITE['phone']) ?></span></span>
   </div>
 </footer>
 <a class="mobile-call-bar" href="<?= esc($SITE['phone_href']) ?>" aria-label="<?= esc($SITE['phone']) ?>">
