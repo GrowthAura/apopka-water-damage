@@ -220,6 +220,12 @@ li{margin-bottom:.5em}
 .brand-panel .btn{width:100%}
 .aside-call{background:var(--accent-faint);border:1px solid var(--accent-soft);border-radius:var(--radius);padding:24px}
 .aside-call p{color:var(--ink-2);font-weight:500;margin-bottom:16px}
+/* UX-A2Z 2026-11-13: the aside CTA wrapped to 2 lines on desktop (340px
+   aside, 19px text + 60px padding = 324px > 292px content width), leaving
+   an 82px navy button under the 58px phone button. 17px + tighter padding
+   fits one line (approx 273px) at every desktop width; mobile aside is
+   full-width so this only binds >=1021px. */
+.aside-call .btn{white-space:nowrap;padding:15px 18px;font-size:17px;width:100%}
 
 /* ---------- Cards ---------- */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:36px}

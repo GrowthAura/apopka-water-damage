@@ -11,6 +11,17 @@
 $IMG = '/assets/img/';
 
 $PAGE_IMG = [
+    // VISUAL IMAGE-REUSE AUDIT 2026-11-13 (qa/IMAGE-VISUAL-AUDIT-2026-11-13.md):
+    // 10 files confirmed same-photo as live images on other portfolio sites
+    // + 4 wrong-place/branded shots — their entries were REMOVED below, so
+    // those slots render the navy empty panel (same pattern as the
+    // structural-drying card). Files stay on disk in assets/img/ (do NOT
+    // delete — they are the audit evidence). Re-add an entry ONLY with a
+    // fresh photo verified by both nets + viewed pixels.
+    // Removed heroes: slab-leak, storm-roof, mold-remediation,
+    // mold-inspection, mobile-home, leak-detection, blog-mold-timeline.
+    // Removed cards: ac-leak, water-heater, appliance, ceiling, storm,
+    // commercial, mold-inspection. Removed process img: process-4.
     // Homepage hero.
     '/' => [
         'hero' => ['file' => 'hero-apopka.jpg', 'alt' => 'Floodwater on a palm-lined street in Apopka, FL after heavy rain'],
@@ -30,28 +41,21 @@ $PAGE_IMG = [
         'hero' => ['file' => 'burst-pipe-water-damage-apopka.jpg', 'alt' => 'Large red shutoff valve wheel for stopping water after a burst pipe in Apopka, FL'],
     ],
     '/ac-leak-water-damage' => [
-        'card' => ['file' => 'card-ac-leak-water-damage-apopka.jpg', 'alt' => 'AC Leak Water Damage in Apopka'],
         'hero' => ['file' => 'ac-leak-water-damage-apopka.jpg', 'alt' => 'Technician repairing a rooftop air conditioning unit in Apopka, FL'],
     ],
     '/slab-leak-water-damage' => [
         'card' => ['file' => 'card-slab-leak-water-damage-apopka.jpg', 'alt' => 'Slab Leak Water Damage in Apopka'],
-        'hero' => ['file' => 'slab-leak-water-damage-apopka.jpg', 'alt' => 'Water pooled on a cracked concrete slab floor in a home in Apopka, FL'],
     ],
     '/water-heater-leak-cleanup' => [
-        'card' => ['file' => 'card-water-heater-leak-cleanup-apopka.jpg', 'alt' => 'Water Heater Leak Cleanup in Apopka'],
         'hero' => ['file' => 'water-heater-leak-cleanup-apopka.jpg', 'alt' => 'Boiler pump and pressure gauge on a water heating system in a home in Apopka, FL'],
     ],
     '/appliance-leak-water-damage' => [
-        'card' => ['file' => 'card-appliance-leak-water-damage-apopka.jpg', 'alt' => 'Appliance Leak Water Damage in Apopka'],
         'hero' => ['file' => 'appliance-leak-water-damage-apopka.jpg', 'alt' => 'Hands loading dishes into an open dishwasher in a home kitchen in Apopka, FL'],
     ],
     '/ceiling-water-damage-repair' => [
-        'card' => ['file' => 'card-ceiling-water-damage-repair-apopka.jpg', 'alt' => 'Ceiling Water Damage Repair in Apopka'],
         'hero' => ['file' => 'ceiling-water-damage-repair-apopka.jpg', 'alt' => 'Collapsed ceiling with fallen plaster and debris in a room in Apopka, FL'],
     ],
     '/storm-roof-leak-water-damage' => [
-        'card' => ['file' => 'card-storm-roof-leak-water-damage-apopka.jpg', 'alt' => 'Storm and Roof Leak Water Damage in Apopka'],
-        'hero' => ['file' => 'storm-roof-leak-water-damage-apopka.jpg', 'alt' => 'Roofers repairing a shingle roof under a blue sky in Apopka, FL'],
     ],
     '/flood-damage-cleanup' => [
         'card' => ['file' => 'card-flood-damage-cleanup-apopka.jpg', 'alt' => 'Flood Damage Cleanup in Apopka'],
@@ -63,11 +67,8 @@ $PAGE_IMG = [
     ],
     '/mold-remediation' => [
         'card' => ['file' => 'card-mold-remediation-apopka.jpg', 'alt' => 'Mold Remediation in Apopka'],
-        'hero' => ['file' => 'mold-remediation-apopka.jpg', 'alt' => 'Damp-stained wall with peeling paint in a home in Apopka, FL'],
     ],
     '/mold-inspection' => [
-        'card' => ['file' => 'mold-inspection-apopka.jpg', 'alt' => 'Mold Inspection in Apopka'],
-        'hero' => ['file' => 'mold-inspection-apopka.jpg', 'alt' => 'Home inspector in a safety vest pointing at a ceiling during an inspection in Apopka, FL'],
     ],
     '/structural-drying' => [
         'hero' => ['file' => 'structural-drying-apopka.jpg', 'alt' => 'Technician positioning a large drying fan on a concrete floor in Apopka, FL'],
@@ -78,15 +79,12 @@ $PAGE_IMG = [
     ],
     '/mobile-home-water-damage' => [
         'card' => ['file' => 'card-mobile-home-water-damage-apopka.jpg', 'alt' => 'Mobile Home Water Damage in Apopka'],
-        'hero' => ['file' => 'mobile-home-water-damage-apopka.jpg', 'alt' => 'Small manufactured home beside a lake surrounded by trees in Apopka, FL'],
     ],
     '/commercial-water-damage' => [
-        'card' => ['file' => 'card-commercial-water-damage-apopka.jpg', 'alt' => 'Commercial Water Damage in Apopka'],
         'hero' => ['file' => 'commercial-water-damage-apopka.jpg', 'alt' => 'Professional cleaning crew at work in a commercial dining space in Apopka, FL'],
     ],
     '/leak-detection' => [
         'card' => ['file' => 'card-leak-detection-apopka.jpg', 'alt' => 'Leak Detection in Apopka'],
-        'hero' => ['file' => 'leak-detection-apopka.jpg', 'alt' => 'Worker inspecting a wall for a hidden leak in Apopka, FL'],
     ],
     '/water-damage-insurance-claim-help' => [
         'card' => ['file' => 'water-damage-insurance-claim-help-apopka.jpg', 'alt' => 'Water Damage Insurance Claim Help in Apopka'],
@@ -112,9 +110,7 @@ $PAGE_IMG = [
     '/resources/apopka-hurricane-water-damage-checklist' => [
         'hero' => ['file' => 'blog-hurricane-checklist-apopka.jpg', 'alt' => 'Palm trees bending in strong hurricane winds over a stormy ocean'],
     ],
-    '/resources/how-fast-mold-grows-florida' => [
-        'hero' => ['file' => 'blog-mold-timeline-apopka.jpg', 'alt' => 'Black mold and mildew stains on a damp wall in a home in Apopka, FL'],
-    ],
+    // '/resources/how-fast-mold-grows-florida' hero REMOVED 2026-11-13 (visual audit: same photo live on Lancaster/Midvale/Texas/Broken Arrow) — navy hero until a fresh photo lands.
     // Process steps (homepage phase grid).
     'process-1' => [
         'img' => ['file' => 'process-1-emergency-call-apopka.jpg', 'alt' => 'Woman making an emergency phone call from home in Apopka, FL'],
@@ -125,9 +121,7 @@ $PAGE_IMG = [
     'process-3' => [
         'img' => ['file' => 'process-3-inspection-apopka.jpg', 'alt' => 'Technician holding a tablet showing a thermal image during a moisture inspection in Apopka, FL'],
     ],
-    'process-4' => [
-        'img' => ['file' => 'process-4-extraction-apopka.jpg', 'alt' => 'Yellow industrial wet vacuum with a hose on a tiled floor in Apopka, FL'],
-    ],
+    // 'process-4' img REMOVED 2026-11-13 (visual audit: same photo live on Lancaster) — navy phase panel until a fresh photo lands.
     'process-5' => [
         'img' => ['file' => 'process-5-demolition-apopka.jpg', 'alt' => 'Gutted room with exposed framing and debris after controlled demolition in Apopka, FL'],
     ],
