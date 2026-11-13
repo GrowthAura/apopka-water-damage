@@ -179,6 +179,10 @@ li{margin-bottom:.5em}
     linear-gradient(100deg,rgba(10,22,38,.94) 0%,rgba(10,22,38,.82) 46%,rgba(10,22,38,.45) 100%);
 }
 .hero-content{position:relative;z-index:2}
+/* C2 Stage 2 (CLS P3-1): pin the non-split hero block to full width so
+   the H1's font-swap widening (24ch in Fraunces vs fallback) can no
+   longer resize/re-center the whole hero block. */
+.hero:not(.hero-split) .hero-content{width:100%}
 .hero h1{color:#fff;margin-bottom:22px;text-shadow:0 2px 24px rgba(0,0,0,.35)}
 .hero-intro{color:#E6EEF5;font-size:1.1875rem;line-height:1.7;max-width:72ch;margin-bottom:32px;text-wrap:pretty}
 .hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
@@ -351,6 +355,8 @@ li{margin-bottom:.5em}
   border-top:1px solid rgba(255,255,255,.14);padding:24px 28px;
   display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:19px;color:#9FB2C4;
 }
+/* C2 Stage 2 (C2-6): the footer bottom-bar phone never splits mid-number. */
+.footer-bottom .nowrap{white-space:nowrap}
 
 /* ---------- Mobile call bar ---------- */
 .mobile-call-bar{
@@ -418,6 +424,11 @@ li{margin-bottom:.5em}
   .hero-ctas .btn{min-width:0;width:100%;font-size:16px;padding:15px 16px;white-space:nowrap}
   .hero .hero-ctas .btn{font-size:18px}
   .hero-ctas{flex-direction:column}
+  /* C2 Stage 2 (C2-3): hero eyebrow pill wraps 2 lines at 390, 3 at 320.
+     ≤640px only: tighter tracking + smaller type, drop the 34px dash,
+     balance the wrap. Never nowrap (single line ≈490px > 350px at 390). */
+  .hero .eyebrow{font-size:.68rem;letter-spacing:.12em;text-wrap:balance}
+  .hero .eyebrow::before{display:none}
   .final-cta-card{padding:36px 24px}
   .form-card{padding:26px 20px}
   .brand-word{font-size:1.05rem}
