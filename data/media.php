@@ -49,9 +49,22 @@ $PAGE_IMG = [
     // All 12 installed files viewed full-size before install (worker) and
     // re-viewed by the coordinator; EXIF 0, JFIF-only. Never claimed as
     // real job photos. Alts below describe the new photos.
+    // CYCLE 6 STAGE 2 (2026-11-14): homepage hero REPLACED — the old file
+    // (Pexels 27398545) was the SAME photo live on Cape Coral's
+    // flood-cleanup page + Houston TX (P1-1/P3-5, qa/FINDINGS-OPT-C6-IMAGES).
+    // Pexels retry exhausted honestly (4 candidates viewed full-size:
+    // 13865772 live on Lancaster storm hero — confirmed in Lancaster's live
+    // data/pages.json; 14216445 dark, puddles only; 28447761 European, no
+    // palms; 28447808 B&W European). Replacement is a CREATED image
+    // (qa/c6-created/media-generation-c6-hero-created-0-*.jpg) — never
+    // claimed as a real job photo; alt carries NO place claim. Nets on
+    // fresh disk reads BEFORE install: md5 0 hits over 45,991 files;
+    // aHash 0 flags d16<=40 (qa/c6-stage2-nets.json). EXIF 0, JFIF-only.
+    // Old files backed up in qa/c6-stage2-backup/. 400w hero variants
+    // added for all 25 heroes this cycle (srcset hero [400, 800]).
     // Homepage hero.
     '/' => [
-        'hero' => ['file' => 'hero-apopka.jpg', 'alt' => 'Floodwater on a palm-lined street in Apopka, FL after heavy rain'],
+        'hero' => ['file' => 'hero-apopka.jpg', 'alt' => 'Floodwater covering a palm-lined street after heavy rain'],
     ],
     // Service pages: 'card' alt is the page short title; 'hero' alt is a
     // descriptive sentence with place. Card and hero are DIFFERENT photos
@@ -230,7 +243,7 @@ function srcset_attr($img, $kind) {
         'card' => '(max-width: 640px) 348px, 387px',
         'process' => '(max-width: 640px) 348px, 598px',
     ][$kind] ?? null;
-    $variantWidths = ['hero' => [800], 'card' => [400], 'process' => [400, 600]][$kind] ?? null;
+    $variantWidths = ['hero' => [400, 800], 'card' => [400], 'process' => [400, 600]][$kind] ?? null;
     if ($sizes === null || $variantWidths === null) return '';
     $dir = __DIR__ . '/../assets/img/';
     $main = @getimagesize($dir . $img['file']);
