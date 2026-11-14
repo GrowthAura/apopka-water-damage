@@ -113,8 +113,17 @@ $PAGE_IMG = [
         'card' => ['file' => 'card-structural-drying-apopka.jpg', 'alt' => 'Structural Drying in Apopka'],
         'hero' => ['file' => 'structural-drying-apopka.jpg', 'alt' => 'Air movers and a dehumidifier drying a wet living room in Apopka, FL'],
     ],
+    // CYCLE 5 STAGE 2 (2026-11-14): the wet-flooring card files were
+    // DELETED — declared but never served (wet-flooring is an 'also'
+    // link under the doc homepage tab's combined H3 "Structural Drying
+    // and Wet Flooring", which has ONE shared body paragraph already
+    // serving the structural-drying card; no standalone homepage-tab
+    // H3/body exists for a separate card, so wiring one would duplicate
+    // the shared paragraph or import inner-tab copy. Same mechanism +
+    // same resolution as the C4 mold-inspection orphan deletion. The
+    // service stays linked from the homepage via the parent card's
+    // closing sentence. Hero untouched.
     '/wet-flooring-water-damage' => [
-        'card' => ['file' => 'card-wet-flooring-water-damage-apopka.jpg', 'alt' => 'Flooded Carpet and Wet Floor Cleanup in Apopka'],
         'hero' => ['file' => 'wet-flooring-water-damage-apopka.jpg', 'alt' => 'Worker in rubber boots brushing muddy water off a concrete floor in Apopka, FL'],
     ],
     '/mobile-home-water-damage' => [
@@ -129,8 +138,16 @@ $PAGE_IMG = [
         'card' => ['file' => 'card-leak-detection-apopka.jpg', 'alt' => 'Leak Detection in Apopka'],
         'hero' => ['file' => 'leak-detection-apopka.jpg', 'alt' => 'Technician aiming a thermal imaging camera at a damp wall in a home in Apopka, FL'],
     ],
+    // CYCLE 5 STAGE 2 (2026-11-14): the insurance-claim-help card
+    // files were DELETED — declared but never served (insurance-claim
+    // help is an 'also' link under the doc homepage tab's combined H3
+    // "Leak Detection and Insurance Claim Help", one shared body
+    // paragraph already serving the leak-detection card; no standalone
+    // homepage-tab H3/body exists for a separate card). Same mechanism
+    // + same resolution as the C4 mold-inspection orphan deletion. The
+    // service stays linked from the homepage via the parent card's
+    // closing sentence. Hero untouched.
     '/water-damage-insurance-claim-help' => [
-        'card' => ['file' => 'card-water-damage-insurance-claim-help-apopka.jpg', 'alt' => 'Water Damage Insurance Claim Help in Apopka'],
         'hero' => ['file' => 'water-damage-insurance-claim-help-apopka.jpg', 'alt' => 'Inspector in a hard hat holding a clipboard while documenting a home inspection in Apopka, FL'],
     ],
     // New routes (tabs 20..25, full-content rebuild 2026-11-12). Hero only;
@@ -213,7 +230,7 @@ function srcset_attr($img, $kind) {
         'card' => '(max-width: 640px) 348px, 387px',
         'process' => '(max-width: 640px) 348px, 598px',
     ][$kind] ?? null;
-    $variantWidths = ['hero' => [800], 'card' => [400], 'process' => [600]][$kind] ?? null;
+    $variantWidths = ['hero' => [800], 'card' => [400], 'process' => [400, 600]][$kind] ?? null;
     if ($sizes === null || $variantWidths === null) return '';
     $dir = __DIR__ . '/../assets/img/';
     $main = @getimagesize($dir . $img['file']);

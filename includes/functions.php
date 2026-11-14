@@ -510,13 +510,17 @@ function ld_webpage($canonical, $title, $aboutId = null, $imageUrl = null, $desc
     if ($mainEntityId !== null) $out['mainEntity'] = ['@id' => $mainEntityId];
     if ($aboutId !== null) $out['about'] = ['@id' => $aboutId];
     if ($imageUrl !== null) {
-        $out['image'] = $imageUrl;
+        // Cycle 5 U-1: WebPage.image as an ImageObject with the
+        // already-known dimensions (same pattern as Article.image,
+        // Cycle 4 P3-2). primaryImageOfPage keeps the same object.
         if ($imageMeta !== null && isset($imageMeta['width'], $imageMeta['height'])) {
             $imgObj = ['@type' => 'ImageObject', 'url' => $imageUrl,
                 'width' => (int) $imageMeta['width'], 'height' => (int) $imageMeta['height']];
             if (!empty($imageMeta['alt'])) $imgObj['caption'] = $imageMeta['alt'];
+            $out['image'] = $imgObj;
             $out['primaryImageOfPage'] = $imgObj;
         } else {
+            $out['image'] = $imageUrl;
             $out['primaryImageOfPage'] = $imageUrl;
         }
     }
