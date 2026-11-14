@@ -164,7 +164,7 @@ function render_home($form = null) {
         'og_type' => 'website',
         'og_image' => $homeHero ? site_url($homeHero['src']) : null,
         'ld' => ld_json([ld_local_business($homeHeroUrl), ld_website(),
-            ld_webpage($homeCanon, $HOME_META['title'], site_url('/') . '#business', $homeHeroUrl, $HOME_META['description']),
+            ld_webpage($homeCanon, $HOME_META['title'], site_url('/') . '#business', $homeHeroUrl, $HOME_META['description'], site_url('/') . '#business', img_schema_meta($homeHero)),
             ld_breadcrumb([['label' => 'Home', 'href' => '/']], $homeCanon),
             ld_faq($FAQS, $homeCanon), ld_howto($PROCESS_STEPS, $homeCanon)]),
     ];
@@ -303,7 +303,7 @@ function render_page($slug, $page, $form = null) {
     $pageHero = page_img($slug, 'hero');
     $pageHeroUrl = $pageHero ? site_url($pageHero['src']) : null;
     $graph = [ld_local_business($pageHeroUrl), ld_website(), ld_webpage($pageCanon, $meta['title'], $aboutId, $pageHeroUrl, $meta['description'],
-        $full['type'] === 'service' ? $pageCanon . '#service' : ($full['type'] === 'blog' ? $pageCanon . '#article' : null)),
+        $full['type'] === 'service' ? $pageCanon . '#service' : ($full['type'] === 'blog' ? $pageCanon . '#article' : site_url('/') . '#business'), img_schema_meta($pageHero)),
         ld_breadcrumb($crumbs, $pageCanon)];
     if ($full['type'] === 'service') {
         $graph[] = ld_service($page['h1'], $full['nav'], $pageCanon, $pageHeroUrl, $meta['description']);

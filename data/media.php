@@ -66,7 +66,7 @@ $PAGE_IMG = [
     ],
     '/appliance-leak-water-damage' => [
         'card' => ['file' => 'card-appliance-leak-water-damage-apopka.jpg', 'alt' => 'Appliance Leak Water Damage in Apopka'],
-        'hero' => ['file' => 'appliance-leak-water-damage-apopka.jpg', 'alt' => 'Hands loading dishes into an open dishwasher in a home kitchen in Apopka, FL'],
+        'hero' => ['file' => 'appliance-leak-water-damage-apopka.jpg', 'alt' => 'Water leaking from a front-loading washing machine onto a tile floor in a laundry room in Apopka, FL'],
     ],
     '/ceiling-water-damage-repair' => [
         'card' => ['file' => 'card-ceiling-water-damage-repair-apopka.jpg', 'alt' => 'Ceiling Water Damage Repair in Apopka'],
@@ -217,4 +217,14 @@ function img_dims_attr($img) {
     $d = @getimagesize(__DIR__ . '/../assets/img/' . $img['file']);
     if ($d === false) return '';
     return ' width="' . (int) $d[0] . '" height="' . (int) $d[1] . '"';
+}
+
+// Real intrinsic dimensions + alt of a media entry, for the schema
+// ImageObject (Cycle 3 U-2). Dimensions come from getimagesize on disk —
+// never assumed. Returns null when the file is missing.
+function img_schema_meta($img) {
+    if (!$img) return null;
+    $d = @getimagesize(__DIR__ . '/../assets/img/' . $img['file']);
+    if ($d === false) return null;
+    return ['alt' => $img['alt'], 'width' => (int) $d[0], 'height' => (int) $d[1]];
 }

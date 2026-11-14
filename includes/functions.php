@@ -472,15 +472,21 @@ function ld_howto($steps, $canonical = null, $name = 'Our Water Damage Restorati
         $out['tool'] = array_map(fn($t) => $t['tool'], $tools);
     }
     if ($canonical !== null) $out['@id'] = $canonical . '#howto';
+    // Cycle 3 U-3: link the HowTo node to its page (the canonical already
+    // in the graph). Honest only — nothing else points at #howto.
+    if ($canonical !== null) $out['mainEntityOfPage'] = $canonical;
     return $out;
 }
 
 // WebPage node: ties the page into the @id graph (isPartOf WebSite,
 // about the business on the homepage / the service on service pages).
 // $mainEntityId (Cycle 2 U-2): the page's Service/Article @id when one
-// exists; null on pages with no Service/Article node (home, about,
-// contact) — no mainEntity is emitted there rather than an invented one.
-function ld_webpage($canonical, $title, $aboutId = null, $imageUrl = null, $description = null, $mainEntityId = null) {
+// exists; Cycle 3 U-1: home/about/contact pass '#business' (the page's
+// subject IS the business) instead of null.
+// $imageMeta (Cycle 3 U-2): ['alt','width','height'] from
+// img_schema_meta() — real on-disk dims; primaryImageOfPage becomes an
+// ImageObject with caption = the image's existing alt text.
+function ld_webpage($canonical, $title, $aboutId = null, $imageUrl = null, $description = null, $mainEntityId = null, $imageMeta = null) {
     $out = [
         '@type' => 'WebPage',
         '@id' => $canonical,
@@ -496,7 +502,14 @@ function ld_webpage($canonical, $title, $aboutId = null, $imageUrl = null, $desc
     if ($aboutId !== null) $out['about'] = ['@id' => $aboutId];
     if ($imageUrl !== null) {
         $out['image'] = $imageUrl;
-        $out['primaryImageOfPage'] = $imageUrl;
+        if ($imageMeta !== null && isset($imageMeta['width'], $imageMeta['height'])) {
+            $imgObj = ['@type' => 'ImageObject', 'url' => $imageUrl,
+                'width' => (int) $imageMeta['width'], 'height' => (int) $imageMeta['height']];
+            if (!empty($imageMeta['alt'])) $imgObj['caption'] = $imageMeta['alt'];
+            $out['primaryImageOfPage'] = $imgObj;
+        } else {
+            $out['primaryImageOfPage'] = $imageUrl;
+        }
     }
     // $description is the page's verbatim meta description (doc text).
     if ($description !== null) {
