@@ -221,7 +221,7 @@ function ld_local_business($imageUrl = null) {
         'name' => $SITE['brand'],
         'description' => $HOME_META['description'],
         'url' => site_url('/'),
-        'telephone' => $SITE['phone'],
+        'telephone' => '+1-407-787-9139',
         'address' => [
             '@type' => 'PostalAddress',
             'addressLocality' => 'Apopka',
@@ -368,7 +368,7 @@ function ld_service($name, $serviceType, $canonical, $imageUrl = null, $descript
 // rather than invented.
 // $body is the blog tab's full visible article text verbatim (its blocks
 // joined with blank lines) — Cycle 1 P2-1 articleBody.
-function ld_article($canonical, $headline, $imageUrl = null, $description = null, $body = null) {
+function ld_article($canonical, $headline, $imageUrl = null, $description = null, $body = null, $imageMeta = null) {
     $out = [
         '@type' => 'Article',
         '@id' => $canonical . '#article',
@@ -388,8 +388,17 @@ function ld_article($canonical, $headline, $imageUrl = null, $description = null
     if ($description !== null) {
         $out['description'] = $description;
     }
+    // Cycle 4 P3-2: Article.image as an ImageObject with the
+    // already-known dimensions (same helper as primaryImageOfPage).
     if ($imageUrl !== null) {
-        $out['image'] = $imageUrl;
+        if ($imageMeta !== null && isset($imageMeta['width'], $imageMeta['height'])) {
+            $imgObj = ['@type' => 'ImageObject', 'url' => $imageUrl,
+                'width' => (int) $imageMeta['width'], 'height' => (int) $imageMeta['height']];
+            if (!empty($imageMeta['alt'])) $imgObj['caption'] = $imageMeta['alt'];
+            $out['image'] = $imgObj;
+        } else {
+            $out['image'] = $imageUrl;
+        }
     }
     if ($body !== null && $body !== '') {
         $out['articleBody'] = $body;

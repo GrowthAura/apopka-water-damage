@@ -19,6 +19,32 @@
 @font-face{font-family:"Fraunces";font-style:normal;font-weight:400 700;font-display:swap;src:url("/assets/fonts/fraunces-normal.woff2") format("woff2")}
 @font-face{font-family:"Fraunces";font-style:italic;font-weight:400 700;font-display:swap;src:url("/assets/fonts/fraunces-italic.woff2") format("woff2")}
 @font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("/assets/fonts/inter-var.woff2") format("woff2")}
+/* CYCLE 4 (SEO P3-1, font-swap CLS): metric-matched fallback faces.
+   font-display:swap shows the fallback until the woff2 arrives; when the
+   fallback's metrics differ from the webfont, hero text re-wraps and the
+   page shifts (A/B-proven: CLS 0.017-0.023 Slow-4G, H1 53px Fraunces vs
+   79px fallback). These faces make the fallback occupy the webfont's
+   box: size-adjust matches x-height, ascent/descent/line-gap overrides
+   match the webfont's vertical metrics (fontsource model: effective
+   metric = override x size-adjust). Webfont metrics measured with
+   fontTools from the shipped woff2 files; fallback metrics are the
+   published reference values (Georgia UPM 2048 x-height 1037;
+   Arial UPM 2048 x-height 1084). Fraunces: UPM 2000 xH 964 asc 1956
+   desc 510 -> size-adjust 95.19%, ascent 102.74%, descent 26.79%.
+   Inter: UPM 2048 xH 1118 asc 1984 desc 494 -> size-adjust 103.14%,
+   ascent 93.93%, descent 23.39%. Line-gap 0 on both (webfonts: 0).
+   The stacks below put the fallback face right after the webfont, so
+   the browser uses it (with overrides) instead of the bare system
+   font while the woff2 loads. NEVER font-display:optional.
+   Src-list rule: @font-face src accepts ONLY local()/url() — a bare
+   generic (serif/sans-serif) invalidates the whole face (caught by
+   diagnostic 2026-11-14: document.fonts.check false, spans identical).
+   DejaVu locals are listed last so Linux desktops (and this sandbox)
+   get the overrides too; the numbers are Georgia/Arial-targeted and
+   within ~3% for DejaVu (x-height ratios 0.519/0.547 vs 0.506/0.529). */
+@font-face{font-family:"Fraunces Fallback";font-style:normal;font-weight:400 700;src:local("Georgia"),local("Times New Roman"),local("DejaVu Serif");size-adjust:95.19%;ascent-override:102.74%;descent-override:26.79%;line-gap-override:0%}
+@font-face{font-family:"Fraunces Fallback";font-style:italic;font-weight:400 700;src:local("Georgia"),local("Times New Roman"),local("DejaVu Serif");size-adjust:95.19%;ascent-override:102.74%;descent-override:26.79%;line-gap-override:0%}
+@font-face{font-family:"Inter Fallback";font-style:normal;font-weight:100 900;src:local("Segoe UI"),local("Arial"),local("DejaVu Sans");size-adjust:103.14%;ascent-override:93.93%;descent-override:23.39%;line-gap-override:0%}
 :root{
   --paper:#FBF8F2;
   --paper-2:#F4EFE4;
@@ -45,8 +71,8 @@
   --shadow-accent:0 16px 44px rgba(14,110,106,.28);
   --shadow-hero:0 24px 60px rgba(0,0,0,.35);
   --maxw:1280px;
-  --font-display:"Fraunces",Georgia,"Times New Roman",serif;
-  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-display:"Fraunces","Fraunces Fallback",Georgia,"Times New Roman",serif;
+  --font-body:"Inter","Inter Fallback",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}

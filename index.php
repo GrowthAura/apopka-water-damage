@@ -299,7 +299,7 @@ function render_page($slug, $page, $form = null) {
     $meta = page_meta($slug, $PAGES);
     $crumbs = [['label' => 'Home', 'href' => '/'], ['label' => $page['h1']]];
     $pageCanon = site_url($slug);
-    $aboutId = $full['type'] === 'service' ? $pageCanon . '#service' : site_url('/') . '#business';
+    $aboutId = $full['type'] === 'service' ? $pageCanon . '#service' : ($full['type'] === 'blog' ? $pageCanon . '#article' : site_url('/') . '#business');
     $pageHero = page_img($slug, 'hero');
     $pageHeroUrl = $pageHero ? site_url($pageHero['src']) : null;
     $graph = [ld_local_business($pageHeroUrl), ld_website(), ld_webpage($pageCanon, $meta['title'], $aboutId, $pageHeroUrl, $meta['description'],
@@ -309,7 +309,7 @@ function render_page($slug, $page, $form = null) {
         $graph[] = ld_service($page['h1'], $full['nav'], $pageCanon, $pageHeroUrl, $meta['description']);
     }
     if ($full['type'] === 'blog') {
-        $graph[] = ld_article($pageCanon, $page['h1'], $pageHeroUrl, $meta['description'], article_body_text($full['blocks'], $full['intro'] ?? null));
+        $graph[] = ld_article($pageCanon, $page['h1'], $pageHeroUrl, $meta['description'], article_body_text($full['blocks'], $full['intro'] ?? null), img_schema_meta($pageHero));
     }
     if (!empty($full['faqs'])) {
         $graph[] = ld_faq(array_map(fn($f) => ['q' => $f['q'], 'a' => $f['a']], $full['faqs']), $pageCanon);
@@ -322,7 +322,7 @@ function render_page($slug, $page, $form = null) {
         'title' => $meta['title'],
         'description' => $meta['description'],
         'canonical' => site_url($slug),
-        'og_type' => 'website',
+        'og_type' => ($full['type'] === 'blog') ? 'article' : 'website',
         'og_image' => $pageHero ? site_url($pageHero['src']) : null,
         'ld' => ld_json($graph),
     ];

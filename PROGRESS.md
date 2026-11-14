@@ -369,3 +369,175 @@ Source: Google Doc 1LfF_CNNyium0TldmxA3no6Wv_nFZFyPm8bok5MAlKGY (homepage only, 
 - gh-pages export regenerated from new main HEAD and committed **6c37747** (83 files): 25 routes, 49 html, subpath-prefixed /apopka-water-damage/, 0 double-slash, 0 unprefixed, 0 localhost, + .nojekyll, sitemap 25 locs + 48 image:loc. rsync --delete --exclude=.git into ~/workspace/apopka-gh-pages-worktree. NOTHING pushed — re-push awaits his word + token.
 - Review pack DONE: **735 pages, 69,994,738 bytes** at ~/workspace/your_files/apopka-review-pack.pdf. Shoot 50/50 genuine full-page native Playwright (0 sectioned, 0 viewport-only, 0 failed); home desktop 16,987px, home mobile 31,369px; total PNGs 104,060,354 B; shoot table qa/SHOTS-pack-c3.json; scripts qa/shoot-pack-c3.py + qa/make-review-pdf-pack-c3.py. PDF verified: pdfinfo 735 pp A4; pages viewed (cover, home process slice — all 8 process photos render, NO empty navy blocks — scroll-through prescroll worked; home FAQ/final-CTA slice; appliance hero page with the new washing-machine photo). UPLOAD BLOCKED (open item): remote-storage upload attempted once ~09:45 PKT — the attempt was killed by a runtime/VM restart mid-upload (uptime reset to 0; PHP server on 8985 died with it), no link returned, no expiry. Do NOT treat as uploaded. Re-run `/opt/hatch/bin/remote-storage upload-file --path ~/workspace/your_files/apopka-review-pack.pdf` when the user is present to approve the egress card. (The Cycle 2 pack upload is being re-attempted separately by the parent — this entry is the Cycle 3 pack only.)
 - Environment notes: no VM replacement this cycle; PHP 8.3.6 + mbstring present from the start (no reinstall needed); server on Apopka port 8985 (title + tel:+14077879139 marker-verified; Acworth's 8971 never touched). No token used anywhere (local only).
+
+## 2026-11-14 ~10:05 PKT — CYCLE 3 CLOSED (Stage 2 + close-out coordinator 9bf01027) — READY (P1 0 / P2 0 / P3 1)
+- Parent-verified on disk: main 60e6a4f (amended from 04ece91, same content), gh-pages 6c37747, both trees clean. Pack 735 pp, 69,994,738 B (pdfinfo-verified), 50/50 genuine native full-page, scroll-through prescroll worked (process photos render, no empty navy blocks).
+- Images: 6,720,192 → 6,213,243 B (−506,949 B); 16 mains retuned to exact slot dims (LANCZOS q70/q72), byte-exact to audit targets, display-MAD 0.70–2.95; homepage 622,459 B @1280 / 512,813 B @390 / 932,258 B @390dpr2. Appliance hero REPLACED (Pexels retry exhausted — zero real leak photos; created washing-machine leak photo, viewed + rendered; install nets CLEAR fresh-disk before install: md5 0/36,072, aHash 0 flags d16≤64; new file md5 ac9eb1cd0115f5ae7705b0f2d67bbbeb, 1280×960, 85,305 B; old ID 4112728 retired). Breadcrumb 23→26px. Schema U-1/U-2/U-3 landed, 2 validators 0 errors 25/25. Why-grid orphan fixed (last card full-width 1,224px). Word-diff 0 on 25/25; titles untouched.
+- Re-verification: qa/FINDINGS-OPT-C3-VERIFY-2026-11-14.md — READY, PROBLEMS 1. The one P3 is PRE-EXISTING slow-4G CLS 0.017–0.023 (max 0.0231, under 0.1 bar) on 8 routes — proven by A/B with full C3 code restored, so C3's reported 0/78 was a measurement miss, not a Stage 2 regression.
+- CAVEAT (honest): no separate independent verifier subagent could be dispatched (depth 2/2, can_spawn=no) — verification was fresh re-measurement by the close-out coordinator itself (auditors' scripts re-run from scratch, new server port 8985, CLS A/B). A second pair of eyes remains the parent's option.
+- Pack UPLOAD BLOCKED: single upload attempt killed by a runtime/VM restart mid-upload (uptime reset to 0) — no link, no expiry. Re-run remote-storage upload when the user is present to approve the egress card. (Cycle 2 pack re-attempt separate — untouched.)
+- OPEN (his call / next deploy): titles, FAQ open-by-default (3,066w), contact-form fields, orphan card-mold-inspection.jpg deletion, live-site staleness, slow-4G CLS P3, carried image cosmetics (hurricane Tenerife, process-6 B&W, about hero cropped heads, mobile-home hero no visible damage).
+
+## 2026-11-14 ~10:07 PKT — OPTIMIZATION CYCLE 4 STARTED (coordinator f579bd0a)
+- Starting state: Cycle 3 closed READY (P1 0 / P2 0 / P3 1), main 60e6a4f, gh-pages 6c37747, trees clean (PROGRESS.md uncommitted log entry only). PHP 8.3.6 + mbstring verified present on this VM. Pack 735 pp, 69,994,738 B — upload still BLOCKED (parent re-attempts with user present).
+- NOTE: Cycle 3 READY was self-verified; a fresh independent C3 verifier (eaddffc6) is running separately from the parent session — if it reports a P1/P2, fold the fix into Cycle 4.
+- CYCLE 4 Stage 1 (read-only audits) dispatched ~10:07 PKT, 3 workers in parallel: images (weight/slot-fit + relevance by viewed pixels + fresh reuse nets + orphan check), SEO + schema (fresh crawl, real LCP/CLS, 2 validators, honest upgrades), content + UI/UX (fullness gate, zero-scroll, fresh 1-1 review + 50 full-page screenshots). Findings: qa/FINDINGS-OPT-C4-*.md. Stage 2 (fixes) follows adjudication; then MY OWN independent re-verifier (depth 1 can spawn), commit, export, fresh full-page pack + upload attempt. Stop rule: a full cycle with no real measured improvement is the last.
+- HELD (his call, do not touch): titles, FAQ accordions open-by-default, contact form fields. 44px tap-target padding DECLINED. Content 1001% verbatim. Local only, no push/token.
+
+## 2026-11-14 ~10:35 PKT — CYCLE 4 STAGE 1 CLOSED + ADJUDICATED (coordinator f579bd0a)
+- Stage 1 totals (all four audits read in full by the coordinator, decisive claims spot-checked
+  with own eyes): Images P1 0/P2 0/P3 6, SEO P1 0/P2 0/P3 3, Schema P1 0/P2 0/P3 2,
+  Content+UX P1 0/P2 4 (2 actionable + 2 held)/P3 3. Content 25/25 FULL, word-diff 0, FAQ 128/128,
+  sitemap 25 locs + 48 image:loc (XML-parsed — confirms 48, Cycle 2's "96" was a grep double-count).
+  Titles fresh-counted 24/25 H1-derived (brief's 23/25 off by one) — HELD, report only.
+- Spot-checks confirmed: about hero headless (file itself is the crop), mobile-home hero zero
+  damage, process-6 saturation exactly 0.000, sewage hero 1440x1080, orphan mold-inspection card
+  files zero references outside media.php:92, CLS A/B confirms font-swap reflow (0.02136, font
+  1,176 ms). Slow-4G CLS cause PROVEN — fix is metric-matched fallback (size-adjust), A/B-gated.
+- BLOCKER: Stage 2 spawn FAILED 2x — runtime error "subagent reservation owner is terminal or
+  structurally invalid: parent=f579bd0a...". This coordinator session can no longer spawn children
+  (no Stage 2 fixer, no independent re-verifier). Stage 2 brief is written and ready:
+  qa/C4-STAGE2-BRIEF-2026-11-14.md (10 adjudicated fixes + opportunistic flood card + held/declined
+  lists + install rules). Parent to dispatch a FRESH Stage 2 coordinator from its own session
+  with that brief. Nothing committed yet; main still 60e6a4f, gh-pages 6c37747.
+- Pending: parent's independent C3 verifier (eaddffc6) has not reported yet — if it reports a
+  P1/P2, fold the fix into Stage 2.
+
+## 2026-11-14 ~10:58 PKT — CYCLE 3 INDEPENDENT VERIFICATION CLOSED (verifier eaddffc6)
+- Verdict: READY — P1 0 / P2 0 / P3 1. Findings: qa/FINDINGS-OPT-C3-INDEP-VERIFY-2026-11-14.md. No P1/P2 missed by the self-verification; nothing to fold into Cycle 4 Stage 2.
+- Verified fresh from own servers (C3 on 8933, C2 d2ffb08 worktree on 8934): main 60e6a4f + gh-pages 6c37747; appliance hero md5 ac9eb1cd…/85,305 B/1280×960, viewed full-size = genuine washing-machine leak, old Pexels ID 4112728 zero refs; retunes 16/16 byte-exact; EXIF 0/98; sitemap 25 + 48 image:loc (true count); crawl 25/25 200, H1 1/page, canonicals self, fonts 0, FAQ 128, HowTo 10/72; schema 2 validators 0 errors (156 nodes), U-1/U-2/U-3 present; word-diff 0 on 25/25, titles identical; crumbs 24/24 h=26px, Why-grid last card full-span (1,224px desktop), eyebrow 35/54px = legit 2-line wrap (viewed @390), footer tel 141×23px; pack 735 pp / 69,994,738 B, 3 slices viewed = genuine full-page (upload still blocked, no link).
+- Reuse nets CLEAR: Net A md5 NONE over full 107,752-file corpus + focused 33,462 asset files; Net B aHash 0 flags d16≤25 (98 vs 4,179 unique); Net C Pexels IDs (12243107/3829552/6195125/8101101) NONE in 398 past-site logs + 0 in other sites' media.php. (Whole-workspace walk now 107,752 files — mostly QA screenshots/ts-spaces duplicates; Net B scoped to past-site asset dirs, documented in findings §2.5.)
+- P3-1 slow-4G CLS: my own A/B (same script, C3 vs C2 code) reproduces it on C2 code at the same magnitude with the same shift sources (hero-intro/hero-ctas/hero-form) — pre-existing, NOT a C3 regression. Count correction: self-verification's "8/25" did not reproduce — my runs found 1/25 each (C3: wet-flooring 0.0231; C2: slab-leak 0.0214); intermittent/timing-dependent, still P3 (<0.1 good).
+- C4 note: Stage 2 spawn is blocked in coordinator f579bd0a's session (needs a fresh coordinator from parent); this verifier found no P1/P2 to fold in.
+
+## 2026-11-14 ~11:35 PKT — CYCLE 4 STAGE 2, CODE FIXES DONE (coordinator b63d4026, self)
+- Fixes 7/8/9/10 landed + verified on own server (port 8941, mbstring, marker-verified Apopka):
+  7. og:type = article on 4/4 blogs, website elsewhere (index.php render_page).
+  8. Business telephone unified to +1-407-787-9139 (E.164, matches contactPoint + tel: link).
+  9. Blog WebPage.about -> #article (matches mainEntity); Article.image now an ImageObject
+     with real dims + caption (1280x554 verified on AC-drain blog).
+  10. CLS metric-matched fallback faces (styles.css): "Fraunces Fallback" (Georgia-targeted:
+      size-adjust 95.19%, ascent 102.74%, descent 26.79%) + "Inter Fallback" (Arial-targeted:
+      103.14% / 93.93% / 23.39%), line-gap 0 both; stacks updated. Webfont metrics measured
+      with fontTools from the shipped woff2 (Fraunces UPM 2000 xH 964 asc 1956 desc 510;
+      Inter UPM 2048 xH 1118 asc 1984 desc 494); fallback metrics are published reference
+      values (Georgia UPM 2048 xH 1037; Arial UPM 2048 xH 1084). NEVER font-display:optional.
+- BUG FOUND + FIXED DURING 10: first version put bare generics (serif/sans-serif) in the
+  @font-face src lists — a bare generic INVALIDATES the whole face (diagnostic:
+  document.fonts.check false, spans identical). Fixed src to local() only; DejaVu locals
+  listed last so Linux/sandbox get the overrides too (within ~3% for DejaVu).
+- CLS A/B (qa/c4-cls-ab-after.py, same 3 shifters + control, Slow-4G 390, vs C4 baseline):
+  slab 0.02136 -> 0.00646 (-70%), wet-flooring 0.02307 -> 0.01548 (-33%),
+  mobile-home 0.01716 -> 0.00899 (-48%), control burst-pipe 0 -> 0.00774.
+  Residual is form-only (intro line-count, DIV.hero-form sole shift source); H1-driven
+  component GONE (blocked-arm H1 line counts now match Fraunces exactly on 4/4 routes).
+  Control's 0.00774 is the same residual band, plausibly a VM artifact (this VM's bare
+  DejaVu Sans already matches Inter, so the 103.14% upscale overshoots here; real
+  Arial/Segoe UI need the upscale). Max CLS now 0.01548, ~6x under Google's 0.1 bar.
+  VM CAVEAT: this VM's fallback font varies run-to-run (Liberation Serif vs DejaVu Serif
+  vs Noto Serif by fontconfig), so VM CLS numbers are directional, not absolute; the
+  Georgia/Arial-targeted overrides are for real Windows/Mac users. KEEP per the brief
+  (revert condition was "no improvement" — improvement is real on all 3 shifters).
+- GATE CHECKS PASSED: unthrottled CLS 0 on 25/25 at 1280 AND 390 (qa/c4-stage2-gate.py);
+  fallback renders viewed 4/4 (qa/c4-fallback-blocked-*.png) — H1s readable, buttons equal,
+  no overlap/clipping. Word-diff vs pristine HEAD tree (port 8942 worktree): 25 routes,
+  0 mismatches — ZERO content-word changes from the code fixes.
+- STILL PENDING: image worker (fixes 1-5 + opportunistic flood card) running; then
+  media.php single edit (orphan mold-inspection card deletion + 2 new card wirings),
+  independent re-verifier, commit, export, fresh pack.
+
+## 2026-11-14 ~11:45 PKT — CYCLE 4 STAGE 2 FIXES COMPLETE (coordinator b63d4026)
+- Images (worker cc0cd5d3, coordinator re-verified md5s/dims/EXIF on disk +
+  viewed all 5 photos full-size): About hero swapped (61,209 B, two techs,
+  faces visible, moisture meter); mobile-home hero swapped (217,178 B,
+  floodwater + stained skirting); process-6 colour swap (spread 5.444);
+  2 distinct cards created + wired (wet-flooring boots/squeegee/muddy water;
+  insurance inspector/clipboard/paperwork); sewage retuned 1440x1080 ->
+  1280x960 (MAD 0.14, -25,901 B). Nets CLEAR (md5 0/36,985; aHash process-6
+  11 flags all DIFFERENT, MAD 44.46-88.58). All 5 created (Pexels retry
+  exhausted, 4 candidates rejected). assets/img 100 files / 6,191,630 B.
+- Orphan mold-inspection card files trashed (recoverable, expiry 2026-12-14);
+  0 refs sitewide; sitemap XML-parse 25 + 48 image:loc.
+- Code fixes 7/8/9 verified served (og:type article 4/4 blogs; telephone
+  +1-407-787-9139 unified; blog about -> #article; Article.image ImageObject).
+  Schema validators re-run: A 0 errors/0 warnings, B 0 errors/0 notes.
+- CLS fallback faces: A/B slab -70%, wet -33%, mobile -48%; unthrottled CLS 0
+  on 25/25 at 1280 + 390; fallback renders viewed 4/4. Word-diff 0 on 25/25.
+- Findings: qa/FINDINGS-OPT-C4-STAGE2-2026-11-14.md. Independent re-verifier
+  60749fa7 dispatched (findings qa/FINDINGS-OPT-C4-VERIFY-2026-11-14.md).
+  NOTHING committed yet — commit + export + pack after the verifier's verdict.
+
+- INDEPENDENT RE-VERIFICATION CLOSED 2026-11-14 ~11:55 PKT (verifier
+  60749fa7, findings qa/FINDINGS-OPT-C4-VERIFY-2026-11-14.md): VERDICT
+  READY — P1 0 / P2 0 / P3 1 (carried slow-4G CLS residual max 0.01548,
+  form-only, ~6x under 0.1). All 10 fixes verified fresh on own servers
+  (8951 edited / 8952 pristine HEAD 60e6a4f): 6 images viewed full-size
+  (faces/floodwater/colour/boots/inspector all as claimed); nets fresh
+  over ALL 100 images — md5 0 true cross-site hits (corpus 36,985),
+  aHash only process-6 (11 distinct, all DIFFERENT, MAD64 45.13-88.83)
+  + process-3 (2 new flags, DIFFERENT, MAD64 59.77/76.21); both cards 0
+  flags d16<=64; EXIF 0/100; orphan 0 refs; og:type 4/4 article;
+  telephone +1-407-787-9139 on 25/25; blog about -> #article + Article.image
+  true dims 4/4; validators A 0/0, B 0/0; CLS A/B reproduced EXACTLY
+  (0.00646/0.01548/0.00899/control 0.00774 — control real, same form-only
+  residual, not run variance); unthrottled CLS 0 on 25/25 at 1280 + 390,
+  overflow 0; word-diff 0 on 25/25; crawl 25/25 200, H1 1, 0 broken
+  links/images, sitemap 25 + 48 image:loc; Button 2 in view 25/25 at both
+  widths; pack inputs genuine full-page (50 shots, 6,394-31,369 px).
+  Notes: sewage MAD claim 0.14 did not reproduce (mine 1.55-1.61, still
+  same-photo band — do not quote 0.14); process-6 spread 5.444 vs mine
+  5.728 (sampling); Plano3<->Lancaster same-photo pair independently
+  confirmed visually (out of scope, not Apopka). NOTHING committed yet —
+  commit + export + pack now rest on this verdict.
+
+## 2026-11-14 ~11:47 PKT — CYCLE 4 CLOSED: READY (P1 0 / P2 0 / P3 1) (coordinator b63d4026)
+- INDEPENDENT RE-VERIFICATION (verifier 60749fa7, qa/FINDINGS-OPT-C4-VERIFY-2026-11-14.md):
+  READY, P1 0 / P2 0 / P3 1. All 10 fixes verified from scratch: all 6 photos
+  viewed full-size; md5s 12/12 match the log; reuse nets CLEAR on fresh disk
+  reads over all 100 images (md5 0 true cross-site hits, corpus 36,985 files;
+  aHash process-6 11 flags + process-3 2 flags all adjudicated DIFFERENT by
+  full-size side-by-side + MAD64); orphan deletion 0 refs; og:type article
+  4/4; telephone +1-407-787-9139 on 25/25; blog about -> #article + Article.image
+  ImageObject with true on-disk dims; validators A 0/0, B 0/0; CLS A/B
+  reproduced EXACTLY (slab 0.00646, wet 0.01548, mobile 0.00899, control
+  0.00774 — control is real, same form-only residual, not variance);
+  unthrottled CLS 0 on 25/25 at 1280 + 390; word-diff 0 on 25/25; crawl
+  25/25 200, H1 1/page, canonicals self, 73 internal links 0 broken, 96 images
+  0 broken, sitemap 25 + 48 image:loc (XML-parsed), 404 + noindex correct,
+  Button 2 in view 25/25 at 1280 and 390.
+- CORRECTIONS from the verifier (recorded in the Stage 2 findings): sewage
+  retune display-MAD is 1.55-1.61, NOT the worker's 0.14 — still same-photo
+  band, verdict stands, do NOT quote 0.14. Process-6 colour spread 5.728
+  (verifier) vs 5.444 (worker) — sampling difference, both confirm colour.
+- The one P3 (carried, not blocking): slow-4G CLS residual 0.006-0.015
+  (max 0.01548), ~6x under Google's 0.1 bar — same residual class as Cycle 3,
+  now smaller. Residual is form-only (DIV.hero-form, ~1210-1238 ms).
+- COMMITS (local only, NOT pushed): main **5d2b2e0** (19 files), gh-pages
+  **f832a17** (64 files; export 25 routes, 49 html, 0 double-slash, 0
+  unprefixed, 0 localhost, + .nojekyll, sitemap 25 + 48 image:loc).
+- FRESH PACK: 50/50 genuine native full-page shots (full_page=50, sectioned=0,
+  viewport-only=0, failed=0; heights 6,394-31,369 px), PDF 735 pp,
+  70,013,595 B at ~/workspace/your_files/apopka-review-pack.pdf.
+  Cover mislabel caught + fixed before delivery (C3 builder hardcode said
+  "Cycle 3 / port 8985" — corrected to Cycle 4 / port 8941, PDF rebuilt,
+  cover re-verified). Pack spot-checked (p.1 cover + p.400 labelled slice).
+- UPLOAD: attempted ONCE ~11:52 PKT — interrupted by a SERVICE RESTART
+  mid-upload, no link returned; a duplicate call (coordinator error) aborted.
+  Outcome unknown (no list/verify command exists for remote-storage); per
+  the no-retry-on-unknown-outcome rule the upload was NOT re-attempted.
+  The PDF is on disk and verified; re-attempt with the user present.
+  NOTE: MEMORY.md was trimmed by a background job during this close-out
+  (Cycle 1/2/3 lineage lines removed) — the Cycle 4 close-out entry still
+  needs adding to MEMORY.md by the parent.
+- CYCLE 4 IMPROVEMENTS (measured): slow-4G CLS max 0.0231 -> 0.01548
+  (-33% worst case; slab -70%, mobile -48%); About hero now shows two techs
+  with faces + moisture meter (was cropped heads); mobile-home hero now shows
+  real floodwater + stained skirting (was no visible damage); process-6 now
+  colour (was the site's only B&W photo); 2 distinct cards where 1 photo was
+  reused twice; sewage hero -25,901 B at exact slot dims; assets/img net
+  -21,613 B (100 files); schema now E.164 telephone, og:type article on
+  blogs, blog about + Article.image with true dims. Zero content-word changes.
+- HELD (unchanged, his call): titles (24/25 H1-derived), FAQ accordions
+  closed-by-default (3,066 answer words), contact form fields.
+- STOP RULE: Cycle 4 found real measured improvements, so cycling continues.
+  Next cycle would need a fresh full round to find anything left.

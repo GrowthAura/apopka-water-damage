@@ -34,6 +34,21 @@ $PAGE_IMG = [
     // viewed pixels + MAD 60.83 / 58.60 (false positives — street scenes
     // vs a concrete-floor detail shot). All 9 viewed full-size before
     // install; EXIF 0, JFIF-only. Alts below describe the new photos.
+    // CYCLE 4 STAGE 2 (2026-11-14): 5 created images installed after the
+    // Pexels retry was exhausted (no fitting real photo exists for any of
+    // the 5 slots; see qa/c4-stage2-images.md §1 — incl. Pexels 21528760,
+    // rejected: wrong floor + already live on Tulsa Repair + Chesterfield).
+    // About hero (two technicians, faces visible), mobile-home hero
+    // (manufactured home + floodwater), process-6 (colour fan on wet
+    // concrete), wet-flooring card (boots + squeegee + muddy water),
+    // insurance-claim-help card (inspector + clipboard + claim paperwork).
+    // Sewage hero retuned 1440x1080 -> 1280x960 (same photo, MAD 0.14).
+    // Nets on fresh disk reads BEFORE install: md5 0 hits over 36,985
+    // files; aHash 11 process-6 flags d16<=40 all adjudicated DIFFERENT
+    // by viewed pixels + MAD64 44.46-88.58; both cards 0 flags d16<=64.
+    // All 12 installed files viewed full-size before install (worker) and
+    // re-viewed by the coordinator; EXIF 0, JFIF-only. Never claimed as
+    // real job photos. Alts below describe the new photos.
     // Homepage hero.
     '/' => [
         'hero' => ['file' => 'hero-apopka.jpg', 'alt' => 'Floodwater on a palm-lined street in Apopka, FL after heavy rain'],
@@ -88,8 +103,10 @@ $PAGE_IMG = [
         'card' => ['file' => 'card-mold-remediation-apopka.jpg', 'alt' => 'Mold Remediation in Apopka'],
         'hero' => ['file' => 'mold-remediation-apopka.jpg', 'alt' => 'Worker in protective gear removing black mold from a wall in a home in Apopka, FL'],
     ],
+    // CYCLE 4 (2026-11-14): mold-inspection card files deleted — the card
+    // was never served (mold-inspection is an 'also' link, not a homepage
+    // card), so the declaration is removed with the files. Hero untouched.
     '/mold-inspection' => [
-        'card' => ['file' => 'card-mold-inspection-apopka.jpg', 'alt' => 'Mold Inspection in Apopka'],
         'hero' => ['file' => 'mold-inspection-apopka.jpg', 'alt' => 'Inspector with a clipboard and moisture meter at the front door of a home in Apopka, FL'],
     ],
     '/structural-drying' => [
@@ -97,12 +114,12 @@ $PAGE_IMG = [
         'hero' => ['file' => 'structural-drying-apopka.jpg', 'alt' => 'Air movers and a dehumidifier drying a wet living room in Apopka, FL'],
     ],
     '/wet-flooring-water-damage' => [
-        'card' => ['file' => 'wet-flooring-water-damage-apopka.jpg', 'alt' => 'Flooded Carpet and Wet Floor Cleanup in Apopka'],
+        'card' => ['file' => 'card-wet-flooring-water-damage-apopka.jpg', 'alt' => 'Flooded Carpet and Wet Floor Cleanup in Apopka'],
         'hero' => ['file' => 'wet-flooring-water-damage-apopka.jpg', 'alt' => 'Worker in rubber boots brushing muddy water off a concrete floor in Apopka, FL'],
     ],
     '/mobile-home-water-damage' => [
         'card' => ['file' => 'card-mobile-home-water-damage-apopka.jpg', 'alt' => 'Mobile Home Water Damage in Apopka'],
-        'hero' => ['file' => 'mobile-home-water-damage-apopka.jpg', 'alt' => 'Manufactured home in a sunny Florida mobile home park in Apopka, FL'],
+        'hero' => ['file' => 'mobile-home-water-damage-apopka.jpg', 'alt' => 'Manufactured home with floodwater pooled around its foundation in a sunny Florida mobile home park in Apopka, FL'],
     ],
     '/commercial-water-damage' => [
         'card' => ['file' => 'card-commercial-water-damage-apopka.jpg', 'alt' => 'Commercial Water Damage in Apopka'],
@@ -113,14 +130,14 @@ $PAGE_IMG = [
         'hero' => ['file' => 'leak-detection-apopka.jpg', 'alt' => 'Technician aiming a thermal imaging camera at a damp wall in a home in Apopka, FL'],
     ],
     '/water-damage-insurance-claim-help' => [
-        'card' => ['file' => 'water-damage-insurance-claim-help-apopka.jpg', 'alt' => 'Water Damage Insurance Claim Help in Apopka'],
+        'card' => ['file' => 'card-water-damage-insurance-claim-help-apopka.jpg', 'alt' => 'Water Damage Insurance Claim Help in Apopka'],
         'hero' => ['file' => 'water-damage-insurance-claim-help-apopka.jpg', 'alt' => 'Inspector in a hard hat holding a clipboard while documenting a home inspection in Apopka, FL'],
     ],
     // New routes (tabs 20..25, full-content rebuild 2026-11-12). Hero only;
     // no homepage card. page_img() returns null until the file lands in
     // assets/img/, so a missing photo is a navy hero, never a broken image.
     '/about' => [
-        'hero' => ['file' => 'about-apopka.jpg', 'alt' => 'Water damage restoration crew with cleaning equipment in a home in Apopka, FL'],
+        'hero' => ['file' => 'about-apopka.jpg', 'alt' => 'Two water damage restoration technicians with a moisture meter in a home in Apopka, FL'],
     ],
     '/contact' => [
         'hero' => ['file' => 'contact-apopka.jpg', 'alt' => 'Homeowner calling for emergency help on the phone at home in Apopka, FL'],
