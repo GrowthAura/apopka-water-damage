@@ -132,12 +132,14 @@ function page_meta($slug, $pages) {
         return ['title' => $HOME_META['title'], 'description' => $HOME_META['description']];
     }
     if (isset($FULL_PAGES[$slug])) {
-        // Titles: the tab's H1 alone, trimmed at a word boundary to <=60
-        // (two blog H1s are 62-63ch; the doc's own Meta Titles run 54-64ch
-        // and are NOT used as <title> — same class as the Round 1 P3 fix).
+        // Titles: the doc's Meta Title line VERBATIM per route (his
+        // decision 2026-11-16, "Doc wale Meta Titles verbatim lagao").
+        // The <=60ch trim is DROPPED — 12/25 doc titles run 61-64ch and
+        // verbatim wins over length. $fp['meta_title'] now HOLDS the doc
+        // title (see data/full_pages.php header); it is NOT the H1.
         // Descriptions: the tab's Meta Description verbatim (all <=108ch).
         $fp = $FULL_PAGES[$slug];
-        return ['title' => trim_words_meta($fp['meta_title'], 60),
+        return ['title' => $fp['meta_title'],
                 'description' => trim_words_meta($fp['meta_description'], 160)];
     }
     $p = $pages[$slug];
