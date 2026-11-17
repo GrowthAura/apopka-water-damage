@@ -1,4 +1,4 @@
-// Apopka Water Damage Restoration — vanilla JS only.
+// Apopka Water Damage Restoration - vanilla JS only.
 // Reveal-on-scroll via IntersectionObserver; mobile menu closes when a link
 // inside it is tapped. FAQ uses native <details>, no JS needed.
 (function () {
@@ -18,7 +18,7 @@
     // it stayed invisible. Any visible sliver now triggers the reveal.
     // Safety timer below reveals anything still hidden after 900ms, so
     // content is never stuck invisible. Content-bearing wrappers no
-    // longer carry .reveal at all (index.php) — first paint shows text
+    // longer carry .reveal at all (index.php) - first paint shows text
     // with zero JS dependency; this observer only covers decorative use.
     }, { threshold: 0 });
     revealEls.forEach(function (el) { observer.observe(el); });
