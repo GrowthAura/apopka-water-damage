@@ -704,3 +704,10 @@ Source: Google Doc 1LfF_CNNyium0TldmxA3no6Wv_nFZFyPm8bok5MAlKGY (homepage only, 
 - 20x: footer YES, header YES, Speed Index NO (P1), type good with wide-line caveat.
 - NOTE (verifier 2): Chromium "Socket path too long" kills Playwright when the profile dir path is long — use short TMPDIR paths in future rounds. NOTE (unrelated, from MEMORY.md mid-task): Fort Myers push failed 2026-11-18 ~01:20 PKT (403 — token authenticates as GrowthAura, no permission on the Noorullahmian-owned repo) — not Apopka, flagged to parent.
 - COMMITTED locally (main + gh-pages worktree), NEVER pushed. Pack next. FAQ/form still HELD. Live still serves the 2026-11-12 export.
+
+## 2026-11-18 ~02:00 PKT — DESIGN + SPEED ROUND CLOSE-OUT (local only; pack built, upload blocked)
+- Main 8c4752c (8c4752cfd8eebd3c5e894a3f6e477bbe36de3399, 143 files, tree clean); gh-pages 0efe04c (0efe04c1f7d0bd7b2c9ea6b266265133a0ef63a3, 184 files, tree clean). NEVER pushed. Remotes clean https.
+- Pack: ~/workspace/your_files/apopka-review-pack.pdf — 786 pages, 73,014,235 B, 50/50 native full-page shots (desktop 1280 + mobile 390, all 25 routes, server port 8995), cover verified (round + port + SHAs + NOT READY verdict line). Shot PNGs kept in ~/workspace/your_files/apopka-pack-shots/ (50).
+- UPLOAD BLOCKED: single remote-storage attempt exit 3 approval_expired ("egress approval timed out") — nothing uploaded, no URL, no expiry. NOT retried. Re-attempt needs him present to approve the egress card.
+- VERDICT (stands): NOT READY — P1 1 / P2 1 / P3 3. Mobile SI unmoved in 3 independent A/Bs; footer/header 20x verified; type good with wide-line caveat. Cleanup done: verifier servers killed (PIDs 11959/12005), baseline worktree removed.
+- OPEN (his call): P1 mobile SI — accept as lab noise / ship the LCP+bytes wins / investigate further; push (his word + fresh token); FAQ accordions + contact form fields still HELD; wide-text interpretation (rendered-line ≤88 vs CSS-ch rule).
