@@ -1,5 +1,5 @@
 <?php
-// Apopka Water Damage Restoration — lead form. No mail is sent: no
+// Apopka Water Damage Restoration - lead form. No mail is sent: no
 // destination address has been given yet, and none is invented here.
 // Submitting the form shows an honest notice and points to the phone line.
 global $SITE, $SERVICES;

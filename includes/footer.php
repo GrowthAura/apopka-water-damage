@@ -1,5 +1,5 @@
 <?php
-// Apopka Water Damage Restoration — footer + mobile call bar. Written
+// Apopka Water Damage Restoration - footer + mobile call bar. Written
 // fresh for this site. $show_map (bool) is set by the page renderer before
 // include.
 global $SITE, $SERVICES;
@@ -18,11 +18,11 @@ $map_src = 'https://www.google.com/maps?q=' . rawurlencode($SITE['map_query']) .
       <p class="footer-h"><?= esc($SITE['brand']) ?></p>
       <p>24/7 emergency water damage restoration in Apopka, FL 32703 and 32712. Crew dispatched immediately.</p>
       <p><a href="<?= esc($SITE['phone_href']) ?>"><?= esc($SITE['phone']) ?></a><br>
-      Apopka, FL 32703<br>
+      Apopka, FL 32703 and 32712<br>
       <span class="footer-hours">Open 24 hours, 7 days a week</span></p>
       <a class="btn btn-ocean" href="<?= esc($SITE['phone_href']) ?>"><?= esc($SITE['phone']) ?></a>
     </div>
-    <div class="footer-col">
+    <div class="footer-col footer-col-services">
       <p class="footer-h">Services</p>
       <ul>
         <?php foreach ($SERVICES as $s): ?>
@@ -44,14 +44,6 @@ $map_src = 'https://www.google.com/maps?q=' . rawurlencode($SITE['map_query']) .
         <li><a href="/resources/how-fast-mold-grows-florida">How Fast Mold Grows</a></li>
       </ul>
     </div>
-    <div class="footer-col">
-      <p class="footer-h">Get Help Now</p>
-      <p>Water on your floors, dripping through a ceiling or soaking a closet wall needs action now, not tomorrow.</p>
-      <p><a href="<?= esc($SITE['phone_href']) ?>"><?= esc($SITE['phone']) ?></a><br>
-      Apopka, FL 32703 and 32712<br>
-      <span class="footer-hours">Open 24 hours, 7 days a week</span></p>
-      <a class="btn btn-cream" href="<?= ($is_404 ?? false) ? '/#request-service' : '#request-service' ?>">Request Emergency Help</a>
-    </div>
   </div>
   <div class="container footer-bottom">
     <span>&copy; 2026 <?= esc($SITE['brand']) ?> &middot; Apopka, FL 32703</span>
@@ -63,5 +55,9 @@ $map_src = 'https://www.google.com/maps?q=' . rawurlencode($SITE['map_query']) .
 </a>
 <div class="mobile-call-spacer" aria-hidden="true"></div>
 <script src="/assets/js/main.js?v=3" defer></script>
+<?php /* STAGE 3 (2026-11-17, mobile SI): JSON-LD lives here (end of body)
+     instead of <head> - same bytes, same schema, but the ~11.7KB block no
+     longer delays parsing of the body markup. JSON-LD in <body> is valid. */ ?>
+<?= $HEAD['ld'] ?? '' ?>
 </body>
 </html>

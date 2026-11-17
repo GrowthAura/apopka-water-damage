@@ -1,5 +1,5 @@
 <?php
-// Apopka Water Damage Restoration — lead form validation.
+// Apopka Water Damage Restoration - lead form validation.
 // No mail is sent and nothing is stored: no destination address has been
 // given yet. A valid submission returns a notice flag only; the renderer
 // shows an honest "not sent, please call" message.

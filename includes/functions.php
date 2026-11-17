@@ -1,5 +1,5 @@
 <?php
-// Apopka Water Damage Restoration — shared helpers. Written fresh for
+// Apopka Water Damage Restoration - shared helpers. Written fresh for
 // this site.
 
 function esc($s) {
@@ -134,7 +134,7 @@ function page_meta($slug, $pages) {
     if (isset($FULL_PAGES[$slug])) {
         // Titles: the doc's Meta Title line VERBATIM per route (his
         // decision 2026-11-16, "Doc wale Meta Titles verbatim lagao").
-        // The <=60ch trim is DROPPED — 12/25 doc titles run 61-64ch and
+        // The <=60ch trim is DROPPED - 12/25 doc titles run 61-64ch and
         // verbatim wins over length. $fp['meta_title'] now HOLDS the doc
         // title (see data/full_pages.php header); it is NOT the H1.
         // Descriptions: the tab's Meta Description verbatim (all <=108ch).
@@ -193,7 +193,7 @@ function render_block_list($blocks, $slug, &$used) {
 
 // ---- JSON-LD -------------------------------------------------------------
 // Business node (2026-11-12 10x upgrade): HomeAndConstructionBusiness,
-// the 2026-11-08 research verdict's best subtype — NEVER EmergencyService
+// the 2026-11-08 research verdict's best subtype - NEVER EmergencyService
 // (schema.org defines that as a fire station / ER). One @id (#business)
 // shared by every page. Description is the homepage meta description,
 // verbatim from the doc. NO street address (none in the doc), NO geo,
@@ -240,7 +240,7 @@ function ld_local_business($imageUrl = null) {
             ['@type' => 'PostalCode', 'postalCode' => '32703'],
             ['@type' => 'PostalCode', 'postalCode' => '32712'],
         ],
-        // U-3 (Cycle 1): only terms verified verbatim in page copy —
+        // U-3 (Cycle 1): only terms verified verbatim in page copy -
         // "IICRC S500 Drying Methods" is a homepage category heading.
         'knowsAbout' => ['Water damage restoration', 'Emergency water extraction',
             'Structural drying', 'Mold remediation', 'IICRC S500 Drying Methods'],
@@ -260,7 +260,7 @@ function ld_local_business($imageUrl = null) {
             'contactType' => 'customer service',
             'areaServed' => ['@type' => 'AdministrativeArea', 'name' => 'Orange County'],
             'availableLanguage' => 'English',
-            // U-5 (Cycle 1): mirrors openingHoursSpecification — 24/7
+            // U-5 (Cycle 1): mirrors openingHoursSpecification - 24/7
             // is stated everywhere on the site; no new fact.
             'hoursAvailable' => [
                 '@type' => 'OpeningHoursSpecification',
@@ -278,7 +278,7 @@ function ld_local_business($imageUrl = null) {
 }
 
 // One catalog entry: verbatim service label + live URL. No invented
-// offers, prices or availability — the label and URL are the offer.
+// offers, prices or availability - the label and URL are the offer.
 function ld_offer($s) {
     return [
         '@type' => 'Offer',
@@ -369,7 +369,7 @@ function ld_service($name, $serviceType, $canonical, $imageUrl = null, $descript
 // or update date for any guide, so datePublished/dateModified are omitted
 // rather than invented.
 // $body is the blog tab's full visible article text verbatim (its blocks
-// joined with blank lines) — Cycle 1 P2-1 articleBody.
+// joined with blank lines) - Cycle 1 P2-1 articleBody.
 function ld_article($canonical, $headline, $imageUrl = null, $description = null, $body = null, $imageMeta = null) {
     $out = [
         '@type' => 'Article',
@@ -382,7 +382,7 @@ function ld_article($canonical, $headline, $imageUrl = null, $description = null
         'isPartOf' => ['@id' => site_url('/') . '#website'],
         'inLanguage' => 'en-US',
         // U-2 (Cycle 1): about the business; articleSection is the URL
-        // directory the blogs live under — honest, not invented.
+        // directory the blogs live under - honest, not invented.
         'about' => ['@id' => site_url('/') . '#business'],
         'articleSection' => 'Resources',
     ];
@@ -484,7 +484,7 @@ function ld_howto($steps, $canonical = null, $name = 'Our Water Damage Restorati
     }
     if ($canonical !== null) $out['@id'] = $canonical . '#howto';
     // Cycle 3 U-3: link the HowTo node to its page (the canonical already
-    // in the graph). Honest only — nothing else points at #howto.
+    // in the graph). Honest only - nothing else points at #howto.
     if ($canonical !== null) $out['mainEntityOfPage'] = $canonical;
     return $out;
 }
@@ -495,7 +495,7 @@ function ld_howto($steps, $canonical = null, $name = 'Our Water Damage Restorati
 // exists; Cycle 3 U-1: home/about/contact pass '#business' (the page's
 // subject IS the business) instead of null.
 // $imageMeta (Cycle 3 U-2): ['alt','width','height'] from
-// img_schema_meta() — real on-disk dims; primaryImageOfPage becomes an
+// img_schema_meta() - real on-disk dims; primaryImageOfPage becomes an
 // ImageObject with caption = the image's existing alt text.
 function ld_webpage($canonical, $title, $aboutId = null, $imageUrl = null, $description = null, $mainEntityId = null, $imageMeta = null) {
     $out = [
@@ -541,7 +541,9 @@ function page_images($slug) {
     global $SERVICES;
     $out = [];
     $add = function ($img) use (&$out) {
-        if ($img) $out[] = site_url($img['src']);
+        // DESIGN+SPEED 2026-11-17 (WebP): image:loc carries the served URL
+        // — the WebP re-encode <picture> actually serves, when it exists.
+        if ($img) $out[] = site_url(webp_src($img));
     };
     if ($slug === '/') {
         $add(page_img('/', 'hero'));

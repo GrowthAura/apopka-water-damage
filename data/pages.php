@@ -1,7 +1,7 @@
 <?php
-// Apopka Water Damage Restoration — site and page data.
+// Apopka Water Damage Restoration - site and page data.
 // Written fresh for this site. All visible copy is verbatim from the
-// Google Doc "Apopka FL Water Damage Restoration — Page Copy" (homepage
+// Google Doc "Apopka FL Water Damage Restoration - Page Copy" (homepage
 // only, 2,753 words). Nothing here is invented: no domain, no street
 // address, no About / Contact / Privacy content, no reviews, no rates
 // beyond the doc's own cost range ($1,000 to $3,000 / $3,000 to $10,000
@@ -334,7 +334,7 @@ $FINAL_CTA_PARAS = [
     'Every hour water sits in your home, more drywall soaks it up, more flooring lifts and the risk of mold grows. Our water damage restoration Apopka FL crew is ready right now for flood cleanup, water removal service and full structural drying. Call (407) 787-9139 and a crew is dispatched immediately to your door.',
 ];
 
-// Full tab content (tabs 02..25) — generated, see data/full_pages.php.
+// Full tab content (tabs 02..25) - generated, see data/full_pages.php.
 // The homepage arrays above are unchanged; inner pages now carry their OWN
 // tab's full content verbatim instead of the old homepage summary.
 require __DIR__ . '/full_pages.php';

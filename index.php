@@ -1,5 +1,5 @@
 <?php
-// Apopka Water Damage Restoration — front controller / router. Plain PHP 8.
+// Apopka Water Damage Restoration - front controller / router. Plain PHP 8.
 // Clean URLs, no trailing slash except the homepage. Slash forms of a
 // no-slash route answer 308 to the no-slash form.
 // Local only: no deploy, no domain, no external service calls.
@@ -45,7 +45,7 @@ if ($path === '/sitemap.xml') {
 // 3. Static files (assets, favicons, manifest, robots, llms).
 $MIME = [
     'css' => 'text/css', 'js' => 'text/javascript', 'jpg' => 'image/jpeg',
-    'jpeg' => 'image/jpeg', 'png' => 'image/png', 'ico' => 'image/x-icon',
+    'jpeg' => 'image/jpeg', 'webp' => 'image/webp', 'png' => 'image/png', 'ico' => 'image/x-icon',
     'svg' => 'image/svg+xml', 'json' => 'application/manifest+json',
     'webmanifest' => 'application/manifest+json', 'txt' => 'text/plain',
     'xml' => 'application/xml',
@@ -163,6 +163,7 @@ function render_home($form = null) {
         'canonical' => $homeCanon,
         'og_type' => 'website',
         'og_image' => $homeHero ? site_url($homeHero['src']) : null,
+        'hero_preload' => hero_preload_link($homeHero),
         'ld' => ld_json([ld_local_business($homeHeroUrl), ld_website(),
             ld_webpage($homeCanon, $HOME_META['title'], site_url('/') . '#business', $homeHeroUrl, $HOME_META['description'], site_url('/') . '#business', img_schema_meta($homeHero)),
             ld_breadcrumb([['label' => 'Home', 'href' => '/']], $homeCanon),
@@ -173,7 +174,7 @@ function render_home($form = null) {
     require $ROOT . '/includes/header.php';
     ?>
 <section class="hero">
-  <?php if ($homeHero): ?><div class="hero-media"><img src="<?= esc($homeHero['src']) ?>" alt="<?= esc($homeHero['alt']) ?>" width="1280" height="720"<?= srcset_attr($homeHero, 'hero') ?> fetchpriority="high"></div><?php endif; ?>
+  <?php if ($homeHero): ?><div class="hero-media"><?= picture_tag($homeHero, 1280, 720, '', 'hero', ' fetchpriority="high"') ?></div><?php endif; ?>
   <div class="container hero-content">
     <p class="eyebrow on-navy"><?= esc($HOME_META['eyebrow']) ?></p>
     <h1><?= esc($HOME_META['h1']) ?></h1>
@@ -225,7 +226,7 @@ function render_home($form = null) {
   <div class="phase-grid">
     <?php foreach ($PROCESS_STEPS as $i => $s): $pimg = page_img('process-' . ($i + 1), 'img'); ?>
     <div class="phase-card">
-      <?php if ($pimg): ?><div class="phase-media"><img src="<?= esc($pimg['src']) ?>" alt="<?= esc($pimg['alt']) ?>" width="900" height="506"<?= srcset_attr($pimg, 'process') ?> loading="lazy"></div><?php else: ?><div class="phase-media phase-media-empty" aria-hidden="true"></div><?php endif; ?>
+      <?php if ($pimg): ?><div class="phase-media"><?= picture_tag($pimg, 900, 506, 'lazy', 'process') ?></div><?php else: ?><div class="phase-media phase-media-empty" aria-hidden="true"></div><?php endif; ?>
       <h3><?= esc($s['h3']) ?></h3><p><?= esc($s['text']) ?></p>
     </div>
     <?php endforeach; ?>
@@ -324,6 +325,7 @@ function render_page($slug, $page, $form = null) {
         'canonical' => site_url($slug),
         'og_type' => ($full['type'] === 'blog') ? 'article' : 'website',
         'og_image' => $pageHero ? site_url($pageHero['src']) : null,
+        'hero_preload' => hero_preload_link($pageHero),
         'ld' => ld_json($graph),
     ];
     $currentSlug = $slug;
@@ -345,7 +347,7 @@ function render_page($slug, $page, $form = null) {
     ?>
 <?php if ($isService): ?>
 <section class="hero hero-split">
-  <?php if ($pageHero): ?><div class="hero-media"><img src="<?= esc($pageHero['src']) ?>" alt="<?= esc($pageHero['alt']) ?>"<?= img_dims_attr($pageHero) ?><?= srcset_attr($pageHero, 'hero') ?> fetchpriority="high"></div><?php endif; ?>
+  <?php if ($pageHero): ?><div class="hero-media"><?= picture_tag($pageHero, null, null, '', 'hero', ' fetchpriority="high"') ?></div><?php endif; ?>
   <div class="container hero-content">
     <?= crumbs_html($crumbs) ?>
     <div class="hero-copy">
@@ -361,7 +363,7 @@ function render_page($slug, $page, $form = null) {
 </section>
 <?php else: ?>
 <section class="hero hero-short">
-  <?php if ($pageHero): ?><div class="hero-media"><img src="<?= esc($pageHero['src']) ?>" alt="<?= esc($pageHero['alt']) ?>"<?= img_dims_attr($pageHero) ?><?= srcset_attr($pageHero, 'hero') ?> fetchpriority="high"></div><?php endif; ?>
+  <?php if ($pageHero): ?><div class="hero-media"><?= picture_tag($pageHero, null, null, '', 'hero', ' fetchpriority="high"') ?></div><?php endif; ?>
   <div class="container hero-content">
     <?= crumbs_html($crumbs) ?>
     <p class="eyebrow on-navy"><?= esc($full['eyebrow']) ?></p>

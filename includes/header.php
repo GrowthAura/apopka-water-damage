@@ -1,5 +1,5 @@
 <?php
-// Apopka Water Damage Restoration — page head + header. Written fresh
+// Apopka Water Damage Restoration - page head + header. Written fresh
 // for this site. Expects before include: $HEAD (title, description,
 // canonical, ld json, og_type), $currentSlug, and the data arrays from
 // data/pages.php.
@@ -32,16 +32,20 @@ global $SITE, $SERVICES;
 <meta name="theme-color" content="#0F1D2E">
 <link rel="manifest" href="/site.webmanifest">
 <!-- C2 Stage 2 (CLS P3-1): preload the two woff2 files actually fetched
-     on every page. Italic was never fetched in 75 probes — not preloaded. -->
+     on every page. Italic was never fetched in 75 probes - not preloaded. -->
 <link rel="preload" href="/assets/fonts/fraunces-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<?php /* STAGE 3 (2026-11-17, mobile SI): hero image preload (exact WebP
+     srcset/sizes as the hero <picture>); JSON-LD moved to end of <body>
+     (footer.php) so the ~11.7KB schema block no longer sits in <head>
+     ahead of the body markup. */ ?>
+<?= $HEAD['hero_preload'] ?? '' ?>
 <link rel="icon" href="/favicon.ico">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/css/styles.css?v=10">
-<?= $HEAD['ld'] ?? '' ?>
+<link rel="stylesheet" href="/assets/css/styles.css?v=14">
 <noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
 </head>
 <body>
