@@ -133,9 +133,15 @@ function call_strip() {
         '</div></section>';
 }
 
-function final_cta_compact() {
+function final_cta_compact($type = null) {
     global $FINAL_CTA_H2, $FINAL_CTA_PARAS;
-    $out = '<section class="final-cta"><div class="container"><div class="final-cta-card">';
+    // STAGE 2A (P2-1d): distinct accent treatment per page type (service /
+    // blog / about) — presentation only, words unchanged.
+    $cls = 'final-cta';
+    if ($type === 'service') $cls .= ' final-cta-service';
+    elseif ($type === 'blog') $cls .= ' final-cta-blog';
+    elseif ($type === 'about' || $type === 'contact') $cls .= ' final-cta-about';
+    $out = '<section class="' . $cls . '"><div class="container"><div class="final-cta-card">';
     $out .= '<h2>' . esc($FINAL_CTA_H2) . '</h2>';
     foreach ($FINAL_CTA_PARAS as $p) $out .= '<p>' . esc($p) . '</p>';
     $out .= hero_buttons('#request-service');
@@ -246,27 +252,27 @@ function render_home($form = null) {
   <p><?= esc($CATEGORIES_CLOSE) ?></p>
 </div></section>
 <section class="section"><div class="container content-block">
-  <h2><?= esc($COST_H2) ?></h2>
+  <h2 class="h2-sub"><?= esc($COST_H2) ?></h2>
   <p><?= esc($COST_INTRO) ?></p>
   <?= bullets_html($COST_BULLETS) ?>
   <p><?= esc($COST_CLOSE) ?></p>
   <hr class="doc-divide">
-  <h2><?= esc($INSURANCE_H2) ?></h2>
+  <h2 class="h2-sub"><?= esc($INSURANCE_H2) ?></h2>
   <?php foreach ($INSURANCE_PARAS as $p): ?><?= render_para($p, '/') ?><?php endforeach; ?>
   <hr class="doc-divide">
-  <h2><?= esc($SIGNS_H2) ?></h2>
+  <h2 class="h2-sub"><?= esc($SIGNS_H2) ?></h2>
   <p><?= esc($SIGNS_INTRO) ?></p>
   <?= bullets_html($SIGNS_BULLETS) ?>
   <p><?= esc($SIGNS_CLOSE) ?></p>
   <hr class="doc-divide">
-  <h2><?= esc($FIRST_HOUR_H2) ?></h2>
+  <h2 class="h2-sub"><?= esc($FIRST_HOUR_H2) ?></h2>
   <p><?= esc($FIRST_HOUR_INTRO) ?></p>
   <?= bullets_html($FIRST_HOUR_BULLETS) ?>
   <hr class="doc-divide">
-  <h2><?= esc($SERVING_H2) ?></h2>
+  <h2 class="h2-sub"><?= esc($SERVING_H2) ?></h2>
   <p><?= esc($SERVING_PARA) ?></p>
   <hr class="doc-divide">
-  <h2><?= esc($WHY_US_H2) ?></h2>
+  <h2 class="h2-sub"><?= esc($WHY_US_H2) ?></h2>
   <p><?= esc($WHY_US_INTRO) ?></p>
   <?= bullets_html($WHY_US_BULLETS) ?>
 </div></section>
@@ -376,8 +382,13 @@ function render_page($slug, $page, $form = null) {
   <?php if (!$isService): ?>
   <p class="lead"><?= render_linked($full['intro'], $full['intro_links'] ?? [], $slug, $used) ?></p>
   <?php endif; ?>
-  <?= render_block_list($preBlocks, $slug, $used) ?>
+  <?= render_block_list($preBlocks, $slug, $used, $full['howto']['name'] ?? null) ?>
 </div></section>
+<?php if ($isService): ?>
+<!-- STAGE 2A (P1-3): slot for the hero lead form on <=1020px (main.js moves
+     the .form-card here; empty on desktop / no-JS, so zero height there). -->
+<div class="hero-form-slot" id="hero-form-slot"></div>
+<?php endif; ?>
 <?php if (!empty($full['faqs'])): ?>
 <section class="section section-cream" id="faq"><div class="container content-block">
   <h2><?= esc($full['faq_h2']) ?></h2>
@@ -392,7 +403,7 @@ function render_page($slug, $page, $form = null) {
 </div></section>
 <?php endif; ?>
 <section class="section"><div class="container content-block">
-  <?= render_block_list($postBlocks, $slug, $used) ?>
+  <?= render_block_list($postBlocks, $slug, $used, $full['howto']['name'] ?? null) ?>
   <?php if (!$isService): ?>
   <div class="form-wrap">
     <?php require $ROOT . '/includes/lead-form.php'; ?>
@@ -400,8 +411,11 @@ function render_page($slug, $page, $form = null) {
   <?php endif; ?>
   <p class="back-home"><a href="/">Back to home</a></p>
 </div></section>
+<?php if ($isService || $full['type'] === 'blog'): ?>
+<?= related_cards_html($slug, $full) ?>
+<?php endif; ?>
 <?= call_strip() ?>
-<?= final_cta_compact() ?>
+<?= final_cta_compact($full['type']) ?>
 <?php
     require $ROOT . '/includes/footer.php';
 }

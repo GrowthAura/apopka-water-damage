@@ -76,9 +76,12 @@ function render_para($para, $currentSlug = null) {
 
 // Service card paragraph: body + closing sentence verbatim, with only the
 // short anchor spans linked. Ends with a period.
+// STAGE 2A (P2-6): the closing sentence renders as its own <p class="card-more">
+// so CSS (margin-top:auto) can pin the Read-more link to the card bottom.
+// Same words, same order, same links — only the paragraph split changes.
 function card_para($card, $currentSlug = null) {
     $sentence = linkify_multi($card['sentence'], $card['links'], $currentSlug);
-    return '<p>' . esc($card['body']) . ' ' . $sentence . '.</p>';
+    return '<p>' . esc($card['body']) . '</p><p class="card-more">' . $sentence . '.</p>';
 }
 
 function bullets_html($items) {
@@ -171,16 +174,57 @@ function render_linked($text, $links, $currentSlug, &$used) {
 }
 
 // Render a full page's body blocks (h2 / h3 / p / ul) in doc order.
-function render_block_list($blocks, $slug, &$used) {
+// STAGE 2A (P2-1a/c): when $howtoName is given, the H2 whose text equals it
+// opens a <div class="howto-steps"> band; the numbered "N. ..." H3s that
+// follow become <div class="howto-step"> items (CSS counter badges) until
+// the next H2. The step strings are NOT re-rendered from data — they are
+// already visible as H3+p blocks (verified: all 64 step texts are in the
+// blocks and in JSON-LD); this only re-styles the existing blocks, so the
+// visible word count is unchanged. A tinted .rhythm-band (aria-hidden, no
+// words) is emitted before every 5th/9th/13th H2 outside the howto band.
+function render_block_list($blocks, $slug, &$used, $howtoName = null) {
     $out = '';
+    $inHowto = false;
+    $inStep = false;
+    $h2Count = 0;
+    $closeStep = function () use (&$out, &$inStep) {
+        if ($inStep) { $out .= '</div>'; $inStep = false; }
+    };
+    $closeHowto = function () use (&$out, &$inHowto, $closeStep) {
+        $closeStep();
+        if ($inHowto) { $out .= '</div>'; $inHowto = false; }
+    };
     foreach ($blocks as $b) {
-        if ($b['t'] === 'h2') {
-            $out .= '<h2>' . esc($b['x']) . '</h2>';
-        } elseif ($b['t'] === 'h3') {
-            $out .= '<h3>' . esc($b['x']) . '</h3>';
-        } elseif ($b['t'] === 'p') {
+        $t = $b['t'] ?? '';
+        if ($t === 'h2') {
+            $wasHowto = $inHowto;
+            $closeHowto();
+            $h2Count++;
+            $isHowtoH2 = ($howtoName !== null && $b['x'] === $howtoName);
+            // Rhythm band before H2 #5/#9/#13 — skipped before the howto H2
+            // itself and before the H2 that directly follows a howto band
+            // (the band is already the visual break there).
+            if (!$isHowtoH2 && !$wasHowto && $h2Count > 1 && ($h2Count - 1) % 4 === 0) {
+                $out .= '<div class="rhythm-band" aria-hidden="true"></div>';
+            }
+            if ($isHowtoH2) {
+                $out .= '<div class="howto-steps"><h2>' . esc($b['x']) . '</h2>';
+                $inHowto = true;
+            } else {
+                $out .= '<h2>' . esc($b['x']) . '</h2>';
+            }
+        } elseif ($t === 'h3') {
+            if ($inHowto && preg_match('/^\d+\.\s/', $b['x'])) {
+                $closeStep();
+                $out .= '<div class="howto-step"><h3>' . esc($b['x']) . '</h3>';
+                $inStep = true;
+            } else {
+                $closeHowto();
+                $out .= '<h3>' . esc($b['x']) . '</h3>';
+            }
+        } elseif ($t === 'p') {
             $out .= '<p>' . render_linked($b['x'], $b['l'] ?? [], $slug, $used) . '</p>';
-        } elseif ($b['t'] === 'ul') {
+        } elseif ($t === 'ul') {
             $out .= '<ul>';
             foreach ($b['items'] as $it) {
                 $out .= '<li>' . render_linked($it['x'], $it['l'] ?? [], $slug, $used) . '</li>';
@@ -188,7 +232,71 @@ function render_block_list($blocks, $slug, &$used) {
             $out .= '</ul>';
         }
     }
+    $closeHowto();
     return $out;
+}
+
+// ---- STAGE 2A (P2-1b): related-services card row -----------------------
+// Targets are ONLY the links this page's own doc tab annotates (the 'l'
+// arrays in its intro/blocks/FAQs — the doc's link annotations, the only
+// authority). Labels are the target's doc nav label (also doc text, 2–5
+// words) — the raw anchor phrases run to 6–10 words ("Water Damage
+// Insurance Claim Help in Apopka", "How Fast Does Mold Grow After Water
+// Damage in Florida?"), so the anchor phrase itself cannot meet the
+// 3–5-word label rule; the nav label is the doc's own short name for the
+// same page. One link per target in the row; the row is template chrome
+// (like the footer, which already links every service on every page), not
+// body copy. Card image reuses the target's existing card photo, else its
+// hero photo — no new sourcing. No visible heading: the <nav> carries an
+// aria-label, so no new heading words are added. Returns '' when the page
+// has no doc-annotated targets (row omitted).
+function related_cards_html($slug, $full) {
+    global $SERVICES, $FULL_PAGES;
+    $targets = [];
+    $collect = function ($links) use (&$targets) {
+        foreach ($links as $l) {
+            $href = $l[1];
+            if (!isset($targets[$href])) $targets[$href] = true;
+        }
+    };
+    $collect($full['intro_links'] ?? []);
+    foreach ($full['blocks'] as $b) {
+        if (($b['t'] ?? '') === 'p') $collect($b['l'] ?? []);
+        if (($b['t'] ?? '') === 'ul') {
+            foreach ($b['items'] as $it) $collect($it['l'] ?? []);
+        }
+    }
+    foreach ($full['faqs'] ?? [] as $f) $collect($f['l'] ?? []);
+    unset($targets[$slug]);
+    if (empty($targets)) return '';
+    $nav = [];
+    foreach ($SERVICES as $s) {
+        $nav[$s['slug']] = $s['nav'];
+        foreach ($s['also'] ?? [] as $x) $nav[$x['slug']] = $x['nav'];
+    }
+    foreach ($FULL_PAGES as $s => $fp) {
+        if (!isset($nav[$s])) $nav[$s] = $fp['nav'];
+    }
+    $cards = '';
+    foreach (array_keys($targets) as $href) {
+        if (!isset($nav[$href])) continue;
+        $label = $nav[$href];
+        $cimg = page_img($href, 'card');
+        if ($cimg) {
+            $media = '<div class="card-media">' . img_tag($cimg, 600, 338, 'lazy', 'card') . '</div>';
+        } else {
+            $himg = page_img($href, 'hero');
+            $media = $himg
+                ? '<div class="card-media">' . picture_tag($himg, null, null, 'lazy', 'card') . '</div>'
+                : '<div class="card-media card-media-empty" aria-hidden="true"></div>';
+        }
+        $cards .= '<article class="card">' . $media .
+            '<div class="card-body"><h3><a href="' . esc($href) . '">' . esc($label) . '</a></h3></div></article>';
+    }
+    if ($cards === '') return '';
+    return '<section class="section section-tint related-services"><div class="container content-block">' .
+        '<nav class="related-cards-wrap" aria-label="Related services"><div class="cards related-cards">' .
+        $cards . '</div></nav></div></section>';
 }
 
 // ---- JSON-LD -------------------------------------------------------------

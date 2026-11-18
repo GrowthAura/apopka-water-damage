@@ -45,17 +45,20 @@ global $SITE, $SERVICES;
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/css/styles.css?v=14">
+<link rel="stylesheet" href="/assets/css/styles.css?v=15">
 <noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
 </head>
 <body>
-<header class="site-header">
-  <div class="topbar">
-    <div class="topbar-inner">
-      <span>24/7 Emergency Service &middot; Apopka, FL 32703 &amp; 32712</span>
-      <a href="<?= esc($SITE['phone_href']) ?>">Call <?= esc($SITE['phone']) ?></a>
-    </div>
+<!-- STAGE 2A (P1-4): the topbar lives OUTSIDE the sticky header now.
+     It scrolls away with the document; the sticky header's own height
+     never changes, so the first scroll can no longer shift the page. -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>24/7 Emergency Service &middot; Apopka, FL 32703 &amp; 32712</span>
+    <a href="<?= esc($SITE['phone_href']) ?>">Call <?= esc($SITE['phone']) ?></a>
   </div>
+</div>
+<header class="site-header">
   <div class="container header-row">
     <a class="brand" href="/" aria-label="Apopka Water Damage Restoration, home">
       <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 2.5C12 2.5 5.5 10.2 5.5 14.8a6.5 6.5 0 0 0 13 0C18.5 10.2 12 2.5 12 2.5Z" fill="#0E6E6A"/><path d="M9.2 15.2a2.8 2.8 0 0 0 2.3 2.7" fill="none" stroke="#FBF8F2" stroke-width="1.4" stroke-linecap="round"/></svg></span>
@@ -83,7 +86,10 @@ global $SITE, $SERVICES;
       <a class="btn btn-ocean" href="<?= esc($SITE['phone_href']) ?>"><?= esc($SITE['phone']) ?></a>
       <details class="mobile-menu-wrap">
         <summary class="btn btn-outline" aria-label="Open menu"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+        <!-- STAGE 2A (P2-3): links scroll; Contact + call are pinned in a
+             fixed foot outside the scrollable area, visible on open. -->
         <div class="mobile-menu">
+          <div class="mobile-menu-links">
           <a href="/"<?= nav_active('/', $currentSlug ?? null) ?>>Home</a>
           <p class="drop-group">Water Damage Services</p>
           <?php foreach ($SERVICES as $s): ?>
@@ -93,8 +99,11 @@ global $SITE, $SERVICES;
           <?php endforeach; ?>
           <?php endforeach; ?>
           <a href="/about"<?= nav_active('/about', $currentSlug ?? null) ?>>About</a>
+          </div>
+          <div class="mobile-menu-foot">
           <a href="/contact"<?= nav_active('/contact', $currentSlug ?? null) ?>>Contact</a>
           <a class="btn btn-ocean" href="<?= esc($SITE['phone_href']) ?>"><?= esc($SITE['phone']) ?></a>
+          </div>
         </div>
       </details>
     </div>
