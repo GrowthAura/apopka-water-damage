@@ -98,6 +98,34 @@
     syncExpanded();
   });
 
+  // STAGE 2A (P1-3): on <=1020px the service hero's lead form moves out of
+  // the hero into #hero-form-slot (below the first content section), so the
+  // mobile hero is copy + CTAs only (~700px instead of ~1,600px). The form
+  // node itself moves — same fields, same values, same id="request-service"
+  // (hero Button 2 still anchors to it). Runs at once (defer script, DOM
+  // ready) and on viewport crossing; no-JS keeps the form in the hero.
+  var heroFormCard = document.querySelector('.hero-split .hero-form .form-card, .hero-form-slot .form-card');
+  var heroFormWrap = document.querySelector('.hero-split .hero-form');
+  var heroFormSlot = document.getElementById('hero-form-slot');
+  function moveHeroForm() {
+    if (!heroFormCard || !heroFormWrap || !heroFormSlot) return;
+    if (window.matchMedia('(max-width: 1020px)').matches) {
+      if (heroFormCard.parentElement !== heroFormSlot) {
+        heroFormSlot.appendChild(heroFormCard);
+        heroFormWrap.classList.add('is-moved');
+      }
+    } else {
+      if (heroFormCard.parentElement !== heroFormWrap) {
+        heroFormWrap.appendChild(heroFormCard);
+        heroFormWrap.classList.remove('is-moved');
+      }
+    }
+  }
+  if (heroFormCard && heroFormWrap && heroFormSlot) {
+    moveHeroForm();
+    window.matchMedia('(max-width: 1020px)').addEventListener('change', moveHeroForm);
+  }
+
   // Mobile call bar: hidden at first paint so it can never cover the hero
   // buttons; it slides in once the user has scrolled a little.
   var docEl = document.documentElement;
