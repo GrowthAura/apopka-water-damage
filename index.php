@@ -23,20 +23,16 @@ if ($path !== '/' && strlen($path) > 1 && str_ends_with($path, '/')) {
     exit;
 }
 
-// 2. Sitemap (dynamic, loc + date-only lastmod + image:loc for every
-// meaningful photo on the page). Each <url> stays on ONE line so a
-// line-based <loc> count still reads 25.
+// 2. Sitemap (dynamic, loc + date-only lastmod ONLY — NO image:loc, ever,
+// per his standing rule 2026-11-23: "NO IMAGES IN THE SITEMAP, EVER").
+// Each <url> stays on ONE line so a line-based <loc> count still reads 25.
 if ($path === '/sitemap.xml') {
     header('Content-Type: application/xml; charset=utf-8');
     echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-    echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
+    echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
     $all = array_merge(['/'], array_keys($PAGES));
     foreach ($all as $slug) {
-        $line = '  <url><loc>' . esc(site_url($slug)) . '</loc><lastmod>' . $TODAY . '</lastmod>';
-        foreach (page_images($slug) as $imgUrl) {
-            $line .= '<image:image><image:loc>' . esc($imgUrl) . '</image:loc></image:image>';
-        }
-        echo $line . '</url>' . "\n";
+        echo '  <url><loc>' . esc(site_url($slug)) . '</loc><lastmod>' . $TODAY . '</lastmod></url>' . "\n";
     }
     echo '</urlset>';
     exit;
@@ -99,9 +95,12 @@ $HEAD = [
 $currentSlug = $path;
 $show_map = false;
 $is_404 = true;
+// LUXURY 2026-11-23 (P3-5): the 404 hero carries the home hero photo (already on the site, no new sourcing).
+$hero404 = page_img('/', 'hero');
 require $ROOT . '/includes/header.php';
 ?>
 <section class="hero hero-short">
+  <?php if ($hero404): ?><div class="hero-media"><?= picture_tag($hero404, 1280, 720, '', 'hero', ' fetchpriority="high"') ?></div><?php endif; ?>
   <div class="container hero-content">
     <p class="eyebrow on-navy"><?= esc($HOME_META['eyebrow']) ?></p>
     <h1>Page Not Found (404)</h1>

@@ -65,8 +65,24 @@ $PAGE_IMG = [
     // Old files backed up in qa/c6-stage2-backup/. 400w hero variants
     // added for all 25 heroes this cycle (srcset hero [400, 800]).
     // Homepage hero.
+    // LUXURY HOME HERO SWAP (2026-11-23, his ruling ~05:04 PKT): the Stage 2B
+    // hero (Pexels 13865773, flooded lakeside path, Sanford FL) showed the
+    // DISASTER, not the restoration — and its "City of Sanford" sign named
+    // the wrong city centre-frame. Replaced with Pexels 29181494 (Sergei
+    // Starostin): a restoration worker in a hard hat laying new floor tiles
+    // with mortar in a bright room — the rebuild step, the professional at
+    // work. Fresh 1920w CDN re-download, 16:9 crop (y=100). Pexels page
+    // carries NO location metadata: no place claim, no GPS tag, alt
+    // place-free. STANDING RULE: HOME HERO = RESTORATION, NOT FLOOD.
+    // Nets CLEAR pre-install (md5 0/101,014 fresh disk reads; aHash 0 flags
+    // over 93,029 mains; control exact-copy flagged md5 + aHash 0, MAD 0.0;
+    // sibling 29181495 live on Lancaster adjudicated DIFFERENT by viewed
+    // pixels, MAD 61.66; see qa/FINDINGS-LUXURY-HERO-SWAP-2026-11-23.md §5).
+    // EXIF 0. Old hero-apopka-lux.* files stay on disk as audit evidence
+    // (do NOT delete); the flood card keeps 13865773 per coordinator
+    // decision (card topic IS flood cleanup).
     '/' => [
-        'hero' => ['file' => 'hero-apopka.jpg', 'alt' => 'Floodwater covering a palm-lined street after heavy rain'],
+        'hero' => ['file' => 'hero-apopka-restoration.jpg', 'alt' => 'Restoration worker in a hard hat laying new floor tiles with mortar in a bright room'],
     ],
     // Service pages: 'card' alt describes the card photo; 'hero' alt describes
     // the hero photo, both place-free. Card and hero are DIFFERENT photos
@@ -174,16 +190,34 @@ $PAGE_IMG = [
     '/contact' => [
         'hero' => ['file' => 'contact-apopka.jpg', 'alt' => 'Homeowner calling for emergency help on the phone at home'],
     ],
+    // LUXURY STAGE 2B (2026-11-23): real photo - Pexels 5463575, technician
+    // with manifold gauges at a rooftop outdoor AC condenser. Fresh 1600w
+    // download, 16:9 crop (y=100). Nets CLEAR pre-install (md5 0/100,370;
+    // aHash 0 flags; Pexels-ID net zero hits anywhere). EXIF 0. The tech's
+    // shirt carries legible Spanish text; location unstated on the Pexels
+    // page; alt stays place-free. Installed on the BLOG hero (outdoor
+    // condenser work matches the drain-line topic), not the AC service hero
+    // (indoor leak). Old created file stays on disk as audit evidence.
     '/resources/apopka-ac-drain-line-tips' => [
-        'hero' => ['file' => 'blog-ac-drain-line-apopka.jpg', 'alt' => 'HVAC technician clearing a condensate drain line at an outdoor air conditioning unit'],
+        'hero' => ['file' => 'blog-ac-drain-line-apopka-lux.jpg', 'alt' => 'Technician checking an outdoor air conditioning unit with manifold gauges on a rooftop'],
     ],
     '/resources/who-pays-for-water-damage-florida' => [
         'hero' => ['file' => 'blog-who-pays-apopka.jpg', 'alt' => 'Homeowner reviewing insurance paperwork at a wooden table in a bright home, with palm trees and neighbouring houses visible through the window'],
     ],
-    // Hurricane alt carries NO place claim: the photo was shot in Tenerife
-    // (Canary Islands), not Florida - palms + storm seascape only.
+    // Hurricane hero REMOVED 2026-11-23 (Luxury Stage 2B): the old file
+    // (Pexels 12661315) was shot in Tenerife, Canary Islands - wrong place,
+    // and must not stay. No real Florida storm photo passed the full gate:
+    // Pexels 13865771 was rejected on viewed pixels - same Sanford lakefront
+    // as the new home hero (same sign, fallen palm, caution tape), a
+    // duplicate motif, not a fresh photo; its staged files are kept in
+    // qa/luxury-stage2b-2026-11-23/candidates/rejected/ for a coordinator
+    // overrule. Slot stays honestly empty (navy panel - the codebase's own
+    // mechanism, same as the 2026-11-13 visual-audit removals) until a real
+    // Apopka storm frame is extracted from YouTube (see
+    // qa/FINDINGS-LUXURY-STAGE2B-2026-11-23.md §2). Sitemap image:loc is
+    // 47, not 48, while this slot is empty - honest consequence, not a
+    // regression. Old file stays on disk as audit evidence (do NOT delete).
     '/resources/apopka-hurricane-water-damage-checklist' => [
-        'hero' => ['file' => 'blog-hurricane-checklist-apopka.jpg', 'alt' => 'Palm trees bending in strong hurricane winds over a stormy ocean'],
     ],
     // '/resources/how-fast-mold-grows-florida' hero was REMOVED 2026-11-13 (visual audit: same photo live on Lancaster/Midvale/Texas/Broken Arrow) - filled Cycle 1 (2026-11-13) with a created image, verified by both nets + viewed.
     '/resources/how-fast-mold-grows-florida' => [

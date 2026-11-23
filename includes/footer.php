@@ -15,6 +15,7 @@ $map_src = 'https://www.google.com/maps?q=' . rawurlencode($SITE['map_query']) .
 <footer class="site-footer">
   <div class="container footer-cols">
     <div class="footer-col">
+      <span class="brand-mark footer-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="10.6" fill="none" stroke="#B98A1F" stroke-width="1.5"/><path d="M7.2 17.5 L12 6.5 L16.8 17.5 M9.3 13.2 H14.7" fill="none" stroke="#FBF8F2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       <p class="footer-h"><?= esc($SITE['brand']) ?></p>
       <p>24/7 emergency water damage restoration in Apopka, FL 32703 and 32712. Crew dispatched immediately.</p>
       <p><a href="<?= esc($SITE['phone_href']) ?>"><?= esc($SITE['phone']) ?></a><br>
@@ -53,6 +54,9 @@ $map_src = 'https://www.google.com/maps?q=' . rawurlencode($SITE['map_query']) .
 <a class="mobile-call-bar" href="<?= esc($SITE['phone_href']) ?>" aria-label="<?= esc($SITE['phone']) ?>">
   <span aria-hidden="true">&#9742;</span><span><?= esc($SITE['phone']) ?></span>
 </a>
+<!-- LUXURY 2026-11-23 (P3-4): back-to-top, icon-only, appears after 2 viewports. No visible words. -->
+<a class="to-top" href="#top" aria-label="Back to top"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 5l7 7-1.4 1.4L13 8.8V19h-2V8.8l-4.6 4.6L5 12l7-7z" fill="currentColor"/></svg></a>
+<script>(function(){var b=document.querySelector('.to-top');if(!b)return;function t(){b.classList.toggle('show',window.scrollY>2*window.innerHeight)}window.addEventListener('scroll',t,{passive:true});t();})();</script>
 <div class="mobile-call-spacer" aria-hidden="true"></div>
 <script src="/assets/js/main.js?v=4" defer></script>
 <?php /* STAGE 3 (2026-11-17, mobile SI): JSON-LD lives here (end of body)

@@ -23,10 +23,10 @@ $SITE = [
     'phone_plain' => '4077879139',
     'hours'       => '24/7',
     'map_query'   => 'Apopka, FL 32703',
-    // Live URL: GitHub Pages project site (deployed 2026-11-12).
-    // Swap for the real apex domain when it lands; canonicals, sitemap,
-    // og and robots all derive from this.
-    'url'         => 'https://growthaura.github.io/apopka-water-damage',
+    // Live URL: the apex domain (set 2026-11-23, Luxury Round). Canonicals,
+    // sitemap, og and robots all derive from this. The gh-pages export is
+    // subpath-prefixed for the Pages preview only (see qa/export_static_luxury.py).
+    'url'         => 'https://waterdamagerestorationapopkafl.site',
 ];
 
 $HOME_META = [

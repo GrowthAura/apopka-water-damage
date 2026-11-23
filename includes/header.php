@@ -45,23 +45,23 @@ global $SITE, $SERVICES;
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/css/styles.css?v=15">
+<link rel="stylesheet" href="/assets/css/styles.css?v=16">
 <noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
 </head>
-<body>
+<body id="top">
 <!-- STAGE 2A (P1-4): the topbar lives OUTSIDE the sticky header now.
      It scrolls away with the document; the sticky header's own height
      never changes, so the first scroll can no longer shift the page. -->
 <div class="topbar">
   <div class="topbar-inner">
-    <span>24/7 Emergency Service &middot; Apopka, FL 32703 &amp; 32712</span>
+    <span>24/7 Emergency Service <span class="topbar-dot" aria-hidden="true">&middot;</span> Apopka, FL 32703 &amp; 32712</span>
     <a href="<?= esc($SITE['phone_href']) ?>">Call <?= esc($SITE['phone']) ?></a>
   </div>
 </div>
 <header class="site-header">
   <div class="container header-row">
     <a class="brand" href="/" aria-label="Apopka Water Damage Restoration, home">
-      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 2.5C12 2.5 5.5 10.2 5.5 14.8a6.5 6.5 0 0 0 13 0C18.5 10.2 12 2.5 12 2.5Z" fill="#0E6E6A"/><path d="M9.2 15.2a2.8 2.8 0 0 0 2.3 2.7" fill="none" stroke="#FBF8F2" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="10.6" fill="none" stroke="#B98A1F" stroke-width="1.5"/><path d="M7.2 17.5 L12 6.5 L16.8 17.5 M9.3 13.2 H14.7" fill="none" stroke="#FBF8F2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       <span class="brand-word">Apopka<br>Water Damage<small><?= esc($SITE['brand_small']) ?></small></span>
     </a>
     <nav class="main-nav" aria-label="Main">
@@ -98,9 +98,9 @@ global $SITE, $SERVICES;
           <a href="<?= esc($x['slug']) ?>"<?= nav_active($x['slug'], $currentSlug ?? null) ?>><?= esc($x['nav']) ?></a>
           <?php endforeach; ?>
           <?php endforeach; ?>
-          <a href="/about"<?= nav_active('/about', $currentSlug ?? null) ?>>About</a>
           </div>
           <div class="mobile-menu-foot">
+          <a href="/about"<?= nav_active('/about', $currentSlug ?? null) ?>>About</a>
           <a href="/contact"<?= nav_active('/contact', $currentSlug ?? null) ?>>Contact</a>
           <a class="btn btn-ocean" href="<?= esc($SITE['phone_href']) ?>"><?= esc($SITE['phone']) ?></a>
           </div>

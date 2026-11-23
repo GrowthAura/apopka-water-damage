@@ -645,6 +645,8 @@ function ld_webpage($canonical, $title, $aboutId = null, $imageUrl = null, $desc
 // sitemap: homepage hero + every service card + the 8 process photos;
 // inner pages carry their hero only. Missing slots (no file) are skipped,
 // never emitted as a broken URL.
+// UNUSED since 2026-11-23 (standing rule: "NO IMAGES IN THE SITEMAP, EVER"
+// — index.php §2 no longer calls this). Kept for reference only.
 function page_images($slug) {
     global $SERVICES;
     $out = [];

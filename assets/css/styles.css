@@ -99,3 +99,95 @@
 .footer-cols{gap:28px;padding-bottom:16px}
 .footer-cols>.footer-col:first-child p:not(.footer-h){margin-bottom:20px}
 }
+
+/* ============ LUXURY ROUND 2026-11-23 (Stage 2A) ============ */
+/* Appended overrides (later rules win at equal specificity). No font
+   metrics touched: H1 max-width:16em + the three weight-split fallback
+   faces (92% / 93.9% / 96%) are unchanged. Gold is borders only, never text. */
+/* P1-6 contrast tokens: --muted 5.84 -> ~8.98:1 on paper; .btn-ocean white on accent-deep 8.75:1. */
+:root{--muted:#3A4753}
+.btn-ocean{background:var(--accent-deep)}
+/* P1-1 hero overlay lightened so the photo carries the hero (audit values).
+   Mobile-only lighter variant, max 0.55. Text-column scrim added only if
+   the post-change contrast sample fails (see findings). */
+.hero-media::after{background:linear-gradient(0deg,rgba(10,22,38,.55) 0%,rgba(10,22,38,0) 34%),linear-gradient(100deg,rgba(10,22,38,.68) 0%,rgba(10,22,38,.50) 46%,rgba(10,22,38,.30) 100%)}
+@media (max-width:640px){.hero-media::after{background:linear-gradient(0deg,rgba(10,22,38,.45) 0%,rgba(10,22,38,0) 40%),linear-gradient(100deg,rgba(10,22,38,.55) 0%,rgba(10,22,38,.38) 50%,rgba(10,22,38,.25) 100%)}}
+/* P1-2 home @320 clip: grid items can never force their track wider than the container; aside button wraps at <=400px. */
+.split>*{min-width:0}
+.sticky-aside{min-width:0}
+@media (max-width:400px){.aside-call .btn{white-space:normal;line-height:1.25}}
+/* P1-3 hero lead form intro line: white-on-white on desktop (inherits .hero color). */
+.hero-form .form-card{color:var(--text)}
+/* P1-4 final-CTA buttons back to 20px on mobile (the only 20px-rule violation). */
+@media (max-width:640px){.final-cta-card .hero-ctas .btn{font-size:20px}}
+/* P1-7 tap targets: footer links 39 -> ~47px, topbar link 26 -> 44px; footer li margin tightened to absorb most of the added height. */
+.footer-col li a,.footer-col p a[href^="tel:"]{padding:11px 0}
+.footer-col li{margin-bottom:2px}
+.topbar a{padding:10px 0}
+.topbar-inner{padding-top:4px;padding-bottom:4px}
+/* P1-8 + P3-9 hero spacing: desktop split padding 48 -> 32px; copy column vertically centred against the form; mobile hero padding + intro/eyebrow margins tightened. */
+.hero-split{padding-top:32px}
+.hero-split .hero-content{align-items:center}
+@media (max-width:640px){.hero,.hero-short{padding-top:28px;padding-bottom:28px}.hero .eyebrow{margin-bottom:14px}.hero-intro{margin-bottom:24px}}
+@media (max-width:400px){.hero,.hero-short{padding-top:14px;padding-bottom:14px}}
+/* P2-1 scrolled header: pure white bg, deeper shadow, gold bottom border (all height-neutral, no CLS). */
+.site-header.scrolled{background:#fff;box-shadow:0 8px 30px rgba(15,29,46,.12);border-bottom-color:var(--gold)}
+/* P2-2 dropdown: gold top edge, 12px group label, gold hover bar, roomier rows. */
+.nav-drop{border-top:3px solid var(--gold)}
+.nav-drop a{padding:11px 14px}
+.nav-drop a:hover{box-shadow:inset 3px 0 0 var(--gold)}
+.drop-group{font-size:12px}
+/* P2-3 mobile menu: hamburger reads as a designed control when open (navy fill). */
+.mobile-menu-wrap[open] summary{background:var(--ink);color:#fff;border-color:var(--ink)}
+/* P2-4 topbar: 14px, gold middot glyph, slimmed phone-only bar on mobile (outside the sticky header, scrolls away, no CLS). */
+.topbar{font-size:.875rem}
+.topbar-dot{color:var(--gold)}
+@media (max-width:640px){.topbar{display:block}.topbar-inner{justify-content:center;padding-top:4px;padding-bottom:4px}.topbar-inner>span:first-child{display:none}}
+/* P2-5 eyebrow pill: smaller + tighter tracking on mobile so it fits one line at 390 (balanced 2-line accepted at 320 for the longest two). */
+@media (max-width:640px){.hero .eyebrow{font-size:.62rem;letter-spacing:.10em;max-width:100%}}
+/* P2-6 cards: natural staggered heights (no empty white bottoms); gold underline on read-more hover. */
+.cards{align-items:start}
+.card-more a:hover{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--gold)}
+/* P2-7 related cards: ink titles (teal on hover only); the .card:hover lift already applies. */
+.related-cards .card-body h3 a{color:var(--ink)}
+.related-cards .card-body h3 a:hover{color:var(--accent-deep)}
+/* P2-8 prose rhythm: gold left rule on prose H3s (direct children only, so card/phase/howto H3s are untouched); rhythm band 2px with a gold centre. */
+.content-block>h3{border-left:4px solid var(--gold);padding-left:16px}
+.rhythm-band{height:2px;background:linear-gradient(90deg,transparent,var(--gold) 18%,var(--gold) 82%,transparent)}
+/* P2-9 footer: Guides column rhythm 29 -> 12px (desktop only); gold hairline above footer-bottom; footer brand mark (see footer.php). */
+@media (min-width:1021px){.footer-cols>.footer-col:last-child li{margin-bottom:12px}}
+.footer-bottom{border-top:1px solid rgba(185,138,31,.45)}
+.footer-mark{margin-bottom:12px}
+.footer-mark svg{width:24px;height:24px}
+/* P2-12 breadcrumb: repeated H1 crumb (+ its separator) hidden on mobile only; desktop keeps the full trail. */
+@media (max-width:640px){.hero .crumbs span[aria-current]{display:none}.hero .crumbs span[aria-hidden="true"]{display:none}}
+/* P2-13 trust band: drawn disc badge instead of a bare text glyph. */
+.trust-band .check{display:inline-flex;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;align-items:center;justify-content:center;font-size:14px;font-weight:800;line-height:1;flex-shrink:0}
+/* P3-3 cause cards: same numbered-badge + tinted left-border treatment as the cat-cards. */
+.cause-grid{counter-reset:cause-step}
+.cause-card{position:relative;border-left:6px solid var(--accent)}
+.cause-card::before{counter-increment:cause-step;content:counter(cause-step);position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#fff;background:var(--accent)}
+/* P3-4 back-to-top: icon-only circular button, gold ring, appears after 2 viewports (see footer.php). */
+.to-top{position:fixed;right:20px;bottom:24px;z-index:85;width:48px;height:48px;border-radius:50%;background:var(--ink);color:#fff;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s ease,transform .25s ease;box-shadow:0 8px 24px rgba(15,29,46,.25)}
+.to-top.show{opacity:1;pointer-events:auto;transform:none}
+.to-top:hover{background:var(--ink-2);color:#fff}
+.to-top svg{width:20px;height:20px}
+@media (max-width:640px){.to-top{right:14px;bottom:96px}}
+/* P3-6 brand subline: larger + looser tracking (still fits the 320px lockup; verified by measure). */
+.brand-word small{font-size:.62rem;letter-spacing:.20em}
+@media (max-width:400px){.brand-word small{font-size:.55rem;letter-spacing:.14em}}
+/* P3-7 call strip: navy gradient on service pages only (mirrors .final-cta-service); the navy pill inside it becomes cream so it stays visible. :has() is supported in Chromium 105+ / Safari 15.4+ / Firefox 121+. */
+.call-strip:has(+ .final-cta-service){background:linear-gradient(120deg,var(--ink),var(--ink-2))}
+.call-strip:has(+ .final-cta-service) .btn-navy{background:#FFF6E3;color:var(--ink);border-color:#E8D9B8}
+.call-strip:has(+ .final-cta-service) .btn-navy:hover{background:#fff;color:var(--ink)}
+
+/* P1-1 contrast follow-up (measured 2026-11-23): the lightened overlay alone
+   leaves white H1 at 2.1-3.5:1 worst-case (p99 background luminance
+   0.25-0.46) - below the audit's 7:1 bar at the text's actual pixels.
+   Fix is the audit's own fallback: darken the scrim ONLY behind the text
+   column (desktop, where the photo has the right side free) + a stronger
+   soft halo around the glyphs (all widths), so the photo stays visible
+   everywhere except directly behind the words. */
+.hero h1{text-shadow:0 2px 24px rgba(0,0,0,.55),0 0 32px rgba(0,0,0,.35)}
+.hero-intro{text-shadow:0 1px 16px rgba(0,0,0,.5)}
+@media (min-width:1021px){.hero-content::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(10,22,38,.65) 0%,rgba(10,22,38,.45) 45%,rgba(10,22,38,0) 72%)}}
