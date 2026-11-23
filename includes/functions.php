@@ -230,6 +230,19 @@ function render_block_list($blocks, $slug, &$used, $howtoName = null) {
                 $out .= '<li>' . render_linked($it['x'], $it['l'] ?? [], $slug, $used) . '</li>';
             }
             $out .= '</ul>';
+        } elseif ($t === 'source-cards') {
+            // Trusted-source cards (About page): whole card is the link to
+            // the source's own site. Name + verbatim description + host.
+            $closeHowto();
+            $out .= '<div class="source-cards">';
+            foreach ($b['items'] as $it) {
+                $out .= '<article class="source-card"><a class="source-card-link" href="' . esc($it['url']) . '">'
+                    . '<span class="source-card-name">' . esc($it['name']) . '</span>'
+                    . '<span class="source-card-desc">' . esc($it['desc']) . '</span>'
+                    . '<span class="source-card-host">' . esc($it['host']) . ' <span aria-hidden="true">&#8599;</span></span>'
+                    . '</a></article>';
+            }
+            $out .= '</div>';
         }
     }
     $closeHowto();
