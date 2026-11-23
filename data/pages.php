@@ -62,7 +62,7 @@ $SERVICES = [
         'h3'   => 'Emergency Water Extraction',
         'full' => 'Emergency Water Extraction in Apopka',
         'body' => 'Standing water comes out first. Truck-mount and portable extraction units pull water from carpet, tile, LVP and concrete fast so the structure stops absorbing it.',
-        'sentence' => 'Read more: Emergency Water Extraction in Apopka',
+        'sentence' => 'Emergency Water Extraction in Apopka',
         'links' => [['anchor' => 'Emergency Water Extraction in Apopka', 'href' => '/emergency-water-extraction']],
     ],
     [
@@ -71,7 +71,7 @@ $SERVICES = [
         'h3'   => 'Burst Pipe Water Damage',
         'full' => 'Burst Pipe Water Damage Cleanup in Apopka',
         'body' => 'A split supply line can release hundreds of gallons in an hour. We extract, open wet wall cavities where needed and dry framing before it warps.',
-        'sentence' => 'Read more: Burst Pipe Water Damage Cleanup in Apopka',
+        'sentence' => 'Burst Pipe Water Damage Cleanup in Apopka',
         'links' => [['anchor' => 'Burst Pipe Water Damage', 'href' => '/burst-pipe-water-damage']],
     ],
     [
@@ -80,7 +80,7 @@ $SERVICES = [
         'h3'   => 'AC Leak and Air Handler Overflow',
         'full' => 'AC Leak Water Damage in Apopka',
         'body' => 'The number one water damage call in Florida homes. A clogged condensate line or rusted drain pan quietly soaks closets, hallways and ceilings under attic units.',
-        'sentence' => 'Read more: AC Leak Water Damage in Apopka',
+        'sentence' => 'AC Leak Water Damage in Apopka',
         'links' => [['anchor' => 'AC Leak Water Damage', 'href' => '/ac-leak-water-damage']],
     ],
     [
@@ -89,7 +89,7 @@ $SERVICES = [
         'h3'   => 'Slab Leak Water Damage',
         'full' => 'Slab Leak Water Damage in Apopka',
         'body' => 'Most Apopka homes sit on a concrete slab with no basement, so a leaking pipe under the floor shows up as warm spots, damp carpet or lifting tile.',
-        'sentence' => 'Read more: Slab Leak Water Damage in Apopka',
+        'sentence' => 'Slab Leak Water Damage in Apopka',
         'links' => [['anchor' => 'Slab Leak Water Damage', 'href' => '/slab-leak-water-damage']],
     ],
     [
@@ -98,7 +98,7 @@ $SERVICES = [
         'h3'   => 'Water Heater Leaks',
         'full' => 'Water Heater Leak Cleanup in Apopka',
         'body' => 'Garage and closet tank failures flood laundry rooms and bedrooms fast.',
-        'sentence' => 'Read more: Water Heater Leak Cleanup in Apopka',
+        'sentence' => 'Water Heater Leak Cleanup in Apopka',
         'links' => [['anchor' => 'Water Heater Leak Cleanup', 'href' => '/water-heater-leak-cleanup']],
     ],
     [
@@ -107,7 +107,7 @@ $SERVICES = [
         'h3'   => 'Appliance and Toilet Overflows',
         'full' => 'Appliance Leak Water Damage in Apopka',
         'body' => 'Washers, dishwashers, refrigerator ice-maker lines and toilet supply lines.',
-        'sentence' => 'Read more: Appliance Leak Water Damage in Apopka',
+        'sentence' => 'Appliance Leak Water Damage in Apopka',
         'links' => [['anchor' => 'Appliance Leak Water Damage', 'href' => '/appliance-leak-water-damage']],
     ],
     [
@@ -116,7 +116,7 @@ $SERVICES = [
         'h3'   => 'Ceiling Water Damage',
         'full' => 'Ceiling Water Damage Repair in Apopka',
         'body' => 'Sagging drywall, brown rings and dripping light fixtures.',
-        'sentence' => 'Read more: Ceiling Water Damage Repair in Apopka',
+        'sentence' => 'Ceiling Water Damage Repair in Apopka',
         'links' => [['anchor' => 'Ceiling Water Damage Repair', 'href' => '/ceiling-water-damage-repair']],
     ],
     [
@@ -125,7 +125,7 @@ $SERVICES = [
         'h3'   => 'Storm and Roof Leak Water Damage',
         'full' => 'Storm and Roof Leak Water Damage in Apopka',
         'body' => 'Wind-driven rain, missing shingles and hurricane leaks.',
-        'sentence' => 'Read more: Storm and Roof Leak Water Damage in Apopka',
+        'sentence' => 'Storm and Roof Leak Water Damage in Apopka',
         'links' => [['anchor' => 'Roof Leak Water Damage', 'href' => '/storm-roof-leak-water-damage']],
     ],
     [
@@ -134,7 +134,7 @@ $SERVICES = [
         'h3'   => 'Flood Damage Cleanup',
         'full' => 'Flood Damage Cleanup in Apopka',
         'body' => 'Rising water from heavy rain, overflowing retention ponds and low lots.',
-        'sentence' => 'Read more: Flood Damage Cleanup in Apopka',
+        'sentence' => 'Flood Damage Cleanup in Apopka',
         'links' => [['anchor' => 'Flood Damage Cleanup', 'href' => '/flood-damage-cleanup']],
     ],
     [
@@ -143,7 +143,7 @@ $SERVICES = [
         'h3'   => 'Septic and Sewage Backup Cleanup',
         'full' => 'Septic and Sewage Backup Cleanup in Apopka',
         'body' => 'Black water from septic systems, cast-iron drains or city sewer lines.',
-        'sentence' => 'Read more: Septic and Sewage Backup Cleanup in Apopka',
+        'sentence' => 'Septic and Sewage Backup Cleanup in Apopka',
         'links' => [['anchor' => 'Sewage Backup Cleanup', 'href' => '/sewage-backup-cleanup']],
     ],
     [
@@ -152,7 +152,7 @@ $SERVICES = [
         'h3'   => 'Mold Remediation and Mold Inspection',
         'full' => 'Mold Remediation in Apopka',
         'body' => 'When water sat too long, we contain, remove and dry.',
-        'sentence' => 'Read more: Mold Remediation in Apopka and Mold Inspection in Apopka',
+        'sentence' => 'Mold Remediation in Apopka and Mold Inspection in Apopka',
         'links' => [
             ['anchor' => 'Mold Remediation', 'href' => '/mold-remediation'],
             ['anchor' => 'Mold Inspection', 'href' => '/mold-inspection'],
@@ -165,7 +165,7 @@ $SERVICES = [
         'h3'   => 'Structural Drying and Wet Flooring',
         'full' => 'Structural Drying in Apopka',
         'body' => 'Daily moisture readings until walls, subfloors and slabs reach dry standard.',
-        'sentence' => 'Read more: Structural Drying in Apopka and Flooded Carpet and Wet Floor Cleanup in Apopka',
+        'sentence' => 'Structural Drying in Apopka and Flooded Carpet and Wet Floor Cleanup in Apopka',
         'links' => [
             ['anchor' => 'Structural Drying', 'href' => '/structural-drying'],
             ['anchor' => 'Wet Floor Cleanup', 'href' => '/wet-flooring-water-damage'],
@@ -178,7 +178,7 @@ $SERVICES = [
         'h3'   => 'Mobile and Manufactured Home Water Damage',
         'full' => 'Mobile Home Water Damage in Apopka',
         'body' => 'Soft particleboard floors and belly-wrap leaks need a different approach than a block home.',
-        'sentence' => 'Read more: Mobile Home Water Damage in Apopka',
+        'sentence' => 'Mobile Home Water Damage in Apopka',
         'links' => [['anchor' => 'Mobile Home Water Damage', 'href' => '/mobile-home-water-damage']],
     ],
     [
@@ -187,7 +187,7 @@ $SERVICES = [
         'h3'   => 'Commercial Water Damage',
         'full' => 'Commercial Water Damage in Apopka',
         'body' => 'Offices, warehouses, churches, nurseries and greenhouses.',
-        'sentence' => 'Read more: Commercial Water Damage in Apopka',
+        'sentence' => 'Commercial Water Damage in Apopka',
         'links' => [['anchor' => 'Commercial Water Damage', 'href' => '/commercial-water-damage']],
     ],
     [
@@ -196,7 +196,7 @@ $SERVICES = [
         'h3'   => 'Leak Detection and Insurance Claim Help',
         'full' => 'Leak Detection in Apopka',
         'body' => 'Finding hidden leaks and documenting the loss for your adjuster.',
-        'sentence' => 'Read more: Leak Detection in Apopka and Water Damage Insurance Claim Help in Apopka',
+        'sentence' => 'Leak Detection in Apopka and Water Damage Insurance Claim Help in Apopka',
         'links' => [
             ['anchor' => 'Leak Detection', 'href' => '/leak-detection'],
             ['anchor' => 'Water Damage Insurance Claim Help', 'href' => '/water-damage-insurance-claim-help'],
